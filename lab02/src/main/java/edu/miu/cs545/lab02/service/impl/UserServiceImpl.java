@@ -40,6 +40,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsersHavePosts() {
-        return userRepo.getUsersByPostsIsNotEmpty().stream().map(user -> modelMapper.map(user, UserDto.class)).toList();
+        return userRepo.findUsersWithMoreThanOnePost().stream().map(user -> modelMapper.map(user, UserDto.class)).toList();
     }
 }
