@@ -1,11 +1,13 @@
 package edu.miu.cs545.lab03.service.impl;
 
 import edu.miu.cs545.lab03.entity.Comment;
+import edu.miu.cs545.lab03.entity.Post;
 import edu.miu.cs545.lab03.entity.User;
 import edu.miu.cs545.lab03.entity.dto.CommentDto;
 import edu.miu.cs545.lab03.entity.dto.PostDto;
 import edu.miu.cs545.lab03.entity.dto.UserDto;
 import edu.miu.cs545.lab03.repository.CommentRepo;
+import edu.miu.cs545.lab03.repository.PostRepo;
 import edu.miu.cs545.lab03.repository.UserRepo;
 import edu.miu.cs545.lab03.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final UserRepo userRepo;
     private final CommentRepo commentRepo;
+    private final PostRepo postRepo;
 
     @Override
     public List<UserDto> getAll() {
@@ -58,6 +62,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommentDto getCommentById(long userId, long postId, long commentId) {
-        return modelMapper.map(commentRepo.getCommentByUserIdPostIdCommentId(userId, postId, commentId).orElse(new Comment()), CommentDto.class);
+        Optional<Comment> comment = commentRepo.getCommentByUserIdPostIdCommentId(userId, postId, commentId);
+        if (comment.isPresent()) {
+            return modelMapper.map(comment.get(), CommentDto.class);
+        }
+        return null;
+    }
+
+    @Override
+    public List<CommentDto> getComments(long userId, long postId) {
+        return commentRepo.getCommentsByUserIdPostId(userId, postId).stream().map(c -> modelMapper.map(c, CommentDto.class)).toList();
+    }
+
+    @Override
+    public void saveComment(long userId, long postId, CommentDto commentDto) {
+        boolean exist = commentRepo.existsByUserIdAndPostId(userId, postId);
+        if (exist) {
+            Comment comment = modelMapper.map(commentDto, Comment.class);
+            Optional<Post> post = postRepo.findById(postId);
+            if (post.isPresent()) {
+                comment.setPost(post.get());
+                commentRepo.save(comment);
+            }
+        }
     }
 }

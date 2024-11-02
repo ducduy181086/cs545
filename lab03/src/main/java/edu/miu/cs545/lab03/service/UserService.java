@@ -15,4 +15,6 @@ public interface UserService {
     List<UserDto> getUsersHavePosts(int numberOfPosts);
     List<UserDto> getUsersHaveTitlePosts(String title);
     CommentDto getCommentById(long userId, long postId, long commentId);
+    List<CommentDto> getComments(long userId, long postId);
+    void saveComment(long userId, long postId, CommentDto commentDto);
 }

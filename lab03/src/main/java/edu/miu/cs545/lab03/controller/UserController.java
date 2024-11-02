@@ -56,4 +56,15 @@ public class UserController {
         var comment = userService.getCommentById(id, postId, commentId);
         return ResponseEntity.ok(comment);
     }
+
+    @GetMapping("/{id}/posts/{postId}/comments")
+    public ResponseEntity<List<CommentDto>> getComments(@PathVariable long id, @PathVariable long postId) {
+        var comments = userService.getComments(id, postId);
+        return ResponseEntity.ok(comments);
+    }
+
+    @PostMapping("/{id}/posts/{postId}/comments")
+    public void createComment(@PathVariable long id, @PathVariable long postId, @RequestBody CommentDto comment) {
+        userService.saveComment(id, postId, comment);
+    }
 }
