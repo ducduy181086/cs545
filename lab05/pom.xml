@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.5</version>
+		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.miu.cs545</groupId>
 	<artifactId>lab05</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lab04</name>
-	<description>Lap02</description>
+	<name>lab05</name>
+	<description>Lap05</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
+			<version>0.12.6</version>
 		</dependency>
 
 

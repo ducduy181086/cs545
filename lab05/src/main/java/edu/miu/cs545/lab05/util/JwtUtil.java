@@ -1,26 +1,31 @@
 package edu.miu.cs545.lab05.util;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 @Component
-@AllArgsConstructor
 public class JwtUtil {
-    private final String secret = "top-secret";
+    private final SecretKey key = Keys.hmacShaKeyFor("_dfsdf_tknn_jfks_fsjhfj_jfhgfdjtop_secret_key".getBytes(StandardCharsets.UTF_8));
+    //private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long expiration = 5 * 60 * 60 * 60;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
 
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
@@ -29,9 +34,10 @@ public class JwtUtil {
 
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     public Date getIssuedAtDateFromToken(String token) {
@@ -49,54 +55,61 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("roles",userDetails.getAuthorities());
+        claims.put("roles", userDetails.getAuthorities());
 
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS512, secret)
+        return Jwts
+                .builder()
+                .claims(claims)
+                .subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                // the token will be expired in 10 hours
+                .expiration(new Date(System.currentTimeMillis() + 1000* 60 * 60 *10))
+                .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 
     // Overridden to accommodate the refresh token
     public String doGenerateToken(String subject) {
         return Jwts.builder()
-                .setSubject(subject)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS512, secret)
+//                .claims(claims)
+                .subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 
     public String generateRefreshToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration))
-                .signWith(SignatureAlgorithm.HS512, secret)
+        return Jwts
+                .builder()
+                .claims(new HashMap<>())
+                .subject(email)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                // the token will be expired in 10 hours
+                .expiration(new Date(System.currentTimeMillis() + refreshExpiration))
+                .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 
     public String getSubject(String token) {
         return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token);
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token);
             return true;
         } catch (SignatureException e) {
             System.out.println(e.getMessage());
@@ -133,12 +146,16 @@ public class JwtUtil {
     }
 
 
-
     public String doGenerateRefreshToken(Map<String, Object> claims, String subject) {
 
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+        return Jwts.builder()
+                .claims(claims)
+                .subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                // the token will be expired in 10 hours
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(key, Jwts.SIG.HS256)
+                .compact();
     }
 
 
@@ -146,9 +163,10 @@ public class JwtUtil {
         String result = null;
         try {
             result = Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token)
-                    .getBody()
+                    .verifyWith(key )
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload()
                     .getSubject();
         } catch (ExpiredJwtException e) {
             System.out.println(e.getMessage());
