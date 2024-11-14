@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 /**
  * @param {{ onCreated: (value: {title: string, author: string, content: string}) => void }} props
  */
 function NewPost({ onCreated }) {
+  const postForm = useRef();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    post.id = 0;
-    if (onCreated) onCreated(post);
+    const form = postForm.current;
+    const data = { id: 0, title: form['title'].value, author: form['author'].value, content: form['content'].value };
+    if (onCreated) onCreated(data);
     setPost(old => ({ ...old, title: "", author: "", content: "" }));
   }
 
@@ -17,10 +20,16 @@ function NewPost({ onCreated }) {
 
   const [post, setPost] = useState({ title: "", author: "", content: "" });
 
+  useEffect(() => {
+    postForm.current['title'].value = "";
+    postForm.current['author'].value = "";
+    postForm.current['content'].value = "";
+  }, []);
+
   return (
     <div className="mb-6 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold text-blue-500 mb-4">New Post</h2>
-      <form id="newPostForm" onSubmit={onSubmit}>
+      <form id="newPostForm" onSubmit={onSubmit} ref={postForm}>
         <div className="mb-4">
           <label htmlFor="newPostTitle" className="block text-gray-700 font-medium">Title</label>
           <input type="text" id="newPostTitle" name="title"
