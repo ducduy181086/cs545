@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 // Import pages
 import Login from './pages/Auth/Login';
@@ -8,16 +8,18 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import ManageSellers from './pages/Admin/ManageSellers';
 import BuyerDashboard from './pages/Buyer/BuyerDashboard';
 import ProductList from './pages/Buyer/ProductList';
-import SellerDashboard from './pages/Seller/SellerDashboard';
-import ManageProducts from './pages/Seller/ManageProducts';
+import SellerDashboard from './pages/Seller/Dashboard/SellerDashboard';
+import ManageProducts from './pages/Seller/Products/ManageProducts';
 import NotFound from './pages/NotFound';
 
 // Role-based route guards
 import PrivateRoute from './components/PrivateRoute';
+import ManageOrders from 'pages/Seller/Orders/ManageOrders';
+import AddProduct from 'pages/Seller/AddProduct/AddProduct';
 
 const AppRoutes = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<Navigate to="/buyer/dashboard" replace />} />
@@ -48,7 +50,7 @@ const AppRoutes = () => {
           path="/buyer/dashboard"
           element={
             // <PrivateRoute role="buyer">
-              <BuyerDashboard />
+            <BuyerDashboard />
             // </PrivateRoute>
           }
         />
@@ -64,24 +66,37 @@ const AppRoutes = () => {
         <Route
           path="/seller/dashboard"
           element={
-            <PrivateRoute role="seller">
+            // <PrivateRoute role="seller">
               <SellerDashboard />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/seller/manage-products"
           element={
-            <PrivateRoute role="seller">
+            // <PrivateRoute role="seller">
               <ManageProducts />
-            </PrivateRoute>
+            // </PrivateRoute>
+          }
+        />
+        <Route
+        path="/seller/manage-products/add" 
+        element={
+          <AddProduct />
+        }/>
+        <Route
+          path="/seller/manage-orders"
+          element={
+            // <PrivateRoute role="seller">
+              <ManageOrders />
+            // </PrivateRoute>
           }
         />
 
         {/* Catch-All Route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 

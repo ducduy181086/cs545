@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
+    console.log("check storedUser")
     if (storedUser) {
       setUser(storedUser);
       setIsAuthenticated(true);
@@ -18,6 +19,7 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
     setIsAuthenticated(true);
     localStorage.setItem('user', JSON.stringify(userData));
+    return true; //TODO mockup login success
   };
 
   const logout = () => {
@@ -25,6 +27,13 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     localStorage.removeItem('user');
   };
+
+  const register = (userData) => {
+    // setUser(userData);
+    // setIsAuthenticated(true);
+    // localStorage.setItem('user', JSON.stringify(userData));
+  };
+
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>

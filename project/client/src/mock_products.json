@@ -1,0 +1,2429 @@
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "category": "Kids",
+        "subcategory": "Pants",
+        "price": 77.74,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "XS",
+            "XL",
+            "L"
+        ],
+        "color": [
+            "Black",
+            "Blue",
+            "White",
+            "Red"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 4.2,
+        "reviews": 497,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Sports",
+            "Winter",
+            "Formal",
+            "Party"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "category": "Men",
+        "subcategory": "Shirts",
+        "price": 116.55,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "L",
+            "XS",
+            "S"
+        ],
+        "color": [
+            "Red",
+            "Black",
+            "White",
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": "10% off",
+        "ratings": 4.8,
+        "reviews": 20,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Waterproof",
+            "Quick-Dry",
+            "Breathable",
+            "Stretchable Fabric",
+            "Hooded"
+        ],
+        "occasion": [
+            "Formal",
+            "Party",
+            "Casual",
+            "Winter",
+            "Sports"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 3,
+        "name": "Product 3",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 51.65,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "XL",
+            "XS",
+            "S",
+            "M"
+        ],
+        "color": [
+            "White",
+            "Red",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 19,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Stretchable Fabric",
+            "Waterproof",
+            "Hooded",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Party",
+            "Sports",
+            "Winter"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 4,
+        "name": "Product 4",
+        "category": "Women",
+        "subcategory": "Pants",
+        "price": 173.14,
+        "brand": "H&M",
+        "size": [
+            "XL",
+            "XS"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "10% off",
+        "ratings": 4.5,
+        "reviews": 260,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Waterproof",
+            "Hooded",
+            "Stretchable Fabric",
+            "Quick-Dry",
+            "Breathable"
+        ],
+        "occasion": [
+            "Casual"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 5,
+        "name": "Product 5",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 100.45,
+        "brand": "H&M",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Black",
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 262,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Breathable",
+            "Waterproof",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Casual",
+            "Party",
+            "Winter",
+            "Formal"
+        ],
+        "demographics": [
+            "Women",
+            "Men",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 6,
+        "name": "Product 6",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 39.48,
+        "brand": "Zara",
+        "size": [
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Blue",
+            "Red",
+            "Black",
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": "20% off",
+        "ratings": 4.8,
+        "reviews": 45,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Waterproof",
+            "Hooded",
+            "Quick-Dry",
+            "Breathable"
+        ],
+        "occasion": [
+            "Casual",
+            "Winter",
+            "Party"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 7,
+        "name": "Product 7",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 172.41,
+        "brand": "Zara",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 335,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Quick-Dry",
+            "Waterproof",
+            "Breathable",
+            "Hooded",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Sports"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 8,
+        "name": "Product 8",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 160.99,
+        "brand": "H&M",
+        "size": [
+            "S",
+            "L",
+            "XL",
+            "M",
+            "XS"
+        ],
+        "color": [
+            "Red",
+            "Blue",
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": "10% off",
+        "ratings": 4.0,
+        "reviews": 377,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Formal",
+            "Party",
+            "Winter",
+            "Sports",
+            "Casual"
+        ],
+        "demographics": [
+            "Men",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 9,
+        "name": "Product 9",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 37.11,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "L",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Blue",
+            "Black"
+        ],
+        "material": "Wool",
+        "discount": "10% off",
+        "ratings": 3.5,
+        "reviews": 458,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Waterproof",
+            "Stretchable Fabric",
+            "Hooded",
+            "Breathable",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Sports"
+        ],
+        "demographics": [
+            "Kids",
+            "Men",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 10,
+        "name": "Product 10",
+        "category": "Women",
+        "subcategory": "Pants",
+        "price": 39.84,
+        "brand": "H&M",
+        "size": [
+            "L",
+            "M"
+        ],
+        "color": [
+            "Red",
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": "20% off",
+        "ratings": 4.8,
+        "reviews": 213,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Waterproof",
+            "Hooded"
+        ],
+        "occasion": [
+            "Winter",
+            "Formal",
+            "Party",
+            "Sports",
+            "Casual"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 11,
+        "name": "Product 11",
+        "category": "Men",
+        "subcategory": "Pants",
+        "price": 185.29,
+        "brand": "Nike",
+        "size": [
+            "L",
+            "M",
+            "XL"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Polyester",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 142,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Breathable",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Winter",
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 12,
+        "name": "Product 12",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 126.97,
+        "brand": "H&M",
+        "size": [
+            "S"
+        ],
+        "color": [
+            "White",
+            "Red",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 3.5,
+        "reviews": 382,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Stretchable Fabric",
+            "Hooded",
+            "Waterproof",
+            "Breathable"
+        ],
+        "occasion": [
+            "Casual",
+            "Party"
+        ],
+        "demographics": [
+            "Women",
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 13,
+        "name": "Product 13",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 103.54,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "XL",
+            "XS",
+            "M"
+        ],
+        "color": [
+            "White",
+            "Black",
+            "Red",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.2,
+        "reviews": 296,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Quick-Dry",
+            "Breathable",
+            "Hooded",
+            "Stretchable Fabric",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Winter",
+            "Casual",
+            "Party",
+            "Sports"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 14,
+        "name": "Product 14",
+        "category": "Women",
+        "subcategory": "Dresses",
+        "price": 15.77,
+        "brand": "Nike",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "Red",
+            "Blue",
+            "Black"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 3.5,
+        "reviews": 340,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Waterproof",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Casual",
+            "Formal",
+            "Winter",
+            "Party",
+            "Sports"
+        ],
+        "demographics": [
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 15,
+        "name": "Product 15",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 104.69,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "M",
+            "XL",
+            "XS",
+            "L"
+        ],
+        "color": [
+            "White",
+            "Black",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.8,
+        "reviews": 288,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Breathable",
+            "Stretchable Fabric",
+            "Waterproof",
+            "Hooded"
+        ],
+        "occasion": [
+            "Formal"
+        ],
+        "demographics": [
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 16,
+        "name": "Product 16",
+        "category": "Kids",
+        "subcategory": "Shirts",
+        "price": 99.66,
+        "brand": "Zara",
+        "size": [
+            "S",
+            "L",
+            "M",
+            "XL"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": "10% off",
+        "ratings": 4.0,
+        "reviews": 345,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Waterproof",
+            "Breathable"
+        ],
+        "occasion": [
+            "Formal",
+            "Sports",
+            "Party",
+            "Casual",
+            "Winter"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 17,
+        "name": "Product 17",
+        "category": "Men",
+        "subcategory": "Jackets",
+        "price": 88.35,
+        "brand": "Zara",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Blue",
+            "Black",
+            "White",
+            "Red"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 4.5,
+        "reviews": 180,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Hooded"
+        ],
+        "occasion": [
+            "Formal",
+            "Sports",
+            "Casual",
+            "Party"
+        ],
+        "demographics": [
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 18,
+        "name": "Product 18",
+        "category": "Kids",
+        "subcategory": "Shirts",
+        "price": 126.71,
+        "brand": "Nike",
+        "size": [
+            "S",
+            "L"
+        ],
+        "color": [
+            "Black",
+            "Blue"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 4.8,
+        "reviews": 334,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Men",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 19,
+        "name": "Product 19",
+        "category": "Men",
+        "subcategory": "Shirts",
+        "price": 188.94,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "XL",
+            "L"
+        ],
+        "color": [
+            "White",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "10% off",
+        "ratings": 4.0,
+        "reviews": 465,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Quick-Dry",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Formal",
+            "Winter"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 20,
+        "name": "Product 20",
+        "category": "Men",
+        "subcategory": "Jackets",
+        "price": 62.39,
+        "brand": "H&M",
+        "size": [
+            "S",
+            "M",
+            "XS",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": "20% off",
+        "ratings": 3.5,
+        "reviews": 91,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry",
+            "Breathable"
+        ],
+        "occasion": [
+            "Party",
+            "Sports",
+            "Formal",
+            "Winter",
+            "Casual"
+        ],
+        "demographics": [
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 21,
+        "name": "Product 21",
+        "category": "Kids",
+        "subcategory": "Shirts",
+        "price": 54.74,
+        "brand": "Nike",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "Red",
+            "Black",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 3.5,
+        "reviews": 209,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Hooded"
+        ],
+        "occasion": [
+            "Party"
+        ],
+        "demographics": [
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 22,
+        "name": "Product 22",
+        "category": "Men",
+        "subcategory": "Pants",
+        "price": 129.97,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "XS"
+        ],
+        "color": [
+            "Red",
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": "10% off",
+        "ratings": 3.5,
+        "reviews": 179,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Breathable",
+            "Hooded",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Formal",
+            "Sports"
+        ],
+        "demographics": [
+            "Kids",
+            "Men",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 23,
+        "name": "Product 23",
+        "category": "Men",
+        "subcategory": "Jackets",
+        "price": 197.68,
+        "brand": "Zara",
+        "size": [
+            "XL",
+            "XS",
+            "M",
+            "S",
+            "L"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.0,
+        "reviews": 141,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Winter",
+            "Formal",
+            "Casual",
+            "Party"
+        ],
+        "demographics": [
+            "Men",
+            "Kids",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 24,
+        "name": "Product 24",
+        "category": "Kids",
+        "subcategory": "Pants",
+        "price": 122.24,
+        "brand": "Nike",
+        "size": [
+            "M",
+            "XS",
+            "S",
+            "XL"
+        ],
+        "color": [
+            "Black",
+            "Red",
+            "Blue",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 3.5,
+        "reviews": 10,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Breathable",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Winter"
+        ],
+        "demographics": [
+            "Men",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 25,
+        "name": "Product 25",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 41.93,
+        "brand": "H&M",
+        "size": [
+            "XL",
+            "M",
+            "S",
+            "XS",
+            "L"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.2,
+        "reviews": 488,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Breathable"
+        ],
+        "occasion": [
+            "Winter",
+            "Sports",
+            "Casual",
+            "Party"
+        ],
+        "demographics": [
+            "Men",
+            "Women",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 26,
+        "name": "Product 26",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 58.25,
+        "brand": "H&M",
+        "size": [
+            "XL",
+            "XS",
+            "M",
+            "L",
+            "S"
+        ],
+        "color": [
+            "Black",
+            "Red",
+            "Blue",
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "10% off",
+        "ratings": 4.0,
+        "reviews": 228,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Breathable",
+            "Hooded"
+        ],
+        "occasion": [
+            "Winter",
+            "Formal",
+            "Casual"
+        ],
+        "demographics": [
+            "Women",
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 27,
+        "name": "Product 27",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 111.83,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "S",
+            "M",
+            "XS"
+        ],
+        "color": [
+            "Red",
+            "Black"
+        ],
+        "material": "Cotton",
+        "discount": "10% off",
+        "ratings": 4.5,
+        "reviews": 208,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Quick-Dry",
+            "Waterproof",
+            "Breathable"
+        ],
+        "occasion": [
+            "Casual",
+            "Party"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 28,
+        "name": "Product 28",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 173.44,
+        "brand": "Zara",
+        "size": [
+            "S",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "Black",
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": "10% off",
+        "ratings": 4.2,
+        "reviews": 440,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Breathable"
+        ],
+        "occasion": [
+            "Casual"
+        ],
+        "demographics": [
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 29,
+        "name": "Product 29",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 189.97,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "M",
+            "XL",
+            "L"
+        ],
+        "color": [
+            "Red",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 352,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Party",
+            "Casual",
+            "Formal"
+        ],
+        "demographics": [
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 30,
+        "name": "Product 30",
+        "category": "Women",
+        "subcategory": "Pants",
+        "price": 25.18,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XS"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": "20% off",
+        "ratings": 3.5,
+        "reviews": 498,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Breathable",
+            "Stretchable Fabric",
+            "Quick-Dry",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Party",
+            "Casual",
+            "Winter",
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 31,
+        "name": "Product 31",
+        "category": "Kids",
+        "subcategory": "Jackets",
+        "price": 41.35,
+        "brand": "Nike",
+        "size": [
+            "XS",
+            "XL",
+            "L",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "20% off",
+        "ratings": 3.5,
+        "reviews": 48,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Party",
+            "Casual",
+            "Sports",
+            "Formal",
+            "Winter"
+        ],
+        "demographics": [
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 32,
+        "name": "Product 32",
+        "category": "Women",
+        "subcategory": "Dresses",
+        "price": 39.6,
+        "brand": "Nike",
+        "size": [
+            "M",
+            "XL",
+            "S",
+            "XS",
+            "L"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 4.2,
+        "reviews": 223,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Waterproof",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Sports",
+            "Casual",
+            "Formal",
+            "Party",
+            "Winter"
+        ],
+        "demographics": [
+            "Women",
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 33,
+        "name": "Product 33",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 155.16,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "M",
+            "XS",
+            "XL",
+            "S"
+        ],
+        "color": [
+            "Blue",
+            "Black",
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": "20% off",
+        "ratings": 3.5,
+        "reviews": 400,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Stretchable Fabric",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 34,
+        "name": "Product 34",
+        "category": "Women",
+        "subcategory": "Dresses",
+        "price": 16.81,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "XL",
+            "M"
+        ],
+        "color": [
+            "Black",
+            "Red"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 343,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry",
+            "Hooded",
+            "Stretchable Fabric",
+            "Breathable"
+        ],
+        "occasion": [
+            "Winter",
+            "Party"
+        ],
+        "demographics": [
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 35,
+        "name": "Product 35",
+        "category": "Women",
+        "subcategory": "Dresses",
+        "price": 145.76,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "XS",
+            "S",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Black",
+            "Red",
+            "Blue",
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 3.5,
+        "reviews": 155,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Waterproof"
+        ],
+        "occasion": [
+            "Winter",
+            "Sports",
+            "Party",
+            "Formal",
+            "Casual"
+        ],
+        "demographics": [
+            "Men",
+            "Women",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 36,
+        "name": "Product 36",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 69.57,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "XS",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Blue",
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": "50% off",
+        "ratings": 4.0,
+        "reviews": 118,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Stretchable Fabric",
+            "Breathable"
+        ],
+        "occasion": [
+            "Party",
+            "Winter",
+            "Casual",
+            "Sports",
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 37,
+        "name": "Product 37",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 121.3,
+        "brand": "Adidas",
+        "size": [
+            "XS",
+            "XL"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.5,
+        "reviews": 17,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Stretchable Fabric",
+            "Waterproof",
+            "Quick-Dry",
+            "Hooded"
+        ],
+        "occasion": [
+            "Formal",
+            "Winter",
+            "Party",
+            "Sports"
+        ],
+        "demographics": [
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 38,
+        "name": "Product 38",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 37.08,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "XS",
+            "M"
+        ],
+        "color": [
+            "White",
+            "Blue",
+            "Red"
+        ],
+        "material": "Wool",
+        "discount": "10% off",
+        "ratings": 4.8,
+        "reviews": 34,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Breathable",
+            "Waterproof"
+        ],
+        "occasion": [
+            "Winter",
+            "Sports",
+            "Party",
+            "Casual",
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 39,
+        "name": "Product 39",
+        "category": "Women",
+        "subcategory": "Pants",
+        "price": 148.73,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "L",
+            "XS"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": "20% off",
+        "ratings": 4.2,
+        "reviews": 279,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Formal",
+            "Sports",
+            "Casual"
+        ],
+        "demographics": [
+            "Women",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 40,
+        "name": "Product 40",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 24.27,
+        "brand": "Zara",
+        "size": [
+            "XL",
+            "S",
+            "M",
+            "L"
+        ],
+        "color": [
+            "Red",
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": "50% off",
+        "ratings": 4.8,
+        "reviews": 314,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Hooded",
+            "Waterproof",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Winter",
+            "Casual",
+            "Sports",
+            "Formal"
+        ],
+        "demographics": [
+            "Women",
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 41,
+        "name": "Product 41",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 186.23,
+        "brand": "Nike",
+        "size": [
+            "XS",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Red",
+            "Black"
+        ],
+        "material": "Wool",
+        "discount": "10% off",
+        "ratings": 4.5,
+        "reviews": 272,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Waterproof",
+            "Breathable",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Sports",
+            "Formal",
+            "Party",
+            "Winter"
+        ],
+        "demographics": [
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 42,
+        "name": "Product 42",
+        "category": "Women",
+        "subcategory": "Pants",
+        "price": 84.13,
+        "brand": "Adidas",
+        "size": [
+            "L",
+            "S"
+        ],
+        "color": [
+            "Black",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.2,
+        "reviews": 273,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry",
+            "Waterproof",
+            "Breathable",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Party",
+            "Formal",
+            "Casual",
+            "Sports",
+            "Winter"
+        ],
+        "demographics": [
+            "Men",
+            "Women",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 43,
+        "name": "Product 43",
+        "category": "Men",
+        "subcategory": "Dresses",
+        "price": 128.14,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "XL",
+            "L"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 4.0,
+        "reviews": 477,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Stretchable Fabric",
+            "Waterproof",
+            "Quick-Dry",
+            "Breathable"
+        ],
+        "occasion": [
+            "Party",
+            "Casual",
+            "Winter"
+        ],
+        "demographics": [
+            "Women",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    },
+    {
+        "id": 44,
+        "name": "Product 44",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 106.62,
+        "brand": "Nike",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Wool",
+        "discount": "20% off",
+        "ratings": 4.5,
+        "reviews": 498,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Winter",
+            "Sports"
+        ],
+        "demographics": [
+            "Men",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 45,
+        "name": "Product 45",
+        "category": "Kids",
+        "subcategory": "Dresses",
+        "price": 147.27,
+        "brand": "Nike",
+        "size": [
+            "XL",
+            "S",
+            "XS"
+        ],
+        "color": [
+            "Red",
+            "Blue",
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": "50% off",
+        "ratings": 4.8,
+        "reviews": 473,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Waterproof",
+            "Stretchable Fabric",
+            "Breathable",
+            "Quick-Dry",
+            "Hooded"
+        ],
+        "occasion": [
+            "Sports",
+            "Party",
+            "Formal"
+        ],
+        "demographics": [
+            "Kids",
+            "Women",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 46,
+        "name": "Product 46",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 59.7,
+        "brand": "Zara",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": "10% off",
+        "ratings": 4.8,
+        "reviews": 60,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Quick-Dry",
+            "Stretchable Fabric"
+        ],
+        "occasion": [
+            "Formal"
+        ],
+        "demographics": [
+            "Women",
+            "Kids",
+            "Men"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 47,
+        "name": "Product 47",
+        "category": "Men",
+        "subcategory": "Shirts",
+        "price": 41.71,
+        "brand": "Adidas",
+        "size": [
+            "XS",
+            "M",
+            "S",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "Blue",
+            "Black",
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": "50% off",
+        "ratings": 3.5,
+        "reviews": 103,
+        "availability": "In Stock",
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Breathable",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Winter",
+            "Casual",
+            "Party",
+            "Sports"
+        ],
+        "demographics": [
+            "Men",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Official Nike Store"
+    },
+    {
+        "id": 48,
+        "name": "Product 48",
+        "category": "Women",
+        "subcategory": "Shirts",
+        "price": 86.48,
+        "brand": "Nike",
+        "size": [
+            "M",
+            "XL",
+            "XS"
+        ],
+        "color": [
+            "Red",
+            "Black",
+            "Blue",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "50% off",
+        "ratings": 4.2,
+        "reviews": 377,
+        "availability": "Out of Stock",
+        "isNewArrival": true,
+        "isBestSeller": false,
+        "features": [
+            "Hooded",
+            "Waterproof",
+            "Breathable",
+            "Stretchable Fabric",
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Casual"
+        ],
+        "demographics": [
+            "Men",
+            "Women"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Zara Official Store"
+    },
+    {
+        "id": 49,
+        "name": "Product 49",
+        "category": "Women",
+        "subcategory": "Jackets",
+        "price": 29.93,
+        "brand": "H&M",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "Black",
+            "White",
+            "Red"
+        ],
+        "material": "Polyester",
+        "discount": "20% off",
+        "ratings": 4.2,
+        "reviews": 376,
+        "availability": "In Stock",
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "features": [
+            "Quick-Dry"
+        ],
+        "occasion": [
+            "Winter",
+            "Sports"
+        ],
+        "demographics": [
+            "Women",
+            "Men",
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "Adidas Official Store"
+    },
+    {
+        "id": 50,
+        "name": "Product 50",
+        "category": "Kids",
+        "subcategory": "Pants",
+        "price": 182.06,
+        "brand": "H&M",
+        "size": [
+            "L",
+            "M"
+        ],
+        "color": [
+            "Blue",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": "10% off",
+        "ratings": 4.2,
+        "reviews": 385,
+        "availability": "Out of Stock",
+        "isNewArrival": false,
+        "isBestSeller": true,
+        "features": [
+            "Hooded"
+        ],
+        "occasion": [
+            "Party"
+        ],
+        "demographics": [
+            "Kids"
+        ],
+        "deliveryOptions": [
+            "Standard Shipping",
+            "Express Delivery"
+        ],
+        "paymentOptions": [
+            "Credit Card",
+            "PayPal",
+            "Cash on Delivery"
+        ],
+        "seller": "H&M Kids Store"
+    }
+]

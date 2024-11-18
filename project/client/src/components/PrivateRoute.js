@@ -12,11 +12,13 @@ const PrivateRoute = ({ children, role }) => {
 
   // If not authenticated, redirect to login
   if (!isAuthenticated) {
+    console.log('not isAuthenticated')
     return <Navigate to="/login" replace />;
   }
 
   // If role is specified and does not match, redirect to a "Not Authorized" page
   if (role && user?.role !== role) {
+    console.log('wrong role')
     return <Navigate to="/not-authorized" replace />;
   }
 
