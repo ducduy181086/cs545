@@ -1,0 +1,50 @@
+.macbook-list-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9f9f9; /* Background color for the container */
+  }
+  
+  .heading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subheading {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 2rem;
+  }
+  
+  .macbook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .macbook-card {
+    background-color: #eaff00; /* Light green background */
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .macbook-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .macbook-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+  
+  .macbook-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
