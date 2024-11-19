@@ -1,20 +1,25 @@
-import { useState } from "react";
+import CategoryListbox from "components/common/CategoryListBox";
+import React, { useState } from "react";
+import categoryData from '../../mock_categories.json'
 
-const AddProductForm = (props) => {
+const ProductForm = (props) => {
 
-  const { onAddProduct } = props;
+  const { mode = "add", initialData = {}, onSubmit } = props;
   const [product, setProduct] = useState({
     name: "",
-    category: "",
+    category: null,
     price: "",
     brand: "",
     size: "",
     color: "",
     material: "",
     discount: "",
+    ...initialData,
   });
 
-  // Handle Input Change
+  const isViewMode = mode === "view";
+  const isUpdateMode = mode === "update";
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({
@@ -23,9 +28,16 @@ const AddProductForm = (props) => {
     });
   };
 
-  // Handle Form Submission
+  const handleChangeCategory = (category) => {
+    setProduct({
+      ...product,
+      category,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isViewMode) return;
 
     if (
       !product.name ||
@@ -41,9 +53,7 @@ const AddProductForm = (props) => {
       return;
     }
 
-    // Call the parent handler with the new product
-    onAddProduct({
-      id: Date.now(), // Generate a unique ID
+    onSubmit({
       name: product.name,
       category: product.category,
       price: parseFloat(product.price),
@@ -52,18 +62,6 @@ const AddProductForm = (props) => {
       color: product.color,
       material: product.material,
       discount: parseFloat(product.discount),
-    });
-
-    // Clear the form
-    setProduct({
-      name: "",
-      category: "",
-      price: "",
-      brand: "",
-      size: "",
-      color: "",
-      material: "",
-      discount: "",
     });
   };
 
@@ -80,20 +78,21 @@ const AddProductForm = (props) => {
             name="name"
             value={product.name}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700">
             Category
           </label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={product.category}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          {/* Category dropdown */}
+          <CategoryListbox
+            categoryData={categoryData}
+            selectedCategory={product.category}
+            onSelectCategory={handleChangeCategory}
+            disabled={isViewMode}
           />
         </div>
         <div>
@@ -106,7 +105,9 @@ const AddProductForm = (props) => {
             name="price"
             value={product.price}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
@@ -119,7 +120,9 @@ const AddProductForm = (props) => {
             name="brand"
             value={product.brand}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
@@ -132,8 +135,9 @@ const AddProductForm = (props) => {
             name="size"
             value={product.size}
             onChange={handleChange}
-            placeholder="e.g., S, M, L"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
@@ -146,8 +150,9 @@ const AddProductForm = (props) => {
             name="color"
             value={product.color}
             onChange={handleChange}
-            placeholder="e.g., Red, Blue"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
@@ -160,7 +165,9 @@ const AddProductForm = (props) => {
             name="material"
             value={product.material}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
         <div>
@@ -173,18 +180,22 @@ const AddProductForm = (props) => {
             name="discount"
             value={product.discount}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
         </div>
       </div>
-      <button
-        type="submit"
-        className="mt-4 w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Add Product
-      </button>
+      {!isViewMode && (
+        <button
+          type="submit"
+          className="mt-8 w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          {isUpdateMode ? "Save Product" : "Add Product"}
+        </button>
+      )}
     </form>
   );
 };
 
-export default AddProductForm;
+export default ProductForm;

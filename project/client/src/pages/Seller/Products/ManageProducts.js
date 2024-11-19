@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SellerHeader from "../SellerHeader"
-import ProductTable from "./ProductTable"
-import productsData from "../../../mock_products.json";
 import { Link } from "react-router-dom";
+import { sellerFetchProducts } from "services/sellerService";
+import ProductTable from "components/common/SellerProductTable";
 
 const ManageProduct = (props) => {
-    const [products, setProducts] = useState(productsData)
-    const [newProduct, setNewProduct] = useState({ id: "", name: "", price: "", stock: "" });
+    const [products, setProducts] = useState()
+
+    useEffect(() => {
+        console.log('fetch products')
+        sellerFetchProducts().then(res => {
+            setProducts(res);
+        });
+    }, [])
+
 
     // Create Product
     const handleCreateProduct = () => {
@@ -47,7 +54,7 @@ const ManageProduct = (props) => {
                             Add Product
                         </button>
                     </Link>
-                    <ProductTable products={productsData} />
+                    {products && <ProductTable products={products} />}
                 </div>
             </main>
         </div>
