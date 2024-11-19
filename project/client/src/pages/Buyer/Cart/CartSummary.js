@@ -8,7 +8,7 @@ const CartSummary = () => {
     cart.reduce((total, item) => total + item.price * item.qty, 0);
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-12">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-12 ml-4 mr-4">
       {/* Item List */}
       <ul>
         {cart.map((item) => (
@@ -24,7 +24,7 @@ const CartSummary = () => {
                 className="w-16 h-16 object-cover rounded-md"
               />
               <div>
-                <p className="text-sm font-semibold">{item.title}</p>
+                <p className="text-sm font-semibold line-clamp-2">{item.title}</p>
                 <p className="text-sm text-gray-500">Shipping: Free</p>
                 <p className="text-sm text-gray-500">Quantity: {item.qty}</p>
               </div>
