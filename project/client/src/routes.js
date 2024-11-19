@@ -15,8 +15,10 @@ import NotFound from './pages/NotFound';
 // Role-based route guards
 import PrivateRoute from './components/PrivateRoute';
 import ManageOrders from 'pages/Seller/Orders/ManageOrders';
-import AddProduct from 'pages/Seller/AddProduct/AddProduct';
+import AddProduct from 'pages/Seller/Products/AddProduct';
 import ShoppingCart from 'pages/Buyer/Cart/ShoppingCart';
+import ProductDetail from 'pages/Seller/Products/ProductDetails';
+import OrderDetail from 'pages/Seller/Orders/OrderDetails';
 
 const AppRoutes = () => {
   return (
@@ -102,10 +104,23 @@ const AppRoutes = () => {
             <AddProduct />
           } />
         <Route
+          path="/seller/manage-products/:id"
+          element={
+            <ProductDetail />
+          } />
+        <Route
           path="/seller/manage-orders"
           element={
             // <PrivateRoute role="seller">
             <ManageOrders />
+            // </PrivateRoute>
+          }
+        />
+        <Route
+          path="/seller/manage-orders/:id"
+          element={
+            // <PrivateRoute role="seller">
+            <OrderDetail />
             // </PrivateRoute>
           }
         />
