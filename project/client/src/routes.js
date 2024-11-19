@@ -16,13 +16,17 @@ import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import ManageOrders from 'pages/Seller/Orders/ManageOrders';
 import AddProduct from 'pages/Seller/AddProduct/AddProduct';
+import ShoppingCart from 'pages/Buyer/Cart/ShoppingCart';
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{
+      v7_relativeSplatPath: true,
+      v7_startTransition: true,
+    }}>
       <Routes>
         {/* Home Page */}
-        <Route path="/" element={<Navigate to="/buyer/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -46,16 +50,27 @@ const AppRoutes = () => {
           }
         />
 
+        {/* --------------- Start Region - Buyer Routes ---------------*/}
         <Route
-          path="/buyer/dashboard"
+          path="/dashboard"
           element={
             // <PrivateRoute role="buyer">
             <BuyerDashboard />
             // </PrivateRoute>
           }
         />
+
         <Route
-          path="/buyer/products"
+          path="/cart"
+          element={
+            // <PrivateRoute role="buyer">
+            <ShoppingCart />
+            // </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/products"
           element={
             <PrivateRoute role="buyer">
               <ProductList />
@@ -63,11 +78,13 @@ const AppRoutes = () => {
           }
         />
 
+        {/*  --------------- End Region - Buyer Routes --------------- */}
+
         <Route
           path="/seller/dashboard"
           element={
             // <PrivateRoute role="seller">
-              <SellerDashboard />
+            <SellerDashboard />
             // </PrivateRoute>
           }
         />
@@ -75,20 +92,20 @@ const AppRoutes = () => {
           path="/seller/manage-products"
           element={
             // <PrivateRoute role="seller">
-              <ManageProducts />
+            <ManageProducts />
             // </PrivateRoute>
           }
         />
         <Route
-        path="/seller/manage-products/add" 
-        element={
-          <AddProduct />
-        }/>
+          path="/seller/manage-products/add"
+          element={
+            <AddProduct />
+          } />
         <Route
           path="/seller/manage-orders"
           element={
             // <PrivateRoute role="seller">
-              <ManageOrders />
+            <ManageOrders />
             // </PrivateRoute>
           }
         />
