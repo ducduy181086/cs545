@@ -46,7 +46,7 @@ const BuyerDashboard = () => {
             <Header />
 
             {/* {Body component} */}
-            <div className="mt-16 text-center p-8 bg-gray-50">
+            <div className="mt-28 text-center p-8 bg-gray-50">
                 <div className="flex h-screen">
                     {/* First Column: Wrap Content */}
                     <div className="flex-none">
