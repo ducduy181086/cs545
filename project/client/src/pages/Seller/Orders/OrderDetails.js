@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { sellerFetchOrderById } from "services/sellerService";
 import SellerHeader from "../SellerHeader";
-import { html2pdf } from "html2pdf.js";
 import OrderReceipt from "./OrderReceipt";
 
 const OrderDetail = (props) => {

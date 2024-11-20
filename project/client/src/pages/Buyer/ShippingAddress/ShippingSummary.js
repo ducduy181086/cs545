@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { formatPhoneNumber } from "utils/utils";
 
 export default function ShippingSummary() {
-    const { shippingInfo, updateShippingInfo } = useContext(ShippingContext);
+    const { shippingInfo } = useContext(ShippingContext);
 
     return (
         <div className="mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 mt-8">

@@ -24,6 +24,8 @@ import CartDashboard from 'pages/Buyer/Cart/CartDashboard';
 import ShippingDashboard from 'pages/Buyer/ShippingAddress/ShippingDashboard';
 import BillingDashboard from 'pages/Buyer/BillingAddress/BillingDashboard';
 import PaymentDashboard from 'pages/Buyer/Payment/PaymentDashboard';
+import OrderHistoryDashboard from 'pages/Buyer/OrderHistory/OrderHistoryDashboard';
+import OrderHistoryDetail from 'pages/Buyer/OrderHistory/OrderHistoryDetail';
 
 const AppRoutes = () => {
   return (
@@ -102,6 +104,26 @@ const AppRoutes = () => {
             // </PrivateRoute>
           }
         />
+
+        <Route
+          path="/order-history"
+          element={
+            // <PrivateRoute role="buyer">
+            <OrderHistoryDashboard />
+            // </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/order-history/:id"
+          element={
+            // <PrivateRoute role="buyer">
+            <OrderHistoryDetail />
+            // </PrivateRoute>
+          }
+        />
+
+
 
 
         <Route
