@@ -29,6 +29,22 @@ import OrderHistoryDetail from 'pages/Buyer/OrderHistory/OrderHistoryDetail';
 import ProductDashboard from 'pages/Buyer/Product/ProductDashboard';
 
 
+const publicRoutes = [
+  { path: "/", element: <BuyerDashboard /> },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "/dashboard", element: <BuyerDashboard /> },
+  { path: "/products/:id", element: <ProductDashboard /> },
+];
+
+const buyerRoutes = [
+  { path: "/cart", element: <CartDashboard /> },
+  { path: "/shipping/confirmation-address", element: <ShippingDashboard /> },
+  { path: "/payment", element: <PaymentDashboard /> },
+  { path: "/order-history", element: <OrderHistoryDashboard /> },
+  { path: "/order-history/:id", element: <OrderHistoryDetail /> },
+];
+
 const sellerRoutes = [
   { path: "/seller/dashboard", element: <SellerDashboard /> },
   { path: "/seller/manage-products", element: <ManageProducts /> },
@@ -46,12 +62,15 @@ const AppRoutes = () => {
       v7_startTransition: true,
     }}>
       <Routes>
-        {/* Home Page */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        {publicRoutes.map(({ path, element }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              element
+            }
+          />
+        ))}
 
         {/* Protected Routes */}
         <Route
@@ -72,80 +91,16 @@ const AppRoutes = () => {
         />
 
         {/* --------------- Start Region - Buyer Routes ---------------*/}
-        <Route
-          path="/dashboard"
-          element={
-            // <PrivateRoute role="buyer">
-            <BuyerDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/cart"
-          element={
-            // <PrivateRoute role="buyer">
-            <CartDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/shipping/confirmation-address"
-          element={
-            // <PrivateRoute role="buyer">
-            <ShippingDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/shipping/billing-address"
-          element={
-            // <PrivateRoute role="buyer">
-            <BillingDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/payment"
-          element={
-            // <PrivateRoute role="buyer">
-            <PaymentDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/order-history"
-          element={
-            // <PrivateRoute role="buyer">
-            <OrderHistoryDashboard />
-            // </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/order-history/:id"
-          element={
-            // <PrivateRoute role="buyer">
-            <OrderHistoryDetail />
-            // </PrivateRoute>
-          }
-        />
-
-
-
-
-        <Route
-          path="/products/:id"
-          element={
-            // <PrivateRoute role="buyer">
-              <ProductDashboard />
-            // </PrivateRoute>
-          }
-        />
+        {buyerRoutes.map(({ path, element }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              element
+              // <PrivateRoute role="buyer">{element}</PrivateRoute>
+            }
+          />
+        ))}
 
         {/*  --------------- End Region - Buyer Routes --------------- */}
 

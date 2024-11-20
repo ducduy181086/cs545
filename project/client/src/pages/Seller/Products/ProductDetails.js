@@ -6,7 +6,7 @@ import { sellerFetchProductById, sellerUpdateProduct } from "services/sellerServ
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
 
     const navigate = useNavigate();
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { sellerFetchProducts } from "services/sellerService";
 import ProductTable from "components/common/SellerProductTable";
 
-const ManageProduct = (props) => {
+const ManageProduct = () => {
     const [products, setProducts] = useState()
 
     useEffect(() => {

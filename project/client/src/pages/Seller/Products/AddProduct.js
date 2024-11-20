@@ -2,7 +2,7 @@ import SellerHeader from "../SellerHeader"
 import { useNavigate } from "react-router";
 import ProductForm from "components/common/SellerProductForm";
 
-const AddProduct = (props) => {
+const AddProduct = () => {
 
     // const [products, setProducts] = useState([]);
 

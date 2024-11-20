@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 const RatingView = ({ product }) => {
 
-  const ratingCounts = [5, 19, 22, 67, 99]; // Array to hold counts for 1 to 5 stars
+  const ratingCounts = [599, 69, 82, 47, 10]; // Array to hold counts for 1 to 5 stars
 
   const totalRatings = ratingCounts.reduce((total, count) => total + count, 0);
   // Calculate percentage for each rating

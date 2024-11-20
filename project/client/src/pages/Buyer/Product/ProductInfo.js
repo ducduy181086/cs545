@@ -1,203 +1,84 @@
-import { ShippingContext } from "context/ShippingContext";
-import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import ImageSlider from 'components/common/ImageSlider';
+import React from 'react';
 
-const ProductInfo = () => {
-  const navigate = useNavigate();
-  const { shippingInfo, updateShippingInfo } = useContext(ShippingContext);
+const ProductInfo = ({ product }) => {
+  const {
+    name,
+    category,
+    subcategory,
+    price,
+    brand,
+    size,
+    color,
+    material,
+    discount,
+    ratings,
+  } = product;
 
+const images= [
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6e3159ac4ed74ad59ebd85b295b5770e_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM1.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/339a1064b40d4068a83f6dd8caa5cfff_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM3_hover.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0a9ad81152394af58d64508f81332339_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM4.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/c289b512b4d64c26bb65a142661a3fb0_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM5.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f3cc9c184bf84995b2b66713ec497643_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM6.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/cb1009c258fa40a5bfc01aa56b2aa639_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM7.jpg",
+  "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/03da0a9cd40d48358bcb5b008e78abe4_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM8.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3fbb78d5996548b4a295374463c68647_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM9.jpg",
+  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/be1706307aa8424e8fb36864db7e48b9_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM10.jpg"
+];
 
-  const [formData, setFormData] = useState({
-    firstName: shippingInfo?.firstName ?? "",
-    lastName: shippingInfo?.lastName ?? "",
-    address: shippingInfo?.address ?? "",
-    apt: shippingInfo?.apt ?? "",
-    zipCode: shippingInfo?.zipCode ?? "",
-    city: shippingInfo?.city ?? "",
-    state: shippingInfo?.state ?? "",
-    country: "United States",
-    phoneNumber: shippingInfo?.phoneNumber ?? "",
-    sameBillingAddress: shippingInfo?.sameBillingAddress ?? true,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateShippingInfo(formData);
-    navigate(formData.sameBillingAddress ? '/payment' : '/shipping/billing-address');
-
-  };
+  // Format the price and discount to show in a readable way
+  const formattedPrice = price.toFixed(2);
+  const discountedPrice = (price - (price * discount) / 100).toFixed(2);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 mt-8"
-    >
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 
-      {/* First and Last Name */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium">First name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1"
-            placeholder="First name"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Last name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1"
-            placeholder="Last name"
-            required
-          />
-        </div>
+      <ImageSlider images={images} />
+      {/* Product Name */}
+      <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-8">{name??''}</h1>
+
+      {/* Product Category and Subcategory */}
+      <p className="text-md text-gray-600">
+        <span className="font-semibold">Category:</span> {category.name} ●{' '}
+        {subcategory}
+      </p>
+
+      {/* Product Price and Discount */}
+      <div className="mt-4 flex items-center">
+        <span className="text-xl font-bold text-gray-800">${formattedPrice}</span>
+        {discount > 0 && (
+          <span className="ml-4 text-lg line-through text-gray-500">
+            ${discountedPrice}
+          </span>
+        )}
+        {discount > 0 && (
+          <span className="ml-4 text-lg text-red-500 font-semibold">
+            {discount}% OFF
+          </span>
+        )}
       </div>
 
-      {/* Address Fields */}
-      <div>
-        <label className="block text-sm font-medium">Address (number and name)</label>
-        <input
-          type="text"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          className="w-full border rounded-md p-2 mt-1"
-          placeholder="Address (number and name)"
-          required
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Apt, Suite, Building, etc. (optional)</label>
-        <input
-          type="text"
-          name="apt"
-          value={formData.apt}
-          onChange={handleChange}
-          className="w-full border rounded-md p-2 mt-1"
-          placeholder="Apt, Suite, Building, etc. (optional)"
-        />
-      </div>
+      {/* Product Brand */}
+      <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">Brand:</span> {brand}
+      </p>
 
-      {/* ZIP and City */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium">ZIP code</label>
-          <input
-            type="text"
-            name="zipCode"
-            value={formData.zipCode}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1"
-            placeholder="ZIP code"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">City</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1"
-            placeholder="City"
-            required
-          />
-        </div>
-      </div>
+      {/* Product Size */}
+      <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">Size:</span> {size.join(', ')}
+      </p>
 
-      {/* State and Country */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium">State/province/region</label>
-          <select
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1"
-            required
-          >
-            <option value="">Select state</option>
-            <option value="Iowa">Iowa</option>
-            <option value="California">California</option>
-            <option value="Texas">Texas</option>
-            <option value="New York">New York</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Country</label>
-          <input
-            type="text"
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            className="w-full border rounded-md p-2 mt-1 cursor-not-allowed bg-gray-200 text-gray-500"
-            readOnly
-          />
-        </div>
-      </div>
+      {/* Product Color */}
+      <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">Color:</span> {color.join(', ')}
+      </p>
 
-      {/* Phone Number */}
-      <div>
-        <label className="block text-sm font-medium">Phone number</label>
-        <div className="flex">
-          <select
-            className="border rounded-l-md p-2"
-            name="countryCode"
-          >
-            <option value="+1">+1</option>
-          </select>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="flex-1 border rounded-r-md p-2"
-            placeholder="Phone number"
-            required
-          />
-        </div>
-        <p className="text-sm text-gray-500 mt-1">
-          Just in case we need to reach you about delivery.
-        </p>
-      </div>
-
-      {/* Same Billing Address */}
-      <div className="flex items-center">
-        <input
-          type="checkbox"
-          name="sameBillingAddress"
-          checked={formData.sameBillingAddress}
-          onChange={handleChange}
-          className="mr-2"
-        />
-        <label className="text-sm">Same billing address</label>
-      </div>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800"
-      >
-        Next
-      </button>
-    </form>
+      {/* Product Material */}
+      <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">Material:</span> {material}
+      </p>
+    </div>
   );
 };
 
