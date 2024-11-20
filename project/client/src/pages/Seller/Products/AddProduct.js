@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SellerHeader from "../SellerHeader"
 import { useNavigate } from "react-router";
 import ProductForm from "components/common/SellerProductForm";
