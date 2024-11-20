@@ -13,7 +13,7 @@ function CartDetail() {
         );
     }
     return (
-        <div className="pt-12">
+        <div className="pt-8">
             {cart.map((item) => (
                 <CartItem
                     key={item.id}

@@ -2,14 +2,17 @@ import './App.css';
 import { AuthProvider } from 'context/AuthContext';
 import { CartProvider } from 'context/CartContext';
 import AppRoutes from './routes';
+import { ShippingProvider } from 'context/ShippingContext';
 
 function App() {
   return (
-    <CartProvider>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <ShippingProvider>
+          <AppRoutes />
+        </ShippingProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
