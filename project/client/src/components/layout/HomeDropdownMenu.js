@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from 'context/AuthContext';
 
 
 const HomeDropdownMenu = () => {
   // State to control the open/close of the menu
+  const { logout } = useContext(AuthContext)
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -22,6 +24,11 @@ const HomeDropdownMenu = () => {
   const onClickOrderHistory = () => {
     handleClose();
     navigate('/order-history');
+  }
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login')
   }
 
   return (
@@ -50,7 +57,7 @@ const HomeDropdownMenu = () => {
           fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
           fontSize: '1.0rem',
         }}>Order History</MenuItem>
-        <MenuItem onClick={handleClose} sx={{
+        <MenuItem onClick={handleLogout} sx={{
           fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
           fontSize: '1.0rem',
         }}>Logout</MenuItem>
