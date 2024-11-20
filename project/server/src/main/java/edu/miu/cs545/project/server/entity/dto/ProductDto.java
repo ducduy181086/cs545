@@ -3,6 +3,7 @@ package edu.miu.cs545.project.server.entity.dto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class ProductDto {
@@ -10,6 +11,7 @@ public class ProductDto {
 
     private String name;
     private String description;
+    private String imageUrl;
 
     private int quantity;
     private double price;
@@ -19,6 +21,7 @@ public class ProductDto {
 
     private CategoryDto category;
 
+    private Map<Integer, Long> ratings;
     private double averageRating;
     private int reviewCount;
     private boolean inStock;

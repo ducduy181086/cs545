@@ -55,16 +55,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(httpSecurityCorsConfigurer -> {
-            httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
-        });
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> {
             request.requestMatchers("/api/v1/authenticate/**").permitAll();
             request.requestMatchers("/api/v1/admin/**").hasAnyAuthority(RoleType.ADMIN.name());
+            request.requestMatchers("/api/v1/reviews/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers("/api/v1/categories/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").hasAnyAuthority(RoleType.SELLER.name(), RoleType.BUYER.name());
-            request.requestMatchers(HttpMethod.DELETE, "/api/v1/products/*/reviews").hasAuthority(RoleType.ADMIN.name());
             request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SELLER.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());

@@ -17,7 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +74,22 @@ public class ReviewServiceImpl implements ReviewService {
         product.setReviewCount(reviewsCount);
         product.setAverageRating((double) sumValue / reviewsCount);
         productRepo.save(product);
+    }
+
+    @Override
+    public Map<Integer, Long> countReviewsByRating(Long productId) {
+        List<Object[]> results = reviewRepo.countReviewsByRating(productId);
+        return results.stream()
+            .collect(Collectors.toMap(
+                result -> (Integer) result[0], // Rating
+                result -> (Long) result[1]    // Count
+            ));
+    }
+
+    @Override
+    public Page<ReviewDto> getDeletedReviews(Pageable pageable) {
+        return reviewRepo.findDeletedReviews(pageable)
+            .map(m -> modelMapper.map(m, ReviewDto.class));
     }
 
     private Optional<Buyer> getCurrentBuyer() {
