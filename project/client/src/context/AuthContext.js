@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = (userData) => {
+    
     // setUser(userData);
     // setIsAuthenticated(true);
     // localStorage.setItem('user', JSON.stringify(userData));

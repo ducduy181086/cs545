@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { loginUser } from 'services/authService';
 
 const Login = () => {
 
@@ -11,11 +12,19 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    const userData = { email: email, password: password, role:'seller' };
-    const result = await login(userData);
-    if (result) {
-      navigate('/')
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    const userData = { email: email, password: password };
+    const result = await loginUser(userData);
+    login(result) //store user info
+    console.log('result = ', result)
+    if (result.role === 'BUYER') {
+      navigate('/dashboard')
+    } else if (result.role === 'SELLER') {
+      navigate('/seller/dashboard')
+    } else if (result.role === 'ADMIN') {
+      navigate('/admin/dashboard')
     }
   };
 
@@ -81,7 +90,7 @@ const Login = () => {
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Not a member?{' '}
             <Link to="/register" className='font-semibold text-indigo-600 hover:text-indigo-500'>
-            Switch to Register
+              Switch to Register
             </Link>
           </p>
         </div>

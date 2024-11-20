@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { registerBuyer, registerSeller } from 'services/authService';
 
 const Register = () => {
 
   const navigate = useNavigate()
 
-  const { register } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState('Buyer');
+  const [selectedRole, setSelectedRole] = useState('BUYER');
 
   const handleSelectionRole = (role) => {
     setSelectedRole(role);
@@ -19,11 +18,18 @@ const Register = () => {
     const userData = {
       email: email,
       password: password,
-      role: selectedRole
+      // role: selectedRole
     };
-    const result = await register(userData);
-    if (result) {
-      navigate('/login')
+    if (selectedRole === 'BUYER') {
+      const result = registerBuyer(userData)
+      if (result) {
+        navigate('/login')
+      }
+    } else if (selectedRole === 'SELLER') {
+      result = registerSeller(userData)
+      if (result) {
+        navigate('/login')
+      }
     }
   };
 
@@ -41,14 +47,14 @@ const Register = () => {
         <div className="mt-10 space-y-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex border rounded-lg divide-x divide-gray-200 shadow">
             <button
-              onClick={() => handleSelectionRole('Buyer')}
-              className={`flex-1 py-2 px-4 text-center ${selectedRole === 'Buyer' ? 'bg-red-500 text-white' : 'bg-white text-black hover:bg-gray-100'
+              onClick={() => handleSelectionRole('BUYER')}
+              className={`flex-1 py-2 px-4 text-center ${selectedRole === 'BUYER' ? 'bg-red-500 text-white' : 'bg-white text-black hover:bg-gray-100'
                 }`}>
               Buyer
             </button>
             <button
-              onClick={() => handleSelectionRole('Seller')}
-              className={`flex-1 py-2 px-4 text-center ${selectedRole === 'Seller' ? 'bg-red-500 text-white' : 'bg-white text-black hover:bg-gray-100'
+              onClick={() => handleSelectionRole('SELLER')}
+              className={`flex-1 py-2 px-4 text-center ${selectedRole === 'SELLER' ? 'bg-red-500 text-white' : 'bg-white text-black hover:bg-gray-100'
                 }`}>
               Seller
             </button>
