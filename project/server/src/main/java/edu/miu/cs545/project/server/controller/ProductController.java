@@ -64,6 +64,11 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+    @GetMapping("/{id}/compatibility")
+    public List<ProductDto> getCompatibilityProducts(@PathVariable Long id) {
+        return productService.getCompatibilityProducts(id);
+    }
+
     @PostMapping()
     public void create(@RequestBody SaveProductRequest product) {
         productService.saveProduct(product);
@@ -75,8 +80,18 @@ public class ProductController {
         productService.saveProduct(product);
     }
 
+    @PutMapping("/{id}/compatibility/{compatibilityProductId}")
+    public void addCompatibilityProduct(@PathVariable Long id, @PathVariable Long compatibilityProductId) {
+        productService.setCompatibilityProduct(id, compatibilityProductId);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         productService.deleteProduct(id);
+    }
+
+    @DeleteMapping("/{id}/compatibility/{compatibilityProductId}")
+    public void deleteCompatibilityProduct(@PathVariable Long id, @PathVariable Long compatibilityProductId) {
+        productService.removeCompatibilityProduct(id, compatibilityProductId);
     }
 }

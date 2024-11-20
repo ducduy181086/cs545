@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -102,5 +103,33 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         productRepo.findById(id).ifPresent(productRepo::delete);
+    }
+
+    @Override
+    public List<ProductDto> getCompatibilityProducts(Long id) {
+        var product = productRepo.findById(id);
+        if (product.isPresent()) {
+            var items = product.get().getCompatibleProducts();
+            return items.stream()
+                .map(item -> modelMapper.map(item, ProductDto.class))
+                .collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void setCompatibilityProduct(Long id, Long compatibilityProductId) {
+        var product = productRepo.findById(id).orElseThrow();
+        var compatibilityProduct = productRepo.findById(compatibilityProductId).orElseThrow();
+        product.getCompatibleProducts().add(compatibilityProduct);
+        productRepo.save(product);
+    }
+
+    @Override
+    public void removeCompatibilityProduct(Long id, Long compatibilityProductId) {
+        var product = productRepo.findById(id).orElseThrow();
+        var compatibilityProduct = productRepo.findById(compatibilityProductId).orElseThrow();
+        product.getCompatibleProducts().add(compatibilityProduct);
+        productRepo.save(product);
     }
 }

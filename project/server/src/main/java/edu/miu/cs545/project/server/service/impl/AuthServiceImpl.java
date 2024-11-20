@@ -1,12 +1,16 @@
 package edu.miu.cs545.project.server.service.impl;
 
+import edu.miu.cs545.project.server.entity.Admin;
 import edu.miu.cs545.project.server.entity.Buyer;
 import edu.miu.cs545.project.server.entity.Seller;
 import edu.miu.cs545.project.server.entity.User;
+import edu.miu.cs545.project.server.entity.dto.UserDto;
 import edu.miu.cs545.project.server.entity.dto.request.LoginRequest;
 import edu.miu.cs545.project.server.entity.dto.request.RefreshTokenRequest;
 import edu.miu.cs545.project.server.entity.dto.response.CommonResponse;
 import edu.miu.cs545.project.server.entity.dto.response.LoginResponse;
+import edu.miu.cs545.project.server.helper.UserHelper;
+import edu.miu.cs545.project.server.repository.AdminRepo;
 import edu.miu.cs545.project.server.repository.BuyerRepo;
 import edu.miu.cs545.project.server.repository.SellerRepo;
 import edu.miu.cs545.project.server.repository.UserRepo;
@@ -14,6 +18,9 @@ import edu.miu.cs545.project.server.service.AuthService;
 import edu.miu.cs545.project.server.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,10 +44,12 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepo userRepo;
     private final SellerRepo sellerRepo;
     private final BuyerRepo buyerRepo;
+    private final ModelMapper modelMapper;
+    private final AdminRepo adminRepo;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        Authentication result = null;
+        Authentication result;
         try {
             result = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
@@ -53,8 +62,7 @@ public class AuthServiceImpl implements AuthService {
 
         final String accessToken = jwtUtil.generateToken(userDetails);
         final String refreshToken = jwtUtil.generateRefreshToken(userDetails.getUsername());
-        var loginResponse = new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);
-        return loginResponse;
+        return new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);
     }
 
     @Override
@@ -66,8 +74,7 @@ public class AuthServiceImpl implements AuthService {
             String accessToken = jwtUtil.generateToken(userDetails);
             String refreshToken = jwtUtil.generateRefreshToken(userDetails.getUsername());
 
-            var loginResponse = new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);
-            return loginResponse;
+            return new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);
         }
         return new LoginResponse();
     }
@@ -79,11 +86,7 @@ public class AuthServiceImpl implements AuthService {
         if (user.isPresent()) {
             return new CommonResponse("failed", "USER_EXISTED");
         }
-        User userEntity = new User();
-        userEntity.setEmail(loginRequest.getEmail());
-        var t = loginRequest.getPassword();
-        userEntity.setPassword(passwordEncoder.encode(loginRequest.getPassword()));
-        userRepo.save(userEntity);
+        User userEntity = getUser(loginRequest);
         Buyer buyerEntity = new Buyer();
         buyerEntity.setUser(userEntity);
         buyerRepo.save(buyerEntity);
@@ -97,13 +100,39 @@ public class AuthServiceImpl implements AuthService {
         if (user.isPresent()) {
             return new CommonResponse("failed", "USER_EXISTED");
         }
-        User userEntity = new User();
-        userEntity.setEmail(loginRequest.getEmail());
-        userEntity.setPassword(passwordEncoder.encode(loginRequest.getPassword()));
-        userRepo.save(userEntity);
+        User userEntity = getUser(loginRequest);
         Seller sellerEntity = new Seller();
         sellerEntity.setUser(userEntity);
         sellerRepo.save(sellerEntity);
         return new CommonResponse("success", "");
+    }
+
+    @Override
+    public Page<UserDto> getUnapprovedSellers(Pageable pageable) {
+        var items = userRepo.findUnapprovedSeller(pageable);
+        return items.map(u -> modelMapper.map(u, UserDto.class));
+    }
+    
+    @Override
+    public CommonResponse approvedSeller(Long userId) {
+        var user = userRepo.findById(userId).orElseThrow();
+        var admin = getCurrentAdmin().orElseThrow();
+        var seller = user.getSellerDetails();
+        seller.setApprovedByAdmin(admin);
+        sellerRepo.save(seller);
+        return new CommonResponse("success", "");
+    }
+
+    private User getUser(LoginRequest loginRequest) {
+        User userEntity = new User();
+        userEntity.setEmail(loginRequest.getEmail());
+        userEntity.setPassword(passwordEncoder.encode(loginRequest.getPassword()));
+        userRepo.save(userEntity);
+        return userEntity;
+    }
+
+    private Optional<Admin> getCurrentAdmin() {
+        String username = UserHelper.getCurrentUserName();
+        return adminRepo.findAdminByEmail(username);
     }
 }

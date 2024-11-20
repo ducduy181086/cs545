@@ -2,7 +2,6 @@ package edu.miu.cs545.project.server.config;
 
 import edu.miu.cs545.project.server.entity.RoleType;
 import edu.miu.cs545.project.server.filter.JwtFilter;
-import edu.miu.cs545.project.server.repository.RoleRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +26,6 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
     private final UserDetailsService userDetailsService;
 
-    String[] roles = { "CLIENT", "ADMIN" };
-
     @Bean
     public UserDetailsService userDetailsSvc() {
         return userDetailsService;
@@ -49,6 +46,10 @@ public class SecurityConfig {
             request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").hasAnyAuthority(RoleType.SELLER.name(), RoleType.BUYER.name());
             request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.SELLER.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers("/api/v1/addresses/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers("/api/v1/payment/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers("/api/v1/order/**").hasAnyAuthority(RoleType.BUYER.name());
             request.anyRequest().authenticated();
         });
         http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

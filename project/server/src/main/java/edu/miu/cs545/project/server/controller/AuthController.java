@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/api/v1/authenticate")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -19,7 +21,7 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         var loginResponse = authService.login(loginRequest);
-        return new ResponseEntity<LoginResponse>(
+        return new ResponseEntity<>(
                 loginResponse, HttpStatus.OK);
     }
 
@@ -31,18 +33,18 @@ public class AuthController {
     @PostMapping("/register-buyer")
     public ResponseEntity<?> registerAsBuyer(@RequestBody LoginRequest loginRequest) {
         var response = authService.registerAsBuyer(loginRequest);
-        if (response.getStatus() == "success") {
-            return new ResponseEntity(response, HttpStatus.CREATED);
+        if (Objects.equals(response.getStatus(), "success")) {
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
-        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/register-seller")
     public ResponseEntity<?> registerAsSeller(@RequestBody LoginRequest loginRequest) {
         var response = authService.registerAsSeller(loginRequest);
-        if (response.getStatus() == "success") {
-            return new ResponseEntity(response, HttpStatus.CREATED);
+        if (Objects.equals(response.getStatus(), "success")) {
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
-        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

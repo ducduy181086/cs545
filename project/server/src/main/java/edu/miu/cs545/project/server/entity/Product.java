@@ -18,6 +18,7 @@ public class Product {
     private String name;
     private String description;
 
+    private int quantity;
     private double price;
     private double discount; // % or value reduce
     private String brand;

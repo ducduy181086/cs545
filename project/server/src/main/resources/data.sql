@@ -27,14 +27,14 @@ INSERT INTO category (name, parent_id) VALUES
 ('Dresses', 2), -- Dresses belongs Women
 ('Jackets', 1); -- Jackets belongs Men
 
-INSERT INTO product (name, description, price, discount, brand, type, category_id, seller_id, average_rating, review_count, in_stock, is_new_arrival, is_best_seller, material, features, model_year, delivery_options, demographics, usage, occasion)
+INSERT INTO product (name, description, quantity, price, discount, brand, type, category_id, seller_id, average_rating, review_count, in_stock, is_new_arrival, is_best_seller, material, features, model_year, delivery_options, demographics, usage, occasion)
 VALUES
-('Nike Men''s Shirt', 'High quality cotton shirt for men', 29.99, 10, 'Nike', 'Shirts', 1, 1, 4.5, 100, true, false, true, 'Cotton', 'Comfortable, Breathable', '2024', 'US, CA', 'Men', 'Casual', 'Casual'),
-('Adidas Women''s Pants', 'Stylish pants for women with premium material', 49.99, 20, 'Adidas', 'Pants', 2, 1, 4.7, 120, true, true, true, 'Polyester', 'Comfortable, Stretchable', '2023', 'US, EU', 'Women', 'Casual', 'Casual'),
-('Zara Kids Dress', 'Trendy dress for girls, perfect for parties', 39.99, 15, 'Zara', 'Dresses', 3, 1, 4.0, 50, true, false, false, 'Cotton', 'Stylish, Comfortable', '2022', 'US, CA', 'Kids', 'Party', 'Party'),
-('H&M Men''s Jacket', 'Warm jacket for men, ideal for winter', 99.99, 25, 'H&M', 'Jackets', 1, 1, 4.8, 150, true, true, false, 'Wool', 'Warm, Stylish', '2023', 'US, EU', 'Men', 'Winter', 'Winter'),
-('Adidas Women''s Jacket', 'Lightweight jacket for women, great for spring', 79.99, 10, 'Adidas', 'Jackets', 2, 1, 4.6, 80, true, false, true, 'Polyester', 'Lightweight, Windproof', '2024', 'US, CA', 'Women', 'Spring', 'Casual'),
-('Nike Kids Shirt', 'Bright, colorful kids shirt for summer', 19.99, 30, 'Nike', 'Shirts', 3, 1, 4.3, 60, true, false, true, 'Cotton', 'Fun, Comfortable', '2023', 'US, EU', 'Kids', 'Summer', 'Casual');
+('Nike Men''s Shirt', 'High quality cotton shirt for men', 10, 29.99, 10, 'Nike', 'Shirts', 1, 1, 4.5, 100, true, false, true, 'Cotton', 'Comfortable, Breathable', '2024', 'US, CA', 'Men', 'Casual', 'Casual'),
+('Adidas Women''s Pants', 'Stylish pants for women with premium material', 25, 49.99, 20, 'Adidas', 'Pants', 2, 1, 4.7, 120, true, true, true, 'Polyester', 'Comfortable, Stretchable', '2023', 'US, EU', 'Women', 'Casual', 'Casual'),
+('Zara Kids Dress', 'Trendy dress for girls, perfect for parties', 30, 39.99, 15, 'Zara', 'Dresses', 3, 1, 4.0, 50, true, false, false, 'Cotton', 'Stylish, Comfortable', '2022', 'US, CA', 'Kids', 'Party', 'Party'),
+('H&M Men''s Jacket', 'Warm jacket for men, ideal for winter', 19, 99.99, 25, 'H&M', 'Jackets', 1, 1, 4.8, 150, true, true, false, 'Wool', 'Warm, Stylish', '2023', 'US, EU', 'Men', 'Winter', 'Winter'),
+('Adidas Women''s Jacket', 'Lightweight jacket for women, great for spring', 8, 79.99, 10, 'Adidas', 'Jackets', 2, 1, 4.6, 80, true, false, true, 'Polyester', 'Lightweight, Windproof', '2024', 'US, CA', 'Women', 'Spring', 'Casual'),
+('Nike Kids Shirt', 'Bright, colorful kids shirt for summer', 32, 19.99, 30, 'Nike', 'Shirts', 3, 1, 4.3, 60, true, false, true, 'Cotton', 'Fun, Comfortable', '2023', 'US, EU', 'Kids', 'Summer', 'Casual');
 
 INSERT INTO product_colors (product_id, colors) VALUES
 (1, 'Red'),

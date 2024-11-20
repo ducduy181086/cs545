@@ -1,18 +1,31 @@
 package edu.miu.cs545.project.server.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import edu.miu.cs545.project.server.entity.dto.UserDto;
+import edu.miu.cs545.project.server.entity.dto.response.CommonResponse;
+import edu.miu.cs545.project.server.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/admin")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequiredArgsConstructor
 public class AdminController {
-    @GetMapping()
-    public String getAdminSite() {
-        return "This is admin action.";
+    private final AuthService authService;
+
+    @GetMapping("/unapproved")
+    public Page<UserDto> getUnapprovedSellers(
+        @RequestParam(name="page", defaultValue = "0") int page,
+        @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return authService.getUnapprovedSellers(pageable);
+    }
+
+    @PutMapping("/approved/{userId}")
+    public CommonResponse approvedSeller(@PathVariable Long userId) {
+        return authService.approvedSeller(userId);
     }
 }

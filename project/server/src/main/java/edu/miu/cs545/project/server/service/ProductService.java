@@ -34,4 +34,7 @@ public interface ProductService {
     ProductDto getProductById(Long id);
     void saveProduct(SaveProductRequest product);
     void deleteProduct(Long id);
+    List<ProductDto> getCompatibilityProducts(Long id);
+    void setCompatibilityProduct(Long id, Long compatibilityProductId);
+    void removeCompatibilityProduct(Long id, Long compatibilityProductId);
 }
