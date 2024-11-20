@@ -25,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -127,6 +128,7 @@ public class AuthServiceImpl implements AuthService {
         userEntity.setEmail(loginRequest.getEmail());
         userEntity.setPassword(passwordEncoder.encode(loginRequest.getPassword()));
         var role = roleRepo.getRoleByRoleType(isBuyer ? RoleType.BUYER : RoleType.SELLER);
+        userEntity.setRoles(new ArrayList<>());
         userEntity.getRoles().add(role);
         userRepo.save(userEntity);
         return userEntity;
