@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@CrossOrigin(origins = {"*"}, allowedHeaders = {"*"}, allowCredentials = "*")
+@CrossOrigin(origins = {"localhost:3000"}, allowedHeaders = {"*"}, allowCredentials = "true")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
