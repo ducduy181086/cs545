@@ -15,8 +15,7 @@ import NotFound from './pages/NotFound';
 // Role-based route guards
 import PrivateRoute from './components/PrivateRoute';
 import ManageOrders from 'pages/Seller/Orders/ManageOrders';
-import AddProduct from 'pages/Seller/AddProduct/AddProduct';
-import ShoppingCart from 'pages/Buyer/Cart/ShoppingCart';
+import AddProduct from 'pages/Seller/Products/AddProduct';
 import ProductDetail from 'pages/Seller/Products/ProductDetails';
 import OrderDetail from 'pages/Seller/Orders/OrderDetails';
 
