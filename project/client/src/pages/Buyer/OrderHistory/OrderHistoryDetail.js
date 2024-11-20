@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { fetchOrderById } from "services/orderService";
 import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
-import { Button } from "@mui/material";
 
 const OrderHistoryDetail = () => {
     const navigate = useNavigate();
@@ -41,6 +40,17 @@ const OrderHistoryDetail = () => {
         printWindow.print();
     };
 
+    const handleSubmitReview = (productId, rating, reviewText) => {
+        console.log(`Submitting review for product ${productId}`);
+        console.log(`Rating: ${rating}, Review: ${reviewText}`);
+      };
+    
+      const handleViewDetail = (productId) => {
+        console.log(`Viewing details for product ${productId}`);
+        navigate(`/products/${productId}`);
+      };
+    
+
     if (!order) return (<>   </>);
 
     return (
@@ -59,7 +69,7 @@ const OrderHistoryDetail = () => {
                         </div>
 
                         <div className="mt-8"></div>
-                        {order && order.items.map((product) => <div key={product.productId} className="pt-2 pb-2"> {OrderProductCard(product)}</div>)}
+                        {order && order.items.map((product) => <div key={product.productId} className="pt-2 pb-2"> <OrderProductCard product = {product} onSubmitReview ={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
 
                         <div className="flex  border-b mt-2 pb-2">
                             <div>
