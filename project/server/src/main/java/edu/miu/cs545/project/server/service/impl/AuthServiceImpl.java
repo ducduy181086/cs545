@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         var user = userRepo.findByEmail(result.getName()).orElseThrow();
-        if (user.getAdminDetails() == null) {
+        if (user.getSellerDetails() != null && user.getSellerDetails().getApprovedByAdmin() == null) {
             throw new BadCredentialsException("Did not approve.");
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(result.getName());
