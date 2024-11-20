@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/addresses")
-@CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
 @RequiredArgsConstructor
 public class AddressController {
     private final AddressService addressService;

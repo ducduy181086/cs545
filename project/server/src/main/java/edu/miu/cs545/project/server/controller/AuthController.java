@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/authenticate")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
