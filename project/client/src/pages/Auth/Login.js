@@ -11,20 +11,36 @@ const Login = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     const userData = { email: email, password: password };
-    const result = await loginUser(userData);
-    login(result) //store user info
-    console.log('result = ', result)
-    if (result.role === 'BUYER') {
-      navigate('/dashboard')
-    } else if (result.role === 'SELLER') {
-      navigate('/seller/dashboard')
-    } else if (result.role === 'ADMIN') {
-      navigate('/admin/dashboard')
+    try {
+      const result = await loginUser(userData);
+      if (result) {
+        setErrorMessage(''); //clear err
+        login(result) //store user info
+        console.log('result = ', result)
+        if (result.role === 'BUYER') {
+          navigate('/dashboard')
+        } else if (result.role === 'SELLER') {
+          navigate('/seller/dashboard')
+        } else if (result.role === 'ADMIN') {
+          navigate('/admin/dashboard')
+        }
+      } else {
+        setErrorMessage(
+          'Login failed. Please try again.'
+        );
+      }
+
+    }
+    catch (err) {
+      setErrorMessage(
+        err.response?.data?.message || 'Login failed. Please try again.'
+      );
     }
   };
 
@@ -77,6 +93,16 @@ const Login = () => {
               </div>
             </div>
 
+
+            {errorMessage && (
+              <div className="mt-4 rounded-md bg-red-50 p-4">
+                <div className="flex">
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-red-800">{errorMessage}</p>
+                  </div>
+                </div>
+              </div>
+            )}
             <div>
               <button
                 type="submit"

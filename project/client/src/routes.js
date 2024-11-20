@@ -28,6 +28,17 @@ import OrderHistoryDashboard from 'pages/Buyer/OrderHistory/OrderHistoryDashboar
 import OrderHistoryDetail from 'pages/Buyer/OrderHistory/OrderHistoryDetail';
 import ProductRatings from 'pages/Seller/Products/ProductRatings';
 
+
+const sellerRoutes = [
+  { path: "/seller/dashboard", element: <SellerDashboard /> },
+  { path: "/seller/manage-products", element: <ManageProducts /> },
+  { path: "/seller/manage-products/add", element: <AddProduct /> },
+  { path: "/seller/manage-products/:id", element: <ProductDetail /> },
+  { path: "/seller/manage-products/:id/ratings", element: <ProductRatings /> },
+  { path: "/seller/manage-orders", element: <ManageOrders /> },
+  { path: "/seller/manage-orders/:id", element: <OrderDetail /> },
+];
+
 const AppRoutes = () => {
   return (
     <BrowserRouter future={{
@@ -138,56 +149,15 @@ const AppRoutes = () => {
 
         {/*  --------------- End Region - Buyer Routes --------------- */}
 
-        <Route
-          path="/seller/dashboard"
-          element={
-            // <PrivateRoute role="seller">
-            <SellerDashboard />
-            // </PrivateRoute>
-          }
-        />
-        <Route
-          path="/seller/manage-products"
-          element={
-            // <PrivateRoute role="seller">
-            <ManageProducts />
-            // </PrivateRoute>
-          }
-        />
-        <Route
-          path="/seller/manage-products/add"
-          element={
-            <AddProduct />
-          } />
-
-        <Route
-          path="/seller/manage-products/:id"
-          element={
-            <ProductDetail />
-          } />
-
-        <Route
-          path="/seller/manage-products/:id/ratings"
-          element={
-            <ProductRatings />
-          } />
-
-        <Route
-          path="/seller/manage-orders"
-          element={
-            // <PrivateRoute role="seller">
-            <ManageOrders />
-            // </PrivateRoute>
-          }
-        />
-        <Route
-          path="/seller/manage-orders/:id"
-          element={
-            // <PrivateRoute role="seller">
-            <OrderDetail />
-            // </PrivateRoute>
-          }
-        />
+        {sellerRoutes.map(({ path, element }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <PrivateRoute role="SELLER">{element}</PrivateRoute>
+            }
+          />
+        ))}
 
         {/* Catch-All Route */}
         <Route path="*" element={<NotFound />} />

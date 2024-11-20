@@ -11,26 +11,42 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState('BUYER');
 
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSelectionRole = (role) => {
     setSelectedRole(role);
   };
-  const handleRegister = async () => {
+
+  const handleRegister = async (event) => {
+    event.preventDefault()
     const userData = {
       email: email,
       password: password,
       // role: selectedRole
     };
-    if (selectedRole === 'BUYER') {
-      const result = registerBuyer(userData)
-      if (result) {
-        navigate('/login')
+    try {
+      let result;
+      if (selectedRole === 'BUYER') {
+        result = await registerBuyer(userData);
+      } else if (selectedRole === 'SELLER') {
+        result = await registerSeller(userData);
       }
-    } else if (selectedRole === 'SELLER') {
-      result = registerSeller(userData)
       if (result) {
-        navigate('/login')
+        setIsSuccessDialogOpen(true);
+        setErrorMessage('');//clear err
       }
+    } catch (err) {
+      console.error('Registration failed:', err);
+      setErrorMessage(
+        err.response?.data?.message || 'Registration failed. Please try again.'
+      );
     }
+  };
+
+  const handleDialogClose = () => {
+    setIsSuccessDialogOpen(false);
+    navigate('/login');
   };
 
 
@@ -98,6 +114,18 @@ const Register = () => {
               </div>
             </div>
 
+
+            {errorMessage && (
+              <div className="mt-4 rounded-md bg-red-50 p-4">
+                <div className="flex">
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-red-800">{errorMessage}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+
             <div>
               <button
                 type="submit"
@@ -116,6 +144,27 @@ const Register = () => {
           </p>
         </div>
       </div>
+
+      {isSuccessDialogOpen && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+            <h3 className="text-lg font-semibold text-gray-800">
+              Registration Successful
+            </h3>
+            <p className="mt-4 text-gray-600">
+              Your account has been created successfully. Click OK to log in.
+            </p>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={handleDialogClose}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-500"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

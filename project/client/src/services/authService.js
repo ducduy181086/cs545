@@ -1,15 +1,17 @@
 import { jwtDecode } from "jwt-decode";
 import { apiAuthenticator } from "./api"
+
 const parseAuthorityFromResponse = (response) => {
     try {
         const { access_token } = response;
         const decodedToken = jwtDecode(access_token);
         const authority = decodedToken.roles?.[0]?.authority || null;
-        if (authority) {
-            localStorage.setItem('authority', authority);
-        }
+        const email = decodedToken.sub;
 
-        return authority;
+        return {
+            role: authority,
+            email: email
+        };
     } catch (error) {
         console.error('Failed to parse authority:', error);
         return null;
@@ -20,10 +22,10 @@ export const loginUser = async (userData) => {
     return apiAuthenticator
         .post('/authenticate', userData)
         .then((response) => {
-            const role = parseAuthorityFromResponse(response.data)
+            const jwtData = parseAuthorityFromResponse(response.data)
             return {
                 ...response.data,
-                role: role
+                ...jwtData
             }
         })
         .catch((error) => {
@@ -32,9 +34,9 @@ export const loginUser = async (userData) => {
         });
 };
 
-export const registerBuyer = async (email, password) => {
+export const registerBuyer = async (userData) => {
     return apiAuthenticator
-        .post('/authenticate/register-buyer', { email, password })
+        .post('/authenticate/register-buyer', userData)
         .then((response) => {
             return response.data
         })
@@ -44,9 +46,9 @@ export const registerBuyer = async (email, password) => {
         });
 };
 
-export const registerSeller = async (email, password) => {
+export const registerSeller = async (userData) => {
     return apiAuthenticator
-        .post('/authenticate/register-seller', { email, password })
+        .post('/authenticate/register-seller', userData)
         .then((response) => {
             return response.data
         })

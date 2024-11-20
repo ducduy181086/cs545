@@ -3,8 +3,8 @@ import React, { createContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [isAuthenticated, setIsAuthenticated] = useState(JSON.parse(localStorage.getItem('user')) != null);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -27,14 +27,6 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     localStorage.removeItem('user');
   };
-
-  const register = (userData) => {
-    
-    // setUser(userData);
-    // setIsAuthenticated(true);
-    // localStorage.setItem('user', JSON.stringify(userData));
-  };
-
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
