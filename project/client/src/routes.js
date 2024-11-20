@@ -26,6 +26,7 @@ import BillingDashboard from 'pages/Buyer/BillingAddress/BillingDashboard';
 import PaymentDashboard from 'pages/Buyer/Payment/PaymentDashboard';
 import OrderHistoryDashboard from 'pages/Buyer/OrderHistory/OrderHistoryDashboard';
 import OrderHistoryDetail from 'pages/Buyer/OrderHistory/OrderHistoryDetail';
+import ProductRatings from 'pages/Seller/Products/ProductRatings';
 
 const AppRoutes = () => {
   return (
@@ -158,11 +159,19 @@ const AppRoutes = () => {
           element={
             <AddProduct />
           } />
+
         <Route
           path="/seller/manage-products/:id"
           element={
             <ProductDetail />
           } />
+
+        <Route
+          path="/seller/manage-products/:id/ratings"
+          element={
+            <ProductRatings />
+          } />
+
         <Route
           path="/seller/manage-orders"
           element={

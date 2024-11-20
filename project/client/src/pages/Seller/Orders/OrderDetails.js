@@ -54,7 +54,7 @@ const OrderDetail = (props) => {
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Order Details of ID: {param.id}</h1>
                         <div>
                             <button
-                                className="mt-4 me-2 px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-500"
+                                className="me-2 px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-500"
                                 onClick={() => setShowDialog(true)}
                             >
                                 Change Status
@@ -94,7 +94,9 @@ const OrderDetail = (props) => {
                                                     ? "bg-yellow-500"
                                                     : order.status === "Shipped"
                                                         ? "bg-blue-500"
-                                                        : "bg-green-500"
+                                                        : order.status === "Cancelled"
+                                                            ? "bg-red-500"
+                                                            : "bg-green-500"
                                                     }`}
                                             >
                                                 {order.status}

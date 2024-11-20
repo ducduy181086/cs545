@@ -14,6 +14,7 @@ const ProductForm = (props) => {
     color: "",
     material: "",
     discount: "",
+    quantity: "",
     ...initialData,
   });
 
@@ -47,7 +48,8 @@ const ProductForm = (props) => {
       !product.size ||
       !product.color ||
       !product.material ||
-      !product.discount
+      !product.discount ||
+      !product.quantity
     ) {
       alert("Please fill in all fields.");
       return;
@@ -62,6 +64,7 @@ const ProductForm = (props) => {
       color: product.color,
       material: product.material,
       discount: parseFloat(product.discount),
+      quantity: parseInt(product.quantity)
     });
   };
 
@@ -172,13 +175,28 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="discount" className="block text-sm font-medium text-gray-700">
-            Discount Amount
+            Discount
           </label>
           <input
             type="number"
             id="discount"
             name="discount"
             value={product.discount}
+            onChange={handleChange}
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
+        </div>
+        <div>
+          <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+            Quantity
+          </label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            value={product.quantity}
             onChange={handleChange}
             disabled={isViewMode}
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"

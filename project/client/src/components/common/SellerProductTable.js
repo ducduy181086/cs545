@@ -40,7 +40,6 @@ const ProductTable = (props) => {
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Color</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Material</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Discount</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ratings</th>
                         {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th> */}
                     </tr>
                 </thead>
@@ -58,7 +57,6 @@ const ProductTable = (props) => {
                             <td className="px-6 py-4 text-sm text-gray-500">{product.color.join(", ")}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.material}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.discount}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.ratings} stars</td>
                             {/* <td className="px-6 py-4 text-sm text-gray-500">
                                 <button className="text-red-600 hover:text-red-800">
                                     Delete
