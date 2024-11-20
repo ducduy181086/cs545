@@ -1,7 +1,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import AuthContext from 'context/AuthContext'
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const navigation = [
     { name: 'Dashboard', href: '/seller/dashboard' },
@@ -9,7 +9,7 @@ const navigation = [
     { name: 'Order', href: '/seller/manage-orders' },
 ]
 const userNavigation = [
-    { name: 'Sign out', href: '/login' },
+    // { name: 'Sign out', href: '/login' },
 ]
 
 function classNames(...classes) {
@@ -18,7 +18,13 @@ function classNames(...classes) {
 
 const SellerHeader = (props) => {
 
-    const user = useContext(AuthContext)
+    const navigate = useNavigate()
+    const { user, logout } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login')
+    }
 
     return <Disclosure as="nav" className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -44,7 +50,7 @@ const SellerHeader = (props) => {
                 </div>
                 <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                        <h1 className='text-sm text-white'>Hi, {user.name ?? 'Seller'}</h1>
+                        <h1 className='text-sm text-white'>Hi, {user.email ?? 'Seller'}</h1>
                         {/* Profile dropdown */}
                         <Menu as="div" className="relative ml-3">
                             <div>
@@ -68,6 +74,15 @@ const SellerHeader = (props) => {
                                         </a>
                                     </MenuItem>
                                 ))}
+
+                                <MenuItem key='logout'>
+                                    <div
+                                        onClick={handleLogout}
+                                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                    >
+                                        Sign out
+                                    </div>
+                                </MenuItem>
                             </MenuItems>
                         </Menu>
                     </div>
@@ -100,6 +115,7 @@ const SellerHeader = (props) => {
                         {item.name}
                     </DisclosureButton>
                 ))}
+
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
@@ -129,6 +145,7 @@ const SellerHeader = (props) => {
                             {item.name}
                         </DisclosureButton>
                     ))}
+
                 </div>
             </div>
         </DisclosurePanel>
