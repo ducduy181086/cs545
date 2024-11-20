@@ -1,8 +1,10 @@
 package edu.miu.cs545.project.server.controller;
 
 import edu.miu.cs545.project.server.entity.dto.ProductDto;
+import edu.miu.cs545.project.server.entity.dto.ReviewDto;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
 import edu.miu.cs545.project.server.service.ProductService;
+import edu.miu.cs545.project.server.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,10 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final ReviewService reviewService;
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> filterProducts(
@@ -93,5 +96,14 @@ public class ProductController {
     @DeleteMapping("/{id}/compatibility/{compatibilityProductId}")
     public void deleteCompatibilityProduct(@PathVariable Long id, @PathVariable Long compatibilityProductId) {
         productService.removeCompatibilityProduct(id, compatibilityProductId);
+    }
+
+    // Reviews part
+    @GetMapping("/{id}/reviews")
+    public Page<ReviewDto> getReviews(@PathVariable Long id,
+      @RequestParam(name="page", defaultValue = "0") int page,
+      @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return reviewService.getReviewsForProduct(id, pageable);
     }
 }
