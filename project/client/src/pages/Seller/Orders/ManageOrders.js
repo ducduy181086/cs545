@@ -1,8 +1,20 @@
+import { sellerFetchOrders } from "services/sellerService"
 import SellerHeader from "../SellerHeader"
 import OrderTable from "./OrderTable"
-import orders from "../../../mock_orders.json";
+import { useEffect, useState } from "react"
 
 const ManageOrders = (props) => {
+    const [orders, setOrders] = useState()
+
+    useEffect(() => {
+        console.log('fetch products')
+        sellerFetchOrders().then(res => {
+            setOrders(res);
+        });
+    }, [])
+
+
+
 
     return <>
         <div className="min-h-full">
@@ -14,7 +26,7 @@ const ManageOrders = (props) => {
             </header>
             <main>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <OrderTable ordersData={orders} />
+                    {orders && <OrderTable ordersData={orders} />}
                 </div>
             </main>
         </div>

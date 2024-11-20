@@ -1,16 +1,17 @@
 import { useState } from "react";
 import SellerHeader from "../SellerHeader"
-import AddProductForm from "./AddProductForm"
 import { useNavigate } from "react-router";
+import ProductForm from "components/common/SellerProductForm";
 
 const AddProduct = (props) => {
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
     const navigate = useNavigate();
 
     const handleAddProduct = (newProduct) => {
-        setProducts([...products, newProduct]);
+        console.log('new product = ', newProduct)
+        // setProducts([...products, newProduct]);
         navigate('/seller/manage-products')
     };
 
@@ -26,7 +27,11 @@ const AddProduct = (props) => {
             <main>
 
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <AddProductForm onAddProduct={handleAddProduct} />
+                    <ProductForm
+                        mode="add"
+                        onSubmit={(newProduct) => handleAddProduct(newProduct)}
+                    />
+                    {/* <AddProductForm onAddProduct={handleAddProduct} /> */}
                     {/* <button onClick={handleCreateProduct}
                         className="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-500">
                         Add Product

@@ -1,41 +1,46 @@
 import React, { useState } from "react";
 import Pagination from "components/Pagination";
+import { useNavigate } from "react-router";
 
 
 const OrderTable = (props) => {
 
+    const navigate = useNavigate();
     const { ordersData } = props;
-    const [orders, setOrders] = useState(ordersData.orders); // Load orders into local state
 
     const [currentPage, setCurrentPage] = useState(1);
     const ordersPerPage = 10;
 
-    const totalPages = Math.ceil(ordersData.orders.length / ordersPerPage);
+    const totalPages = Math.ceil(ordersData.length / ordersPerPage);
 
     const startIndex = (currentPage - 1) * ordersPerPage;
-    const currentOrders = ordersData.orders.slice(startIndex, startIndex + ordersPerPage);
+    const currentOrders = ordersData.slice(startIndex, startIndex + ordersPerPage);
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    const handleCancelOrder = (orderId) => {
-        const updatedOrders = orders.map((order) =>
-            order.orderId === orderId
-                ? { ...order, status: "Cancelled" }
-                : order
-        );
-        setOrders(updatedOrders);
-    };
+    // const handleCancelOrder = (orderId) => {
+    //     const updatedOrders = orders.map((order) =>
+    //         order.orderId === orderId
+    //             ? { ...order, status: "Cancelled" }
+    //             : order
+    //     );
+    //     setOrders(updatedOrders);
+    // };
 
-    const handleStatusChange = (orderId, newStatus) => {
-        const updatedOrders = orders.map((order) =>
-            order.orderId === orderId
-                ? { ...order, status: newStatus }
-                : order
-        );
-        setOrders(updatedOrders);
-    };
+    // const handleStatusChange = (orderId, newStatus) => {
+    //     const updatedOrders = orders.map((order) =>
+    //         order.orderId === orderId
+    //             ? { ...order, status: newStatus }
+    //             : order
+    //     );
+    //     setOrders(updatedOrders);
+    // };
 
+    const handleViewDetail = (orderId) => {
+        console.log('handleViewDetail of id: ', orderId)
+        navigate(`${orderId}`);
+    }
     return (
         <>
 
@@ -49,17 +54,19 @@ const OrderTable = (props) => {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Delivery Date</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Amount</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th> */}
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {currentOrders.map((order) => (
-                            <tr key={order.orderId}>
+                            <tr key={order.orderId}
+                                onClick={() => handleViewDetail(order.orderId)}
+                            >
                                 <td className="px-6 py-4 text-sm text-gray-900">{order.orderId}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{order.customer.name}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.deliveryDate).toLocaleDateString()}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">
+                                {/* <td className="px-6 py-4 text-sm text-gray-500">
 
                                     <select
                                         value={order.status}
@@ -71,9 +78,10 @@ const OrderTable = (props) => {
                                         <option value="On the way">On the way</option>
                                         <option value="Delivered">Delivered</option>
                                     </select>
-                                </td>
+                                </td> */}
+                                <td className="px-6 py-4 text-sm text-gray-500">{order.status}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">${order.payment.totalAmount.toFixed(2)}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">
+                                {/* <td className="px-6 py-4 text-sm text-gray-500">
                                     {order.status === "Pending" ? <button
                                         onClick={
                                             order.status === "Pending" ?
@@ -84,7 +92,7 @@ const OrderTable = (props) => {
                                         Cancel
                                     </button>
                                         : <label>Cancel</label>}
-                                </td>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>
