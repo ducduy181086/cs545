@@ -16,7 +16,12 @@ import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import ManageOrders from 'pages/Seller/Orders/ManageOrders';
 import AddProduct from 'pages/Seller/AddProduct/AddProduct';
-import ShoppingCart from 'pages/Buyer/Cart/ShoppingCart';
+
+// Buyer Routes
+import CartDashboard from 'pages/Buyer/Cart/CartDashboard';
+import ShippingDashboard from 'pages/Buyer/ShippingAddress/ShippingDashboard';
+import BillingDashboard from 'pages/Buyer/BillingAddress/BillingDashboard';
+import PaymentDashboard from 'pages/Buyer/Payment/PaymentDashboard';
 
 const AppRoutes = () => {
   return (
@@ -64,10 +69,38 @@ const AppRoutes = () => {
           path="/cart"
           element={
             // <PrivateRoute role="buyer">
-            <ShoppingCart />
+            <CartDashboard />
             // </PrivateRoute>
           }
         />
+
+        <Route
+          path="/shipping/confirmation-address"
+          element={
+            // <PrivateRoute role="buyer">
+            <ShippingDashboard />
+            // </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/shipping/billing-address"
+          element={
+            // <PrivateRoute role="buyer">
+            <BillingDashboard />
+            // </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/payment"
+          element={
+            // <PrivateRoute role="buyer">
+            <PaymentDashboard />
+            // </PrivateRoute>
+          }
+        />
+
 
         <Route
           path="/products"

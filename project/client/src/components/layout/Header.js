@@ -49,6 +49,7 @@ const Header = () => {
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
+                        <p>{window.location.pathname}</p>
                         {/* Notification Icon */}
                         <button className="relative" onClick={() => navigate('/cart')}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>
