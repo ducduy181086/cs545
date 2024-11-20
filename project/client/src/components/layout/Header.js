@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import HomeDropdownMenu from "./HomeDropdownMenu";
 
 
 const Header = () => {
@@ -31,7 +32,7 @@ const Header = () => {
 
     return (
         <header className={`fixed top-0 w-full z-50 transition-transform duration-300 bg-white shadow-md ${isCollapsed ? "-translate-y-full" : "translate-y-0"}`}>
-            <div className="container mx-auto p-4">
+            <div className="container mx-auto">
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Left Section */}
                     <div className="flex items-center space-x-4">
@@ -65,11 +66,8 @@ const Header = () => {
                                 alt="Profile"
                                 className="w-10 h-10 rounded-full border"
                             />
-
-                            <button className="text-gray-600" >
-                                <span className="material-symbols-outlined">keyboard_arrow_down</span>
-                            </button>
                         </div>
+                        <HomeDropdownMenu />
                     </div>
                 </div>
             </div>
