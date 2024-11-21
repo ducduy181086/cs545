@@ -61,10 +61,10 @@ public class SecurityConfig {
             request.requestMatchers("/api/v1/authenticate/**").permitAll();
             request.requestMatchers("/api/v1/admin/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers("/api/v1/reviews/**").hasAnyAuthority(RoleType.ADMIN.name());
-            request.requestMatchers("/api/v1/categories/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").hasAnyAuthority(RoleType.SELLER.name(), RoleType.BUYER.name());
-            request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SELLER.name());
+            request.requestMatchers("/api/v1/categories/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SELLER.name());
             request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/addresses/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/payment/**").hasAnyAuthority(RoleType.BUYER.name());
