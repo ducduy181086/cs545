@@ -95,6 +95,7 @@ public class ProductServiceImpl implements ProductService {
         }
         if (productEntity != null) {
             modelMapper.map(product, productEntity);
+            productEntity.setInStock(product.getQuantity() > 0);
             if (product.getCcategoryId() != null && product.getCcategoryId() > 0) {
                 categoryRepo.findById(product.getCcategoryId()).ifPresent(productEntity::setCategory);
             }
