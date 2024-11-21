@@ -1,6 +1,7 @@
 import CategoryListbox from "components/common/CategoryListBox";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import categoryData from '../../mock_categories.json'
+import { sellerFetchCategories } from "services/sellerService";
 
 const ProductForm = (props) => {
 
@@ -10,8 +11,8 @@ const ProductForm = (props) => {
     category: null,
     price: "",
     brand: "",
-    size: "",
-    color: "",
+    sizes: "",
+    colors: "",
     material: "",
     discount: "",
     quantity: "",
@@ -20,6 +21,12 @@ const ProductForm = (props) => {
 
   const isViewMode = mode === "view";
   const isUpdateMode = mode === "update";
+
+  useEffect(() => {
+    sellerFetchCategories()
+
+  }, [])
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +52,8 @@ const ProductForm = (props) => {
       !product.category ||
       !product.price ||
       !product.brand ||
-      !product.size ||
-      !product.color ||
+      !product.sizes ||
+      !product.colors ||
       !product.material ||
       !product.discount ||
       !product.quantity
@@ -60,8 +67,8 @@ const ProductForm = (props) => {
       category: product.category,
       price: parseFloat(product.price),
       brand: product.brand,
-      size: product.size,
-      color: product.color,
+      sizes: product.sizes,
+      colors: product.colors,
       material: product.material,
       discount: parseFloat(product.discount),
       quantity: parseInt(product.quantity)
@@ -129,14 +136,14 @@ const ProductForm = (props) => {
           />
         </div>
         <div>
-          <label htmlFor="size" className="block text-sm font-medium text-gray-700">
-            Size
+          <label htmlFor="sizes" className="block text-sm font-medium text-gray-700">
+            Sizes
           </label>
           <input
             type="text"
-            id="size"
-            name="size"
-            value={product.size}
+            id="sizes"
+            name="sizes"
+            value={product.sizes}
             onChange={handleChange}
             disabled={isViewMode}
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
@@ -144,14 +151,14 @@ const ProductForm = (props) => {
           />
         </div>
         <div>
-          <label htmlFor="color" className="block text-sm font-medium text-gray-700">
-            Color
+          <label htmlFor="colors" className="block text-sm font-medium text-gray-700">
+            Colors
           </label>
           <input
             type="text"
-            id="color"
-            name="color"
-            value={product.color}
+            id="colors"
+            name="colors"
+            value={product.colors}
             onChange={handleChange}
             disabled={isViewMode}
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
