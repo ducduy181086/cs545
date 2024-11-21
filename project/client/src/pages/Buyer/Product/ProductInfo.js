@@ -1,83 +1,126 @@
+import AttributeSelector from 'components/common/AttributeSelector';
 import ImageSlider from 'components/common/ImageSlider';
-import React from 'react';
+import ProductQuantity from 'components/common/ProductQuantity';
+import React, { useState } from 'react';
+import ProductDescription from './ProductDescription';
 
 const ProductInfo = ({ product }) => {
-  const {
-    name,
-    category,
-    subcategory,
-    price,
-    brand,
-    size,
-    color,
-    material,
-    discount,
-    ratings,
-  } = product;
 
-const images= [
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6e3159ac4ed74ad59ebd85b295b5770e_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM1.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/339a1064b40d4068a83f6dd8caa5cfff_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM3_hover.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0a9ad81152394af58d64508f81332339_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM4.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/c289b512b4d64c26bb65a142661a3fb0_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM5.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f3cc9c184bf84995b2b66713ec497643_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM6.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/cb1009c258fa40a5bfc01aa56b2aa639_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM7.jpg",
-  "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/03da0a9cd40d48358bcb5b008e78abe4_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM8.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3fbb78d5996548b4a295374463c68647_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM9.jpg",
-  "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/be1706307aa8424e8fb36864db7e48b9_9366/ADIZERO_ADIOS_PRO_3_Shoes_Blue_ID3635_HM10.jpg"
-];
+  const images = [
+    product.imageUrl
+  ];
+
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const handleSelectedSizeChanged = (size) => {
+    setSelectedSize(size);
+  }
+
+  const handleSelectedColorChanged = (color) => {
+    setSelectedColor(color);
+  }
 
   // Format the price and discount to show in a readable way
-  const formattedPrice = price.toFixed(2);
-  const discountedPrice = (price - (price * discount) / 100).toFixed(2);
-
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="w-full mx-auto p-6 bg-white shadow-lg rounded-lg">
 
       <ImageSlider images={images} />
-      {/* Product Name */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-8">{name??''}</h1>
 
-      {/* Product Category and Subcategory */}
-      <p className="text-md text-gray-600">
-        <span className="font-semibold">Category:</span> {category.name} ●{' '}
-        {subcategory}
-      </p>
+      <div className='flex justify-between items-center border-b'>
+        <div className='w-full'>
+          {/* Product Name */}
+          <h1 className="text-xl font-bold text-gray-800 mt-8">{product.name ?? ''}</h1>
+
+          {/* Product Category and Subcategory */}
+          <p className="text-md text-gray-600 pb-2">
+            <span className="font-semibold">Category:</span> {product.category.name}
+            {product.subcategory && <span> '● ' {product.subcategory.name}</span>}
+          </p>
+        </div>
+        
+        <div className='w-60'>
+        {product.newArrival && (
+            <span className="w-4 mr-4 text-xs bg-green-300 text-black font-semibold px-2 py-1 rounded-full z-10">
+              New Arrival
+            </span>
+          )}
+
+          {product.bestSeller && (
+            <span className=" text-xs bg-yellow-300 text-black font-semibold px-2 py-1 rounded-full z-10">
+              Bestseller
+            </span>
+          )}
+        </div>
+       
+      </div>
 
       {/* Product Price and Discount */}
-      <div className="mt-4 flex items-center">
-        <span className="text-xl font-bold text-gray-800">${formattedPrice}</span>
-        {discount > 0 && (
-          <span className="ml-4 text-lg line-through text-gray-500">
-            ${discountedPrice}
+      <p className="text-xl font-bold text-red-500 mt-6">${product.price}</p>
+      <div className="mt-2 flex items-center">
+        {product.discount > 0 && (
+          <span className="text-md line-through text-blue-500">
+            ${(product.price + product.discount).toFixed(2)}
           </span>
         )}
-        {discount > 0 && (
-          <span className="ml-4 text-lg text-red-500 font-semibold">
-            {discount}% OFF
-          </span>
+        {product.discount > 0 && (
+          <p>
+            <span className="ml-4 text-md text-red-500">
+              -${product.discount}
+            </span>
+            <span className="text-md text-gray-500"> Original price</span>
+          </p>
         )}
+
       </div>
 
       {/* Product Brand */}
       <p className="mt-2 text-md text-gray-600">
-        <span className="font-semibold">Brand:</span> {brand}
+        <span className="font-semibold">Brand:</span> {product.brand}
       </p>
 
-      {/* Product Size */}
+      {/* Product Model */}
       <p className="mt-2 text-md text-gray-600">
-        <span className="font-semibold">Size:</span> {size.join(', ')}
+        <span className="font-semibold">Model Year:</span> {product.modelYear}
       </p>
 
-      {/* Product Color */}
-      <p className="mt-2 text-md text-gray-600">
-        <span className="font-semibold">Color:</span> {color.join(', ')}
+       {/* Instock */}
+       <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">In Stock:</span> {product.inStock ?'Yes':'No'}
       </p>
 
       {/* Product Material */}
       <p className="mt-2 text-md text-gray-600">
-        <span className="font-semibold">Material:</span> {material}
+        <span className="font-semibold">Material:</span> {product.material}
       </p>
+
+       {/* Product Material */}
+       <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">Features:</span> {product.features}
+      </p>
+
+      <div className='flex justify-start mb-4'>
+        <div>
+          {/* Product Size */}
+          <p className="mt-2 text-md text-gray-600">
+            <AttributeSelector title={'Size'} data={product.sizes} selectedValue={selectedSize} onSelectedChange={handleSelectedSizeChanged} />
+          </p>
+
+
+        </div>
+        <div>
+          {/* Product Color */}
+          <p className="ml-12 mt-2 text-md text-gray-600">
+            <AttributeSelector title={'Color'} data={product.colors} selectedValue={selectedColor} onSelectedChange={handleSelectedColorChanged} />
+          </p>
+        </div>
+      </div>
+      {/* Product qty */}
+      <ProductQuantity />
+
+      {/* Product desc */}
+      <ProductDescription description={product.description} />
+
     </div>
   );
 };
