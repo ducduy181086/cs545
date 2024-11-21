@@ -1,12 +1,20 @@
 {
   "routes": [
     {
-      "route": "/static/*",
-      "allowedRoles": ["anonymous"]
-    },
-    {
       "route": "/*",
-      "rewrite": "/index.html"
+      "rewrite": "/index.html",
+      "exclude": [
+        "/*.css",
+        "/*.js",
+        "/*.ico",
+        "/*.png",
+        "/*.jpg",
+        "/*.svg",
+        "/*.woff",
+        "/*.woff2",
+        "/*.ttf",
+        "/*.json"
+      ]
     }
   ]
 }
