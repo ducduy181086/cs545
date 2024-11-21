@@ -69,7 +69,7 @@ const ProductDetail = () => {
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex-col justify-center">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900">Product Ratings</h2>
                     <RatingStar
-                        ratings={product?.ratings} reviewCount={product?.reviewCount} />
+                        ratings={product?.averageRating} reviewCount={product?.reviewCount} />
                 </div>
                 <RatingComment />
                 <RatingComment />
