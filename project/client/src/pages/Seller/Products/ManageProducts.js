@@ -13,6 +13,7 @@ const ManageProduct = (props) => {
         sellerFetchProducts().then(res => {
             setProducts(res);
         }).catch(err => {
+
             navigate('/login')
         });
     }, [])
