@@ -1,20 +1,19 @@
 {
   "routes": [
-    {
-      "route": "/*",
-      "rewrite": "/index.html",
-      "exclude": [
-        "/*.css",
-        "/*.js",
-        "/*.ico",
-        "/*.png",
-        "/*.jpg",
-        "/*.svg",
-        "/*.woff",
-        "/*.woff2",
-        "/*.ttf",
-        "/*.json"
-      ]
-    }
-  ]
+  ],
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": [
+      "/*.css",
+      "/*.js",
+      "/*.ico",
+      "/*.png",
+      "/*.jpg",
+      "/*.svg",
+      "/*.woff",
+      "/*.woff2",
+      "/*.ttf",
+      "/*.json"
+    ]
+  }
 }
