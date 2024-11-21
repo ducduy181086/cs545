@@ -5,6 +5,7 @@ import Header from 'components/layout/Header';
 import React, { useState, useEffect } from 'react';
 import { fetchProducts } from 'services/productService';
 import { useLocation } from "react-router-dom";
+import Loading from 'components/layout/Loading';
 
 
 const BuyerDashboard = () => {
@@ -29,7 +30,7 @@ const BuyerDashboard = () => {
     }, [location.state])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />
     }
 
     if (!products) {

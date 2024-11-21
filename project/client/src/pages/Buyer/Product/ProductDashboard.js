@@ -5,6 +5,7 @@ import ReviewView from './ReviewsView';
 import { useParams } from 'react-router-dom';
 import { fetchProductById } from 'services/productService';
 import Header from 'components/layout/Header';
+import Loading from 'components/layout/Loading';
 
 export default function ProductDashboard() {
     const [product, setProduct] = useState(null);
@@ -22,7 +23,7 @@ export default function ProductDashboard() {
     }, [id])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />
     }
 
     return (
