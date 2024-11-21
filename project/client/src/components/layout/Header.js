@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import HomeDropdownMenu from "./HomeDropdownMenu";
+import logo from '../../assets/icons/icon-lad.png';
 
 
 const Header = () => {
@@ -36,12 +37,14 @@ const Header = () => {
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Left Section */}
                     <div className="flex items-center space-x-4">
-                        <h1 className="text-2xl font-bold text-primary cursor-pointer" onClick={() => navigate('/')}>eGrocery Market</h1>
-                        <div className="relative">
+
+                        <img className="w-231 h-50 cursor-pointer" src={logo} alt="home" onClick={() => navigate('/')}/>
+
+                        <div className=" ml-8 relative">
                             <input
                                 type="text"
                                 placeholder="Search for products"
-                                className="w-96 p-3 pl-10 bg-white border rounded-full text-sm shadow-sm focus:outline-none focus:ring focus:text-blue-100"
+                                className="w-96 p-3 pl-10 bg-white border rounded-full text-sm shadow-sm focus:outline-none focus:border-blue-500 focus:text-black"
                             />
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-symbols-outlined">
                                 search
