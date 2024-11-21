@@ -5,11 +5,12 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import AdminDashboard from './pages/Admin/AdminDashboard';
-import ManageSellers from './pages/Admin/ManageSellers';
 import BuyerDashboard from './pages/Buyer/BuyerDashboard';
 import SellerDashboard from './pages/Seller/Dashboard/SellerDashboard';
 import ManageProducts from './pages/Seller/Products/ManageProducts';
 import NotFound from './pages/NotFound';
+import ManageSellersUnapproved from 'pages/Admin/ManageSellers';
+import ManageUsers from './pages/Admin/ManageUsers';
 
 // Role-based route guards
 import PrivateRoute from './components/PrivateRoute';
@@ -37,6 +38,14 @@ const publicRoutes = [
   { path: "/products/:id", element: <ProductDashboard /> },
 ];
 
+const adminRoutes = [
+  { path: "/admin/", element: <AdminDashboard /> },
+  { path: "/admin/manage-users", element: <ManageUsers /> },
+  { path: "/admin/manage-sellers", element: <ManageSellersUnapproved /> },
+  // { path: "/admin/manage-products/:id", element: <ProductDetail /> },
+
+]
+
 const buyerRoutes = [
   { path: "/cart", element: <CartDashboard /> },
   { path: "/shipping/confirmation-address", element: <ShippingDashboard /> },
@@ -46,7 +55,7 @@ const buyerRoutes = [
 ];
 
 const sellerRoutes = [
-  { path: "/seller/dashboard", element: <SellerDashboard /> },
+  { path: "/seller/", element: <SellerDashboard /> },
   { path: "/seller/manage-products", element: <ManageProducts /> },
   { path: "/seller/manage-products/add", element: <AddProduct /> },
   { path: "/seller/manage-products/:id", element: <ProductDetail /> },
@@ -73,22 +82,16 @@ const AppRoutes = () => {
         ))}
 
         {/* Protected Routes */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <PrivateRoute role="admin">
-              <AdminDashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/manage-sellers"
-          element={
-            <PrivateRoute role="admin">
-              <ManageSellers />
-            </PrivateRoute>
-          }
-        />
+        {adminRoutes.map(({ path, element }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <PrivateRoute role="ADMIN">{element}</PrivateRoute>
+            }
+          />
+        ))}
+
 
         {/* --------------- Start Region - Buyer Routes ---------------*/}
         {buyerRoutes.map(({ path, element }) => (
