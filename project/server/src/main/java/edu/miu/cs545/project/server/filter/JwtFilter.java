@@ -24,6 +24,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        response.addHeader("Set-Cookie", "SameSite=None;");
+
         var token = extractTokenFromRequest(request);
         if (token != null && jwtUtil.validateToken(token)) {
             SecurityContextHolder.getContext().setAuthentication(jwtUtil.getAuthentication(token));
