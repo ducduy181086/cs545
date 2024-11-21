@@ -5,7 +5,7 @@ export default function OrderProductCard({product, onSubmitReview, onViewDetail}
 
     return (
         <>
-            <div className="w-full border p-4 rounded rounded-md">
+            <div className="w-full border p-4 rounded-md">
                 <div className="flex items-center w-full justify-between ">
                     <div className="flex items-center">
                         <img src="https://via.placeholder.com/80" alt="Product Image" className="w-16 h-16 object-cover rounded-lg" />

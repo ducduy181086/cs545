@@ -2,44 +2,42 @@
 import ProductGrid from 'components/common/ProductGrid';
 import FilterComponent from 'components/layout/FilterComponent';
 import Header from 'components/layout/Header';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchProducts } from 'services/productService';
+import { useLocation } from "react-router-dom";
+import Loading from 'components/layout/Loading';
 
-const macbookData = [
-    {
-        name: 'MacBook Air',
-        image: '/path/to/macbook-air.png',
-    },
-    {
-        name: 'MacBook Pro',
-        image: '/path/to/macbook-pro.png',
-    },
-    {
-        name: 'MacBook',
-        image: '/path/to/macbook.png',
-    },
-    {
-        name: 'All MacBooks',
-        image: '/path/to/all-macbooks.png',
-    },
-    {
-        name: 'MacBook Air',
-        image: '/path/to/macbook-air.png',
-    },
-    {
-        name: 'MacBook Pro',
-        image: '/path/to/macbook-pro.png',
-    },
-    {
-        name: 'MacBook',
-        image: '/path/to/macbook.png',
-    },
-    {
-        name: 'All MacBooks',
-        image: '/path/to/all-macbooks.png',
-    }
-];
 
 const BuyerDashboard = () => {
+
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.data) {
+            setProducts(location.state.data);
+            setLoading(false);
+        } else {
+            setLoading(true);
+            fetchProducts().then(res => {
+                setProducts(res.content);
+            }).finally(() => {
+                setLoading(false);
+            });
+        }
+    }, [location.state])
+
+    if (loading) {
+        return <Loading />
+    }
+
+    if (!products) {
+        return <div>Loading...</div>;
+    }
+
+
     return (
         <div>
             {/* {Header component} */}
@@ -57,7 +55,7 @@ const BuyerDashboard = () => {
 
                     {/* Second Column: Full Width */}
                     <div className="flex-grow ml-8">
-                        <ProductGrid products={macbookData} />
+                        <ProductGrid products={products} />
                     </div>
                 </div>
             </div>

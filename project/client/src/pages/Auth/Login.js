@@ -26,9 +26,9 @@ const Login = () => {
         if (result.role === 'BUYER') {
           navigate('/dashboard')
         } else if (result.role === 'SELLER') {
-          navigate('/seller/dashboard')
+          navigate('/seller')
         } else if (result.role === 'ADMIN') {
-          navigate('/admin/dashboard')
+          navigate('/admin')
         }
       } else {
         setErrorMessage(
