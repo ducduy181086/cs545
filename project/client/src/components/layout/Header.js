@@ -36,7 +36,7 @@ const Header = () => {
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Left Section */}
                     <div className="flex items-center space-x-4">
-                        <h1 className="text-2xl font-bold text-primary" onClick={() => navigate('/')}>eGrocery Market</h1>
+                        <h1 className="text-2xl font-bold text-primary cursor-pointer" onClick={() => navigate('/')}>eGrocery Market</h1>
                         <div className="relative">
                             <input
                                 type="text"
@@ -50,7 +50,6 @@ const Header = () => {
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
-                        <p>{window.location.pathname}</p>
                         {/* Notification Icon */}
                         <button className="relative" onClick={() => navigate('/cart')}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>

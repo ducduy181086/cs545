@@ -1,13 +1,11 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import SellerHeader from "../SellerHeader";
 import { useEffect, useState } from "react";
 import { sellerFetchProductById, sellerUpdateProduct } from "services/sellerService";
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
 
-const ProductRatings = (props) => {
-
-    const navigate = useNavigate();
+const ProductRatings = () => {
 
     const [product, setProduct] = useState();
 

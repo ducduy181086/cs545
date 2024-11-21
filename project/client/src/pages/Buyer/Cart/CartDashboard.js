@@ -2,12 +2,13 @@ import React from 'react';
 import CartDetail from './CartDetail';
 import CartSummary from './CartSummary';
 import CheckoutHeader from '../../../components/layout/CheckoutHeader';
+import Headers from '../../../components/layout/Header';
 
 const CartDashboard = () => {
     return (
         <div >
             {/* {Header component} */}
-            <CheckoutHeader />
+            <Headers />
 
             {/* {Body component} */}
             <div className="container mx-auto p-4 mt-20">

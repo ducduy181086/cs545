@@ -1,14 +1,12 @@
 import React from 'react';
-
-
-import CheckoutHeader from '../../../components/layout/CheckoutHeader';
 import OrderHistory from './OrderHistory';
+import Headers from '../../../components/layout/Header';
 
 const OrderHistoryDashboard = () => {
     return (
         <div >
             {/* {Header component} */}
-            <CheckoutHeader />
+            <Headers />
 
             {/* {Body component} */}
             <div className="container mx-auto p-4 mt-20">

@@ -4,7 +4,7 @@ import ProductForm from "components/common/SellerProductForm";
 import { sellerAddProduct } from "services/sellerService";
 import { useState } from "react";
 
-const AddProduct = (props) => {
+const AddProduct = () => {
 
     // const [products, setProducts] = useState([]);
 
