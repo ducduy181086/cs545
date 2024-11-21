@@ -35,7 +35,7 @@ public class OrderController {
         return orderService.getOrdersByStatus(status, pageable);
     }
 
-    @GetMapping("/items/{orderId}")
+    @GetMapping("/{orderId}/items")
     public List<OrderItemDto> getOrderItems(@PathVariable Long orderId) {
         return orderService.getOrderItems(orderId);
     }
