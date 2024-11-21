@@ -1,5 +1,6 @@
 package edu.miu.cs545.project.server.repository;
 
+import edu.miu.cs545.project.server.entity.Category;
 import edu.miu.cs545.project.server.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,4 +61,24 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             @Param("usage") String usage,
             @Param("occasion") String occasion,
             Pageable pageable);
+
+    // Query DISTINCT categories
+    @Query("SELECT DISTINCT p.category FROM Product p")
+    List<Category> findDistinctCategories();
+
+    // Query DISTINCT brands
+    @Query("SELECT DISTINCT p.brand FROM Product p ORDER BY p.brand")
+    List<String> findDistinctBrands();
+
+    // Query DISTINCT colors
+    @Query("SELECT DISTINCT c FROM Product p JOIN p.colors c")
+    List<String> findDistinctColors();
+
+    // Query DISTINCT sizes
+    @Query("SELECT DISTINCT s FROM Product p JOIN p.sizes s")
+    List<String> findDistinctSizes();
+
+    // Query DISTINCT materials
+    @Query("SELECT DISTINCT p.material FROM Product p")
+    List<String> findDistinctMaterials();
 }
