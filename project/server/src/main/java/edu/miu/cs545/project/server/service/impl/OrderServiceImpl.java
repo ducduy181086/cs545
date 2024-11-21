@@ -14,7 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -83,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setBuyer(buyer.get());
         var firstProduct = productMap.values().stream().toList().get(0);
         orderEntity.setSeller(firstProduct.getSeller());
+        calculateOrder(orderEntity, order, productMap);
         var savedOrder = orderRepo.save(orderEntity);
 
         for (int i = 0; i < order.getItems().size(); i++) {
@@ -124,5 +127,10 @@ public class OrderServiceImpl implements OrderService {
     private Optional<Seller> getCurrentSeller() {
         String username = UserHelper.getCurrentUserName();
         return sellerRepo.findSellerByEmail(username);
+    }
+
+    private void calculateOrder(Order orderEntity, PlaceOrderRequest order, Map<Long, Product> productMap) {
+        //Double subtotal = 0D;
+        //orderEntity.setSubtotal(order.getItems().stream().reduce(0D, (total, item) -> total + productMap.get(item.getProductId()).getPrice() * item.getQuantity()));
     }
 }

@@ -3,6 +3,7 @@ package edu.miu.cs545.project.server.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,13 @@ public class Order {
     private Long id;
 
     private String status; // "Pending", "Shipped", "On the way", "Delivered", "Cancelled"
+
+    private Double subtotal;
+    private Double totalDiscount;
+    private Double tax;
+    private Double total;
+
+    private LocalDateTime orderDate;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
