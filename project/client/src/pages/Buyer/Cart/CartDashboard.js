@@ -1,7 +1,6 @@
 import React from 'react';
 import CartDetail from './CartDetail';
 import CartSummary from './CartSummary';
-import CheckoutHeader from '../../../components/layout/CheckoutHeader';
 import Headers from '../../../components/layout/Header';
 
 const CartDashboard = () => {

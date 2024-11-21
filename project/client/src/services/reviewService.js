@@ -1,11 +1,6 @@
-// import api from './api';
-import reviewData from "../mock_reviews.json";
+import {api} from './api';
 
-
-export const fetchReviews = async () => {
-  // const response = await api.get('/products');
-  // return response.data;
-
-  //mock
-  return reviewData;
+export const fetchReviews = async (id) => {
+  const response = await api.get(`/products/${id}/reviews?page=0&pagesize=100`);
+  return response.data;
 };
