@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { fetchOrderById } from "services/orderService";
 import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
+import Header from "components/layout/Header";
 
 const OrderHistoryDetail = () => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ const OrderHistoryDetail = () => {
     return (
         < div ref={receiptRef}>
             {/* {Header component} */}
-            <CheckoutHeader />
+            <Header />
 
             {/* {Body component} */}
             <div className="container mx-auto p-4 mt-20">
