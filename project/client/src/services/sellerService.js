@@ -1,21 +1,31 @@
-// import api from './api';
-import productsData from "../mock_products.json";
 import ordersData from "../mock_orders.json";
+import { api } from "./api";
 
 export const sellerFetchProducts = async () => {
-  // const response = await api.get('/products');
-  // return response.data;
 
+  const response = await api.get('/products');
+  return response.data;
   //mock
-  return productsData;
+  // return productsData;
 };
 export const sellerFetchProductById = async (productId) => {
-  // const response = await api.get(`/products/${productId}`);
-  // return response.data;
+  const response = await api.get(`/products/${productId}`);
+  return response.data;
 
   //mock
-  return productsData.find(p => p.id === Number.parseInt(productId));
+  // return productsData.find(p => p.id === Number.parseInt(productId));
 };
+
+export const sellerFetchCategories = async () => {
+
+}
+
+export const sellerAddProduct = async (newProduct) => {
+  const response = await api.post(`/products`,
+    newProduct
+  )
+  return response.data
+}
 
 export const sellerUpdateProduct = async (newProduct) => {
   // const response = await api.get(`/products/${productId}`);
