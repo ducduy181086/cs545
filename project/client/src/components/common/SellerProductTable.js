@@ -10,12 +10,12 @@ const ProductTable = (props) => {
     const { products } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 10;
+    const productsPerPage = products.pageable.pageSize;
 
-    const totalPages = Math.ceil(products.length / productsPerPage);
+    const totalPages = products.totalPages;
 
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const currentProducts = products.slice(startIndex, startIndex + productsPerPage);
+    // const startIndex = (currentPage - 1) * productsPerPage;
+    const currentProducts = products.content;
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -53,8 +53,8 @@ const ProductTable = (props) => {
                             <td className="px-6 py-4 text-sm text-gray-500">{product.category.name}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">${product.price.toFixed(2)}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.brand}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.size.join(", ")}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.color.join(", ")}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{product.sizes.join(", ")}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{product.colors.join(", ")}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.material}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.discount}</td>
                             {/* <td className="px-6 py-4 text-sm text-gray-500">
