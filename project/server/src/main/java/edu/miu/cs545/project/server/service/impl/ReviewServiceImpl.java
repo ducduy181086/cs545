@@ -44,13 +44,13 @@ public class ReviewServiceImpl implements ReviewService {
         getCurrentBuyer().ifPresent(reviewEntity::setBuyer);
         var product = productRepo.findById(review.getProductId()).orElseThrow();
         reviewEntity.setProduct(product);
-        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId());
-        int reviewsCount = (int) result[0] + 1;
+        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId()).get(0);
+        long reviewsCount = (Long) result[0] + 1;
         Long sum = (Long) result[1];
         long sumValue = (sum == null ? 0 : sum) + review.getRating();
         var savedEntity = reviewRepo.save(reviewEntity);
 
-        product.setReviewCount(reviewsCount);
+        product.setReviewCount((int) reviewsCount);
         product.setAverageRating((double) sumValue / reviewsCount);
         productRepo.save(product);
 
@@ -65,13 +65,13 @@ public class ReviewServiceImpl implements ReviewService {
         review.setDeletedByAdmin(admin);
 
         var product = review.getProduct();
-        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId());
-        int reviewsCount = (int) result[0] - 1;
+        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId()).get(0);
+        long reviewsCount = (Long) result[0] - 1;
         Long sum = (Long) result[1];
         long sumValue = (sum == null ? 0 : sum) - review.getRating();
 
         reviewRepo.save(review);
-        product.setReviewCount(reviewsCount);
+        product.setReviewCount((int) reviewsCount);
         product.setAverageRating((double) sumValue / reviewsCount);
         productRepo.save(product);
     }

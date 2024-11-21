@@ -18,7 +18,7 @@ public interface ReviewRepo extends JpaRepository<Review, Long> {
     @Query("SELECT COUNT(r), SUM(r.rating) " +
         "FROM Review r " +
         "WHERE r.product.id = :productId AND r.deletedByAdmin IS NULL")
-    Object[] countAndSumRatingsByProductId(@Param("productId") Long productId);
+    List<Object[]> countAndSumRatingsByProductId(@Param("productId") Long productId);
 
     @Query("SELECT r.rating, COUNT(r) " +
         "FROM Review r " +

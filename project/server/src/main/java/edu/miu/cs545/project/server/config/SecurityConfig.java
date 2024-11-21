@@ -65,6 +65,7 @@ public class SecurityConfig {
             request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll();
             request.requestMatchers("/api/v1/categories/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll();
+            request.requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SELLER.name());
             request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/addresses/**").hasAnyAuthority(RoleType.BUYER.name());
