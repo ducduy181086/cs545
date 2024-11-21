@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepo extends JpaRepository<Order, Long> {
     Page<Order> findByBuyerId(Long buyerId, Pageable pageable);
     Page<Order> findByBuyerIdAndStatus(Long buyerId, String status, Pageable pageable);
+
+    Page<Order> findBySellerId(Long sellerId, Pageable pageable);
+    Page<Order> findBySellerIdAndStatus(Long sellerId, String status, Pageable pageable);
 }
