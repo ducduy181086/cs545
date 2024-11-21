@@ -1,6 +1,7 @@
 package edu.miu.cs545.project.server.controller;
 
 import edu.miu.cs545.project.server.entity.dto.OrderDto;
+import edu.miu.cs545.project.server.entity.dto.OrderItemDto;
 import edu.miu.cs545.project.server.entity.dto.request.PlaceOrderRequest;
 import edu.miu.cs545.project.server.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -32,6 +35,11 @@ public class OrderController {
         return orderService.getOrdersByStatus(status, pageable);
     }
 
+    @GetMapping("/items/{orderId}")
+    public List<OrderItemDto> getOrderItems(@PathVariable Long orderId) {
+        return orderService.getOrderItems(orderId);
+    }
+
     @PostMapping("/place")
     public void placeOrder(@RequestBody PlaceOrderRequest order) {
         orderService.placeOrder(order);
@@ -40,5 +48,12 @@ public class OrderController {
     @PutMapping("/cancel/{orderId}")
     public boolean cancelOrder(@PathVariable Long orderId) {
         return orderService.cancelOrder(orderId);
+    }
+
+    @PutMapping("/change/{orderId}")
+    public boolean changeStatus(
+        @PathVariable Long orderId,
+        @RequestParam(name="status") String status) {
+        return orderService.changeStatus(orderId, status);
     }
 }

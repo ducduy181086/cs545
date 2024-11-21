@@ -13,5 +13,6 @@ public interface OrderService {
     Page<OrderDto> getOrdersByStatus(String status, Pageable pageable) throws Exception;
     boolean cancelOrder(Long orderId);
     void placeOrder(PlaceOrderRequest order);
+    boolean changeStatus(Long orderId, String status);
     List<OrderItemDto> getOrderItems(Long orderId);
 }

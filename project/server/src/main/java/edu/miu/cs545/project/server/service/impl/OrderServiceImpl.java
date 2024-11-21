@@ -98,6 +98,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean changeStatus(Long orderId, String status) {
+        Order order = orderRepo.findById(orderId).orElseThrow();
+        order.setStatus(status);
+        orderRepo.save(order);
+        return true;
+    }
+
+    @Override
     public List<OrderItemDto> getOrderItems(Long orderId) {
         return orderItemRepo.findByOrderId(orderId)
             .stream().map(m -> modelMapper.map(m, OrderItemDto.class)).toList();
