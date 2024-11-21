@@ -1,0 +1,1123 @@
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 153.78,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "L"
+        ],
+        "color": [
+            "Green",
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": 16,
+        "ratings": 4.1
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 50.35,
+        "brand": "Nike",
+        "size": [
+            "M",
+            "M"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Silk",
+        "discount": 49,
+        "ratings": 3.5
+    },
+    {
+        "id": 3,
+        "name": "Product 3",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Pants",
+        "price": 40.98,
+        "brand": "Zara",
+        "size": [
+            "XL",
+            "L"
+        ],
+        "color": [
+            "Green",
+            "Green",
+            "Green"
+        ],
+        "material": "Silk",
+        "discount": 48,
+        "ratings": 4.2
+    },
+    {
+        "id": 4,
+        "name": "Product 4",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 64.55,
+        "brand": "H&M",
+        "size": [
+            "S",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Blue",
+            "White"
+        ],
+        "material": "Leather",
+        "discount": 47,
+        "ratings": 3.5
+    },
+    {
+        "id": 5,
+        "name": "Product 5",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 101.97,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "S",
+            "L"
+        ],
+        "color": [
+            "Red",
+            "Blue",
+            "Black"
+        ],
+        "material": "Leather",
+        "discount": 24,
+        "ratings": 4.2
+    },
+    {
+        "id": 6,
+        "name": "Product 6",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 154.55,
+        "brand": "Adidas",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Leather",
+        "discount": 2,
+        "ratings": 3.4
+    },
+    {
+        "id": 7,
+        "name": "Product 7",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 88.65,
+        "brand": "Zara",
+        "size": [
+            "XL",
+            "S",
+            "XL"
+        ],
+        "color": [
+            "Black",
+            "Black"
+        ],
+        "material": "Silk",
+        "discount": 25,
+        "ratings": 4.0
+    },
+    {
+        "id": 8,
+        "name": "Product 8",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Pants",
+        "price": 127.97,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "M"
+        ],
+        "color": [
+            "Blue"
+        ],
+        "material": "Wool",
+        "discount": 42,
+        "ratings": 3.1
+    },
+    {
+        "id": 9,
+        "name": "Product 9",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Pants",
+        "price": 156.49,
+        "brand": "Nike",
+        "size": [
+            "S",
+            "S",
+            "S"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Silk",
+        "discount": 49,
+        "ratings": 3.4
+    },
+    {
+        "id": 10,
+        "name": "Product 10",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Casual Wear",
+        "price": 172.87,
+        "brand": "H&M",
+        "size": [
+            "S",
+            "XL",
+            "L",
+            "S"
+        ],
+        "color": [
+            "Black",
+            "Green",
+            "Green"
+        ],
+        "material": "Leather",
+        "discount": 1,
+        "ratings": 3.8
+    },
+    {
+        "id": 11,
+        "name": "Product 11",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 189.08,
+        "brand": "H&M",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "Red",
+            "Red",
+            "White"
+        ],
+        "material": "Cotton",
+        "discount": 20,
+        "ratings": 3.8
+    },
+    {
+        "id": 12,
+        "name": "Product 12",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 64.18,
+        "brand": "Zara",
+        "size": [
+            "L",
+            "S",
+            "L"
+        ],
+        "color": [
+            "Green",
+            "Red"
+        ],
+        "material": "Silk",
+        "discount": 49,
+        "ratings": 4.6
+    },
+    {
+        "id": 13,
+        "name": "Product 13",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Pants",
+        "price": 85.72,
+        "brand": "Zara",
+        "size": [
+            "S"
+        ],
+        "color": [
+            "Blue",
+            "White"
+        ],
+        "material": "Wool",
+        "discount": 2,
+        "ratings": 4.7
+    },
+    {
+        "id": 14,
+        "name": "Product 14",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 142.14,
+        "brand": "Levi's",
+        "size": [
+            "M",
+            "S",
+            "XL"
+        ],
+        "color": [
+            "Blue",
+            "Red",
+            "Black"
+        ],
+        "material": "Leather",
+        "discount": 3,
+        "ratings": 4.3
+    },
+    {
+        "id": 15,
+        "name": "Product 15",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Accessories",
+        "price": 62.56,
+        "brand": "Adidas",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Red",
+            "Red"
+        ],
+        "material": "Leather",
+        "discount": 28,
+        "ratings": 3.6
+    },
+    {
+        "id": 16,
+        "name": "Product 16",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 56.43,
+        "brand": "Nike",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": 2,
+        "ratings": 4.8
+    },
+    {
+        "id": 17,
+        "name": "Product 17",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 96.47,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "XL"
+        ],
+        "color": [
+            "Red",
+            "Green"
+        ],
+        "material": "Leather",
+        "discount": 36,
+        "ratings": 3.1
+    },
+    {
+        "id": 18,
+        "name": "Product 18",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 152.63,
+        "brand": "Adidas",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Wool",
+        "discount": 14,
+        "ratings": 4.5
+    },
+    {
+        "id": 19,
+        "name": "Product 19",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 75.69,
+        "brand": "Levi's",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "Blue",
+            "Black",
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": 31,
+        "ratings": 3.6
+    },
+    {
+        "id": 20,
+        "name": "Product 20",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 114.06,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "Green",
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": 42,
+        "ratings": 3.4
+    },
+    {
+        "id": 21,
+        "name": "Product 21",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Accessories",
+        "price": 47.82,
+        "brand": "Levi's",
+        "size": [
+            "S"
+        ],
+        "color": [
+            "Red",
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": 25,
+        "ratings": 4.3
+    },
+    {
+        "id": 22,
+        "name": "Product 22",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 189.99,
+        "brand": "H&M",
+        "size": [
+            "M",
+            "XL"
+        ],
+        "color": [
+            "Black"
+        ],
+        "material": "Polyester",
+        "discount": 43,
+        "ratings": 3.4
+    },
+    {
+        "id": 23,
+        "name": "Product 23",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 68.96,
+        "brand": "Nike",
+        "size": [
+            "M",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Black",
+            "Blue"
+        ],
+        "material": "Silk",
+        "discount": 9,
+        "ratings": 3.8
+    },
+    {
+        "id": 24,
+        "name": "Product 24",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 67.21,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "XL"
+        ],
+        "color": [
+            "Green"
+        ],
+        "material": "Wool",
+        "discount": 20,
+        "ratings": 4.4
+    },
+    {
+        "id": 25,
+        "name": "Product 25",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 145.7,
+        "brand": "Nike",
+        "size": [
+            "L"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Polyester",
+        "discount": 35,
+        "ratings": 3.2
+    },
+    {
+        "id": 26,
+        "name": "Product 26",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Jackets",
+        "price": 76.44,
+        "brand": "Adidas",
+        "size": [
+            "S",
+            "S",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "White",
+            "White"
+        ],
+        "material": "Silk",
+        "discount": 25,
+        "ratings": 4.9
+    },
+    {
+        "id": 27,
+        "name": "Product 27",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 11.91,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "M"
+        ],
+        "color": [
+            "Green",
+            "White"
+        ],
+        "material": "Leather",
+        "discount": 26,
+        "ratings": 3.7
+    },
+    {
+        "id": 28,
+        "name": "Product 28",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Casual Wear",
+        "price": 69.91,
+        "brand": "Nike",
+        "size": [
+            "L",
+            "XL",
+            "M",
+            "XL"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": 15,
+        "ratings": 3.1
+    },
+    {
+        "id": 29,
+        "name": "Product 29",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Pants",
+        "price": 83.45,
+        "brand": "Nike",
+        "size": [
+            "S",
+            "S"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Leather",
+        "discount": 30,
+        "ratings": 4.3
+    },
+    {
+        "id": 30,
+        "name": "Product 30",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Accessories",
+        "price": 101.19,
+        "brand": "Levi's",
+        "size": [
+            "M",
+            "XL",
+            "M"
+        ],
+        "color": [
+            "Green"
+        ],
+        "material": "Polyester",
+        "discount": 15,
+        "ratings": 4.6
+    },
+    {
+        "id": 31,
+        "name": "Product 31",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Accessories",
+        "price": 127.71,
+        "brand": "Zara",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "Blue",
+            "Blue",
+            "Blue"
+        ],
+        "material": "Silk",
+        "discount": 18,
+        "ratings": 4.5
+    },
+    {
+        "id": 32,
+        "name": "Product 32",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 130.98,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "XL",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Green",
+            "White",
+            "Green"
+        ],
+        "material": "Leather",
+        "discount": 42,
+        "ratings": 4.7
+    },
+    {
+        "id": 33,
+        "name": "Product 33",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Accessories",
+        "price": 119.67,
+        "brand": "Levi's",
+        "size": [
+            "L",
+            "M",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Red",
+            "Green",
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": 37,
+        "ratings": 3.9
+    },
+    {
+        "id": 34,
+        "name": "Product 34",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Accessories",
+        "price": 140.99,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "L",
+            "S"
+        ],
+        "color": [
+            "Green",
+            "Green"
+        ],
+        "material": "Polyester",
+        "discount": 19,
+        "ratings": 4.3
+    },
+    {
+        "id": 35,
+        "name": "Product 35",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 18.6,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "Blue",
+            "Black"
+        ],
+        "material": "Cotton",
+        "discount": 30,
+        "ratings": 4.1
+    },
+    {
+        "id": 36,
+        "name": "Product 36",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Casual Wear",
+        "price": 103.32,
+        "brand": "Zara",
+        "size": [
+            "M"
+        ],
+        "color": [
+            "Black",
+            "Red",
+            "Red"
+        ],
+        "material": "Polyester",
+        "discount": 3,
+        "ratings": 4.9
+    },
+    {
+        "id": 37,
+        "name": "Product 37",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Accessories",
+        "price": 194.8,
+        "brand": "H&M",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "Green"
+        ],
+        "material": "Cotton",
+        "discount": 0,
+        "ratings": 4.4
+    },
+    {
+        "id": 38,
+        "name": "Product 38",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 62.81,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "L",
+            "S"
+        ],
+        "color": [
+            "White"
+        ],
+        "material": "Wool",
+        "discount": 39,
+        "ratings": 4.1
+    },
+    {
+        "id": 39,
+        "name": "Product 39",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Toys",
+        "price": 168.11,
+        "brand": "Levi's",
+        "size": [
+            "M",
+            "L",
+            "L"
+        ],
+        "color": [
+            "Blue",
+            "White",
+            "Black"
+        ],
+        "material": "Cotton",
+        "discount": 48,
+        "ratings": 5.0
+    },
+    {
+        "id": 40,
+        "name": "Product 40",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 45.03,
+        "brand": "H&M",
+        "size": [
+            "S",
+            "L",
+            "L",
+            "S"
+        ],
+        "color": [
+            "Red",
+            "Blue"
+        ],
+        "material": "Cotton",
+        "discount": 47,
+        "ratings": 4.7
+    },
+    {
+        "id": 41,
+        "name": "Product 41",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 178.03,
+        "brand": "Nike",
+        "size": [
+            "XL"
+        ],
+        "color": [
+            "Black",
+            "Red",
+            "Black"
+        ],
+        "material": "Cotton",
+        "discount": 44,
+        "ratings": 4.6
+    },
+    {
+        "id": 42,
+        "name": "Product 42",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Coats",
+        "price": 65.92,
+        "brand": "Nike",
+        "size": [
+            "L",
+            "XL"
+        ],
+        "color": [
+            "Blue",
+            "Red"
+        ],
+        "material": "Silk",
+        "discount": 14,
+        "ratings": 4.9
+    },
+    {
+        "id": 43,
+        "name": "Product 43",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 192.46,
+        "brand": "Zara",
+        "size": [
+            "XL",
+            "S",
+            "L",
+            "XL"
+        ],
+        "color": [
+            "White",
+            "Black",
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": 34,
+        "ratings": 4.6
+    },
+    {
+        "id": 44,
+        "name": "Product 44",
+        "category": {
+            "id": 1,
+            "name": "Men"
+        },
+        "subcategory": "Shirts",
+        "price": 192.93,
+        "brand": "Levi's",
+        "size": [
+            "XL",
+            "M",
+            "XL",
+            "M"
+        ],
+        "color": [
+            "Black",
+            "Red"
+        ],
+        "material": "Polyester",
+        "discount": 22,
+        "ratings": 4.2
+    },
+    {
+        "id": 45,
+        "name": "Product 45",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Casual Wear",
+        "price": 151.44,
+        "brand": "H&M",
+        "size": [
+            "L",
+            "L",
+            "L"
+        ],
+        "color": [
+            "Blue",
+            "Blue"
+        ],
+        "material": "Leather",
+        "discount": 42,
+        "ratings": 4.4
+    },
+    {
+        "id": 46,
+        "name": "Product 46",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Toys",
+        "price": 23.02,
+        "brand": "Zara",
+        "size": [
+            "S",
+            "XL",
+            "XL",
+            "XL"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Silk",
+        "discount": 22,
+        "ratings": 3.1
+    },
+    {
+        "id": 47,
+        "name": "Product 47",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 150.42,
+        "brand": "Nike",
+        "size": [
+            "S",
+            "M"
+        ],
+        "color": [
+            "Green"
+        ],
+        "material": "Leather",
+        "discount": 4,
+        "ratings": 4.0
+    },
+    {
+        "id": 48,
+        "name": "Product 48",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Dresses",
+        "price": 66.1,
+        "brand": "Zara",
+        "size": [
+            "M",
+            "XL",
+            "M"
+        ],
+        "color": [
+            "Red"
+        ],
+        "material": "Cotton",
+        "discount": 15,
+        "ratings": 4.2
+    },
+    {
+        "id": 49,
+        "name": "Product 49",
+        "category": {
+            "id": 3,
+            "name": "Kids"
+        },
+        "subcategory": "Toys",
+        "price": 195.28,
+        "brand": "Adidas",
+        "size": [
+            "XL",
+            "M",
+            "S"
+        ],
+        "color": [
+            "Black",
+            "White",
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": 27,
+        "ratings": 3.8
+    },
+    {
+        "id": 50,
+        "name": "Product 50",
+        "category": {
+            "id": 2,
+            "name": "Women"
+        },
+        "subcategory": "Accessories",
+        "price": 96.84,
+        "brand": "Levi's",
+        "size": [
+            "XL",
+            "M",
+            "L"
+        ],
+        "color": [
+            "Black",
+            "Green",
+            "Blue"
+        ],
+        "material": "Polyester",
+        "discount": 18,
+        "ratings": 3.9
+    }
+]

@@ -1,3 +1,4 @@
+import { Slider } from "@mui/material";
 import React, { useState } from "react";
 
 function RangeSlider() {
@@ -6,56 +7,15 @@ function RangeSlider() {
   const minLimit = 0;
   const maxLimit = 2000;
 
-  const handleMinChange = (e) => {
-    const value = Math.min(Number(e.target.value), maxValue - 10); // Prevent overlap
-    setMinValue(value);
-  };
-
-  const handleMaxChange = (e) => {
-    const value = Math.max(Number(e.target.value), minValue + 10); // Prevent overlap
-    setMaxValue(value);
-  };
-
   return (
     <div className="flex flex-col items-center pt-6 ">
       {/* Slider Container */}
       <div className="relative w-full max-w-lg">
-        {/* Full Track */}
-        <div className=" inset-0 bg-gray-300 rounded-full"></div>
-
-        {/* Active Range Track */}
-        <div
-          className=" bg-blue-500 rounded-full"
-          style={{
-            left: `${((minValue - minLimit) / (maxLimit - minLimit)) * 100}%`,
-            right: `${100 - ((maxValue - minLimit) / (maxLimit - minLimit)) * 100}%`,
-          }}
-        ></div>
-
-        {/* Min Handle */}
-        <input
-          type="range"
-          min={minLimit}
-          max={maxLimit}
-          value={minValue}
-          onChange={handleMinChange}
-          className=" w-full  accent-blue-500  pointer-events-auto"
-          style={{ zIndex: minValue === maxValue - 10 ? 1 : 0 }}
-        />
-
-        {/* Max Handle */}
-        <input
-          type="range"
-          min={minLimit}
-          max={maxLimit}
-          value={maxValue}
-          onChange={handleMaxChange}
-          className=" w-full  accent-blue-500  pointer-events-auto"
-        />
+        <Slider value={[minValue, maxValue]} onChange={(e, newValue) => [setMinValue(newValue[0]), setMaxValue(newValue[1])]} min={minLimit} max={maxLimit} />
       </div>
 
       {/* Display Min/Max Values */}
-      <div className="flex justify-between items-center mt-6 w-full max-w-lg">
+      <div className="flex justify-between items-center mt-6 mb-6 w-full max-w-lg">
         {/* Min Value Input */}
         <div className="flex flex-col items-center">
           <label className="text-sm text-gray-600">Min (USD)</label>
