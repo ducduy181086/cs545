@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import CheckoutHeader from '../../../components/layout/CheckoutHeader';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchOrderById } from "services/orderService";

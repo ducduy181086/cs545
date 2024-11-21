@@ -3,7 +3,7 @@ import ShippingAddressForm from './ShippingAddressForm';
 import CartSummary from '../Cart/CartSummary';
 import CheckOutProgress from 'components/common/CheckOutProgreess';
 import { useNavigate } from 'react-router-dom';
-import CheckoutHeader from '../../../components/layout/CheckoutHeader';
+import Header from 'components/layout/Header';
 
 const ShippingDashboard = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ const ShippingDashboard = () => {
     return (
         <div>
             {/* {Header component} */}
-            <CheckoutHeader />
+            <Header />
 
             {/* {Body component} */}
             <div className="container mx-auto p-4 mt-20">
