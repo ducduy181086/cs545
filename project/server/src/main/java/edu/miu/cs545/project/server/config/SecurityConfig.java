@@ -55,18 +55,18 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(httpSecurityCorsConfigurer -> {
-            httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
-        });
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> {
+            request.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
             request.requestMatchers("/api/v1/authenticate/**").permitAll();
             request.requestMatchers("/api/v1/admin/**").hasAnyAuthority(RoleType.ADMIN.name());
+            request.requestMatchers("/api/v1/reviews/**").hasAnyAuthority(RoleType.ADMIN.name());
+            request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll();
             request.requestMatchers("/api/v1/categories/**").hasAnyAuthority(RoleType.ADMIN.name());
-            request.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").hasAnyAuthority(RoleType.SELLER.name(), RoleType.BUYER.name());
-            request.requestMatchers(HttpMethod.DELETE, "/api/v1/products/*/reviews").hasAuthority(RoleType.ADMIN.name());
+            request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll();
+            request.requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/products/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SELLER.name());
-            request.requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/addresses/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/payment/**").hasAnyAuthority(RoleType.BUYER.name());

@@ -2,6 +2,7 @@ package edu.miu.cs545.project.server.controller;
 
 import edu.miu.cs545.project.server.entity.dto.ProductDto;
 import edu.miu.cs545.project.server.entity.dto.ReviewDto;
+import edu.miu.cs545.project.server.entity.dto.request.AddReviewRequest;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
 import edu.miu.cs545.project.server.service.ProductService;
 import edu.miu.cs545.project.server.service.ReviewService;
@@ -63,6 +64,7 @@ public class ProductController {
         if (product == null) {
             return ResponseEntity.notFound().build();
         }
+        product.setRatings(reviewService.countReviewsByRating(id));
         return ResponseEntity.ok(product);
     }
 
@@ -100,9 +102,17 @@ public class ProductController {
     // Reviews part
     @GetMapping("/{id}/reviews")
     public Page<ReviewDto> getReviews(@PathVariable Long id,
-      @RequestParam(name="page", defaultValue = "0") int page,
-      @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
+        @RequestParam(name="page", defaultValue = "0") int page,
+        @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return reviewService.getReviewsForProduct(id, pageable);
+    }
+
+    @PostMapping("/{id}/reviews")
+    public ReviewDto addReview(
+        @PathVariable Long id,
+        @RequestBody AddReviewRequest review) {
+        review.setProductId(id);
+        return reviewService.addReview(review);
     }
 }

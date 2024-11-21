@@ -6,29 +6,30 @@ const api = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+    // 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).access_token}`
   },
+  withCredentials: true
 });
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    const token = user ? JSON.parse(user).access_token : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
-
 
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
       const { status } = error.response;
-      if (status === 401) {
+      if (status === 401 || status === 403) {
         console.log('Unauthorized! Redirecting to login.');
       }
     }

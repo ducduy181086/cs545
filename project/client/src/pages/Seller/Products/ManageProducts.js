@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import SellerHeader from "../SellerHeader"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { sellerFetchProducts } from "services/sellerService";
 import ProductTable from "components/common/SellerProductTable";
 
-const ManageProduct = () => {
+const ManageProduct = (props) => {
+    const navigate = useNavigate()
     const [products, setProducts] = useState()
 
     useEffect(() => {
         console.log('fetch products')
         sellerFetchProducts().then(res => {
             setProducts(res);
+        }).catch(err => {
+
+            navigate('/login')
         });
     }, [])
 

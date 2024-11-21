@@ -17,7 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +44,13 @@ public class ReviewServiceImpl implements ReviewService {
         getCurrentBuyer().ifPresent(reviewEntity::setBuyer);
         var product = productRepo.findById(review.getProductId()).orElseThrow();
         reviewEntity.setProduct(product);
-        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId());
-        int reviewsCount = (int) result[0] + 1;
+        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId()).get(0);
+        long reviewsCount = (Long) result[0] + 1;
         Long sum = (Long) result[1];
         long sumValue = (sum == null ? 0 : sum) + review.getRating();
         var savedEntity = reviewRepo.save(reviewEntity);
 
-        product.setReviewCount(reviewsCount);
+        product.setReviewCount((int) reviewsCount);
         product.setAverageRating((double) sumValue / reviewsCount);
         productRepo.save(product);
 
@@ -62,15 +65,31 @@ public class ReviewServiceImpl implements ReviewService {
         review.setDeletedByAdmin(admin);
 
         var product = review.getProduct();
-        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId());
-        int reviewsCount = (int) result[0] - 1;
+        Object[] result = reviewRepo.countAndSumRatingsByProductId(product.getId()).get(0);
+        long reviewsCount = (Long) result[0] - 1;
         Long sum = (Long) result[1];
         long sumValue = (sum == null ? 0 : sum) - review.getRating();
 
         reviewRepo.save(review);
-        product.setReviewCount(reviewsCount);
+        product.setReviewCount((int) reviewsCount);
         product.setAverageRating((double) sumValue / reviewsCount);
         productRepo.save(product);
+    }
+
+    @Override
+    public Map<Integer, Long> countReviewsByRating(Long productId) {
+        List<Object[]> results = reviewRepo.countReviewsByRating(productId);
+        return results.stream()
+            .collect(Collectors.toMap(
+                result -> (Integer) result[0], // Rating
+                result -> (Long) result[1]    // Count
+            ));
+    }
+
+    @Override
+    public Page<ReviewDto> getDeletedReviews(Pageable pageable) {
+        return reviewRepo.findDeletedReviews(pageable)
+            .map(m -> modelMapper.map(m, ReviewDto.class));
     }
 
     private Optional<Buyer> getCurrentBuyer() {

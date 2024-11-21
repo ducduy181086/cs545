@@ -5,6 +5,7 @@ import edu.miu.cs545.project.server.entity.dto.request.SaveCategoryRequest;
 import edu.miu.cs545.project.server.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,10 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping()
-    public ResponseEntity<Page<CategoryDto>> getAll(Pageable pageable) {
+    public ResponseEntity<Page<CategoryDto>> getAll(
+        @RequestParam(name="page", defaultValue = "0") int page,
+        @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
         var items = categoryService.getAll(pageable);
         return ResponseEntity.ok(items);
     }
