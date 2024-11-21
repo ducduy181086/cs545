@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -130,7 +129,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void calculateOrder(Order orderEntity, PlaceOrderRequest order, Map<Long, Product> productMap) {
-        //Double subtotal = 0D;
-        //orderEntity.setSubtotal(order.getItems().stream().reduce(0D, (total, item) -> total + productMap.get(item.getProductId()).getPrice() * item.getQuantity()));
+        var subtotal = order.getItems().stream().mapToDouble(item -> productMap.get(item.getProductId()).getPrice() * item.getQuantity()).sum();
+        var totalDiscount = order.getItems().stream().mapToDouble(item -> (productMap.get(item.getProductId()).getPrice() * productMap.get(item.getProductId()).getDiscount() / 100) * item.getQuantity()).sum();
+        var tax = subtotal * 5.5 / 100;
+        var total = subtotal - totalDiscount + tax;
+        orderEntity.setSubtotal(subtotal);
+        orderEntity.setTotalDiscount(totalDiscount);
+        orderEntity.setTax(tax);
+        orderEntity.setTotal(total);
     }
 }
