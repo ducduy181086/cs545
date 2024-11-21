@@ -16,7 +16,7 @@ public class SaveProductRequest {
     private String brand;
     private String type;
 
-    private Long categoryId;
+    private Long ccategoryId;
 
     private double averageRating;
     private int reviewCount;
