@@ -58,6 +58,7 @@ public class SecurityConfig {
         http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> {
+            request.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
             request.requestMatchers("/api/v1/authenticate/**").permitAll();
             request.requestMatchers("/api/v1/admin/**").hasAnyAuthority(RoleType.ADMIN.name());
             request.requestMatchers("/api/v1/reviews/**").hasAnyAuthority(RoleType.ADMIN.name());
