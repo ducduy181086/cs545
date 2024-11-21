@@ -7,4 +7,6 @@ public class OrderItemDto {
     private Long id;
     private int quantity;
     private ProductDto product;
+    private String size;
+    private String color;
 }
