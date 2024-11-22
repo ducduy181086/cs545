@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     Page<ProductDto> filterProducts(
+        String name,
         List<Long> categoryIds,
         Double minPrice,
         Double maxPrice,

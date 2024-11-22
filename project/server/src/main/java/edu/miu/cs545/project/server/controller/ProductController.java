@@ -28,6 +28,7 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> filterProducts(
+        @RequestParam(name="name", required = false) String name,
         @RequestParam(name="categoryids", required = false) List<Long> categoryIds, // Accept categoryIds as list
         @RequestParam(name="minprice", required = false) Double minPrice,
         @RequestParam(name="maxprice", required = false) Double maxPrice,
@@ -56,7 +57,7 @@ public class ProductController {
 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy));
         Page<ProductDto> products = productService.filterProducts(
-            categoryIds, minPrice, maxPrice, brand, minRating, inStock,
+            name, categoryIds, minPrice, maxPrice, brand, minRating, inStock,
             isNewArrival, isBestSeller, type, color, size, material, features,
             compatibleProductId, modelYear, deliveryOptions, sellerId, paymentOptions,
             demographics, usage, occasion, pageable);
