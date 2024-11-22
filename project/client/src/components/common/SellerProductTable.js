@@ -35,10 +35,7 @@ const ProductTable = (props) => {
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Brand</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Size</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Color</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Material</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Discount</th>
                         {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th> */}
                     </tr>
@@ -52,10 +49,7 @@ const ProductTable = (props) => {
                             <td className="px-6 py-4 text-sm text-gray-900">{product.name}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.category.name}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">${product.price.toFixed(2)}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.brand}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.sizes.join(", ")}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.colors.join(", ")}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{product.material}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{product.quantity === 0 ? 'Out of stock' : product.quantity}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.discount}</td>
                             {/* <td className="px-6 py-4 text-sm text-gray-500">
                                 <button className="text-red-600 hover:text-red-800">

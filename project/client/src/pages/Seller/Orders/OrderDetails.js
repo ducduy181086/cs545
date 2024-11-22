@@ -24,9 +24,16 @@ const OrderDetail = (props) => {
     }, [])
 
     const updateOrderStatus = () => {
+
         setOrder({ ...order, status: newStatus });
         setShowDialog(false);
     };
+
+    const cancelOrder = () => {
+
+
+    }
+
     const handlePrint = () => {
         const printContent = receiptRef.current.innerHTML;
         const printWindow = window.open("", "_blank");
@@ -54,7 +61,7 @@ const OrderDetail = (props) => {
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Order Details of ID: {param.id}</h1>
                         <div>
                             <button
-                                className="me-2 px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-500"
+                                className="me-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-500"
                                 onClick={() => setShowDialog(true)}
                             >
                                 Change Status
@@ -63,6 +70,12 @@ const OrderDetail = (props) => {
                                 onClick={() => handlePrint()}
                             >
                                 Print Order
+                            </button>
+                            <button
+                                className="ms-2 me-2 px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-500"
+                                onClick={() => setShowDialog(true)}
+                            >
+                                Cancel Order
                             </button>
                         </div>
                     </div>
@@ -108,22 +121,22 @@ const OrderDetail = (props) => {
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Customer Information
                                     </h2>
-                                    <div className="mt-4">
+                                    {order.customer && <div className="mt-4">
                                         <p className="text-gray-600">
-                                            <strong>Name:</strong> {order.customer.name}
+                                            <strong>Name:</strong> {order.customer?.name ?? 'Customer'}
                                         </p>
                                         <p className="text-gray-600">
-                                            <strong>Email:</strong> {order.customer.email}
+                                            <strong>Email:</strong> {order.customer?.email ?? 'Email'}
                                         </p>
                                         <p className="text-gray-600">
-                                            <strong>Phone:</strong> {order.customer.phone}
+                                            <strong>Phone:</strong> {order.customer?.phone ?? ''}
                                         </p>
                                         <p className="text-gray-600">
                                             <strong>Address:</strong>{" "}
-                                            {`${order.customer.address.street}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.zipcode}, ${order.customer.address.country}`}
+                                            {/* {`${order.customer.address.street}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.zipcode}, ${order.customer.address.country}`} */}
                                         </p>
                                     </div>
-
+                                    }
                                     {/* Products Table */}
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Products
@@ -156,10 +169,10 @@ const OrderDetail = (props) => {
                                                             {item.quantity}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-600">
-                                                            ${item.price.toFixed(2)}
+                                                            ${item.product.price.toFixed(2)}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800 font-medium">
-                                                            ${item.totalPrice.toFixed(2)}
+                                                            {/* ${item.totalPrice.toFixed(2)} */}
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -171,7 +184,7 @@ const OrderDetail = (props) => {
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Payment Information
                                     </h2>
-                                    <div className="mt-4">
+                                    {order.payment && <div className="mt-4">
                                         <p className="text-gray-600">
                                             <strong>Payment Method:</strong> {order.payment.method}
                                         </p>
@@ -182,7 +195,7 @@ const OrderDetail = (props) => {
                                             <strong>Total Amount:</strong> ${order.payment.totalAmount}{" "}
                                             {order.payment.currency}
                                         </p>
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                         )}
@@ -200,7 +213,6 @@ const OrderDetail = (props) => {
                                             <option value="Pending">Pending</option>
                                             <option value="Shipped">Shipped</option>
                                             <option value="Delivered">Delivered</option>
-                                            <option value="Cancelled">Cancelled</option>
                                         </select>
                                     </div>
                                     <div className="mt-6 flex justify-end space-x-4">
@@ -224,7 +236,7 @@ const OrderDetail = (props) => {
                         {/* Hidden Receipt for Printing/Downloading */}
                         {order && <div className="hidden">
                             <div ref={receiptRef}>
-                                <OrderReceipt order={order} />
+                                {/* <OrderReceipt order={order} /> */}
                             </div>
                         </div>}
                     </div>

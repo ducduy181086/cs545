@@ -16,6 +16,28 @@ export const adminPutSellersApprove = async (id) => {
     return response.data;
 };
 
+export const adminAddCategory = async (newCategory) => {
+    const response = await api.post('/categories',
+        newCategory
+    )
+    return response.data
+}
+
+export const adminDeleteCategory = async (id) => {
+    const response = await api.delete(`/categories/${id}`)
+    return response.data
+}
+
+
+export const adminUpdateCategory = async (newCategory) => {
+    const response = await api.put(`/categories/${newCategory.id}`,
+        newCategory
+    )
+    return response.data
+}
+
+
+
 // export const sellerFetchProductById = async (productId) => {
 //     const response = await api.get(`/products/${productId}`);
 //     return response.data;

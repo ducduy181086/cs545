@@ -4,9 +4,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 // Import pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
-import AdminDashboard from './pages/Admin/AdminDashboard';
 import BuyerDashboard from './pages/Buyer/BuyerDashboard';
-import SellerDashboard from './pages/Seller/Dashboard/SellerDashboard';
 import ManageProducts from './pages/Seller/Products/ManageProducts';
 import NotFound from './pages/NotFound';
 import ManageSellersUnapproved from 'pages/Admin/ManageSellers';
@@ -28,6 +26,7 @@ import PaymentDashboard from 'pages/Buyer/Payment/PaymentDashboard';
 import OrderHistoryDashboard from 'pages/Buyer/OrderHistory/OrderHistoryDashboard';
 import OrderHistoryDetail from 'pages/Buyer/OrderHistory/OrderHistoryDetail';
 import ProductDashboard from 'pages/Buyer/Product/ProductDashboard';
+import ManageCategories from 'pages/Admin/ManageCategories';
 
 
 const publicRoutes = [
@@ -39,10 +38,10 @@ const publicRoutes = [
 ];
 
 const adminRoutes = [
-  { path: "/admin/", element: <AdminDashboard /> },
   { path: "/admin/manage-users", element: <ManageUsers /> },
   { path: "/admin/manage-sellers", element: <ManageSellersUnapproved /> },
   // { path: "/admin/manage-products/:id", element: <ProductDetail /> },
+  { path: "/admin/manage-categories", element: <ManageCategories /> },
 
 ]
 
@@ -55,7 +54,6 @@ const buyerRoutes = [
 ];
 
 const sellerRoutes = [
-  { path: "/seller/", element: <SellerDashboard /> },
   { path: "/seller/manage-products", element: <ManageProducts /> },
   { path: "/seller/manage-products/add", element: <AddProduct /> },
   { path: "/seller/manage-products/:id", element: <ProductDetail /> },
@@ -94,6 +92,8 @@ const AppRoutes = () => {
 
 
         {/* --------------- Start Region - Buyer Routes ---------------*/}
+        <Route path="/admin" element={<Navigate replace to="/admin/manage-users" />} />
+
         {buyerRoutes.map(({ path, element }) => (
           <Route
             key={path}
@@ -106,6 +106,7 @@ const AppRoutes = () => {
         ))}
 
         {/*  --------------- End Region - Buyer Routes --------------- */}
+        <Route path="/seller" element={<Navigate replace to="/seller/manage-products" />} />
 
         {sellerRoutes.map(({ path, element }) => (
           <Route
