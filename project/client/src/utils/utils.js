@@ -69,6 +69,30 @@ const buildShippingInfo = (shippingInfo = {}) => ({
     shippingAddress: `${shippingInfo?.address ?? ""} ${shippingInfo?.apt ?? ""} ${shippingInfo?.zipCode ?? ""} ${shippingInfo?.city ?? ""} ${shippingInfo?.state ?? ""} ${shippingInfo?.country ?? ""}`,
 });
 
+const formatNumber = (number) => {
+    return formatMoney(number);
+  };
+
+  const formatMoney = (number) => {
+    return number.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  };
+
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true, // Toggle for 12-hour or 24-hour format
+    });
+  };
+
 export {
     formatPhoneNumber,
     validateCardNumber,
@@ -77,5 +101,8 @@ export {
     validateCardHolder,
     validateColor,
     validateSize,
-    buildShippingInfo
+    buildShippingInfo,
+    formatNumber,
+    formatDateTime,
+    formatMoney
 };

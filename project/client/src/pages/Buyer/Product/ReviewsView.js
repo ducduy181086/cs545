@@ -13,7 +13,7 @@ const ReviewView = () => {
     });
   }, [id])
 
-  if (!reviews || !reviews.content || reviews.content.length==0) return <><p>Empty</p></>;
+  if (!reviews || !reviews.content || reviews.content.length==0) return <><p></p></>;
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-8 ">

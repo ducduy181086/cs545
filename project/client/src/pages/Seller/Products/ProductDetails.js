@@ -55,7 +55,6 @@ const ProductDetail = () => {
         })
     }
 
-
     return <>
         <div className="min-h-full pb-40">
             <SellerHeader />
