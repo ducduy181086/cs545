@@ -3,7 +3,6 @@ import ProductReviewModal from "components/common/ProductReviewModel";
 import { formatMoney } from "utils/utils";
 
 export default function OrderProductCard({ product: item, onSubmitReview, onViewDetail }) {
-    console.log("Product:", item);
     return (
         <>
             <div className="w-full border p-4 rounded-md">
@@ -23,7 +22,7 @@ export default function OrderProductCard({ product: item, onSubmitReview, onView
                         <p className="mt-2 font-bold text-blue-500">${formatMoney(item.product.price * item.product.quantity)}</p>
                     </div>
                 </div>
-                <ProductReviewModal product={item} onSubmitReview={onSubmitReview} onViewDetail={onViewDetail} />
+                <ProductReviewModal product={item.product} onSubmitReview={onSubmitReview} onViewDetail={onViewDetail} />
             </div>
         </>
     );

@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
         <img
           src={product.imageUrl ?? 'https://via.placeholder.com/180x160'}
           alt={product.name}
-          className="mt-4 w-80 h-80 object-cover rounded-md"
+          className="mt-4 w-80 aspect-square object-cover rounded-md"
         />
       </div>
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateComment, validateRating } from "utils/utils";
 
 const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
     // State to control modal visibility
@@ -7,6 +8,9 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
     // State for rating and review text
     const [rating, setRating] = useState(0);  // Rating is from 0 to 5
     const [reviewText, setReviewText] = useState('');
+
+    // Handle form errors
+    const [errors, setErrors] = useState({});
 
     // Handle rating change (star selection)
     const handleRating = (value) => {
@@ -21,12 +25,24 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
     // Handle form submission (log to console for now)
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Review Submitted:', { rating, reviewText });
-        onSubmitReview(product?.productId, rating, reviewText);  // Pass data to parent component
-        // Reset form after submission
-        setRating(0);
-        setReviewText('');
-        setIsModalOpen(false);  // Close modal after submission
+
+        // Validate form data
+        const errors = {
+            rating: validateRating(rating),
+            comment: validateComment(reviewText),
+        };
+
+        setErrors(errors);
+
+        // Check if there are no errors
+        if (Object.values(errors).every((error) => error === null)) {
+            onSubmitReview(product?.productId, rating, reviewText);  // Pass data to parent component
+            // Reset form after submission
+            setRating(0);
+            setReviewText('');
+            setIsModalOpen(false);  // Close modal after submission
+        }
+
     };
 
     const hanldeViewDetail = () => {
@@ -42,13 +58,12 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
         setIsModalOpen(false);
         setRating(0);
         setReviewText('');
+        setErrors({});
     };
 
     // Generate an array for star icons based on rating
     const stars = Array(5).fill(false).map((_, index) => index < rating);
     return (
-
-
         <div className="container mx-auto pt-4">
             {/* Button to open the modal */}
             <div className='flex'>
@@ -87,9 +102,9 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
                             {/* Product info Section */}
                             <div className="flex items-center w-full justify-between ">
                                 <div className="flex items-center">
-                                    <img src="https://via.placeholder.com/80" alt="Product Image" className="w-16 h-16 object-cover rounded-lg" />
+                                    <img src={product.imageUrl} alt="Product Image" className="w-16 h-16 object-cover aspect-square rounded-lg" />
                                     <div className="ml-4">
-                                        <p className="font-bold">{product.productName}</p>
+                                        <p className="font-bold">{product.name}</p>
                                         <p className="text-gray-500">${product.price}</p>
                                     </div>
 
@@ -104,8 +119,8 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
                                         <svg
                                             key={index}
                                             xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
+                                            width="32"
+                                            height="32"
                                             fill={filled ? "orange" : "gray"}
                                             viewBox="0 0 24 24"
                                             className="cursor-pointer"
@@ -115,6 +130,9 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
                                         </svg>
                                     ))}
                                 </div>
+                                {errors.rating && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.rating}</p>
+                                )}
                             </div>
 
                             {/* Review Text Section */}
@@ -130,6 +148,9 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
                                     className="w-full p-4 border border-gray-300 rounded-md resize-none"
                                     rows="4"
                                 />
+                                {errors.comment && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.comment}</p>
+                                )}
                             </div>
 
                             {/* Submit Button */}

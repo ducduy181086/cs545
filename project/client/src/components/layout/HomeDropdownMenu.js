@@ -35,7 +35,7 @@ const HomeDropdownMenu = () => {
     <div className="relative">
       {!isAuthenticated && (
         <Link to="/login">
-          <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Sign In
           </button>
         </Link>
@@ -74,7 +74,7 @@ const HomeDropdownMenu = () => {
           {isAuthenticated && user.role === 'SELLER' &&
             <MenuItem
               onClick={() => handleNavigation('/seller')}
-              className="text-gray-700 hover:text-indigo-600"
+              className="text-gray-700 hover:text-blue-600"
               sx={{ fontSize: '1rem', fontWeight: 500 }}
             >
               Seller Dashboard
@@ -83,7 +83,7 @@ const HomeDropdownMenu = () => {
           {isAuthenticated && user.role === 'ADMIN' &&
             <MenuItem
               onClick={() => handleNavigation('/admin')}
-              className="text-gray-700 hover:text-indigo-600"
+              className="text-gray-700 hover:text-blue-600"
               sx={{ fontSize: '1rem', fontWeight: 500 }}
             >
               Admin Dashboard
@@ -91,7 +91,7 @@ const HomeDropdownMenu = () => {
           }
           <MenuItem
             onClick={() => handleNavigation('/order-history')}
-            className="text-gray-700 hover:text-indigo-600"
+            className="text-gray-700 hover:text-blue-600"
             sx={{ fontSize: '1rem', fontWeight: 500 }}
           >
             Order History

@@ -63,6 +63,16 @@ const validateSize = (size) => {
     return null;
 };
 
+const validateRating = (rating) => {
+    if (rating === 0) return "Please rating.";
+    return null;
+};
+
+const validateComment = (commnet) => {
+    if (commnet.length < 10) return "Comments should contain at least 10 characters";
+    return null;
+};
+
 const buildShippingInfo = (shippingInfo = {}) => ({
     phoneNumber: shippingInfo?.phoneNumber ?? "",
     customerName: `${shippingInfo?.firstName ?? ""} ${shippingInfo?.lastName ?? ""}`,
@@ -104,5 +114,7 @@ export {
     buildShippingInfo,
     formatNumber,
     formatDateTime,
-    formatMoney
+    formatMoney,
+    validateComment,
+    validateRating
 };
