@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import HomeDropdownMenu from "./HomeDropdownMenu";
-import logo from '../../assets/icons/icon-lad.png';
-
+import logo from '../../assets/icons/lad-icon.png';
+import { CartContext } from 'context/CartContext';
 
 const Header = () => {
     const [isCollapsed, setIsCollapsed] = useState(false); // Track header state
     const [lastScrollY, setLastScrollY] = useState(0); // Track scroll position
 
     const navigate = useNavigate();
+    const { counter } = useContext(CartContext);
 
 
     const handleScroll = () => {
@@ -38,7 +39,7 @@ const Header = () => {
                     {/* Left Section */}
                     <div className="flex items-center space-x-4">
 
-                        <img className="w-231 h-50 cursor-pointer" src={logo} alt="home" onClick={() => navigate('/')}/>
+                        <img className="w-32 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
 
                         <div className=" ml-8 relative">
                             <input
@@ -56,15 +57,15 @@ const Header = () => {
                         {/* Notification Icon */}
                         <button className="relative" onClick={() => navigate('/cart')}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>
-                            <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                                2
-                            </span>
+                            {counter > 0 && <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                                {counter}
+                            </span>}
                         </button>
 
                         {/* Profile Section */}
                         <div className="flex items-center space-x-2">
                             <img
-                                src="https://via.placeholder.com/40"
+                                src="https://i.pravatar.cc/150?img=5"
                                 alt="Profile"
                                 className="w-10 h-10 rounded-full border"
                             />

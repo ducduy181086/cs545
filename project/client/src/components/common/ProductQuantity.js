@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ProductQuantity = ({ max = 3 }) => {
+const ProductQuantity = ({ max = 3, onAddItemToCart }) => {
     const [quantity, setQuantity] = useState(1);
 
     const handleDecrease = () => {
@@ -12,6 +12,10 @@ const ProductQuantity = ({ max = 3 }) => {
     const handleIncrease = () => {
         if (quantity < max)
             setQuantity(quantity + 1);
+    };
+
+    const handleAddToCart = () => {
+        onAddItemToCart(quantity);
     };
 
     return (
@@ -40,6 +44,7 @@ const ProductQuantity = ({ max = 3 }) => {
 
             {/* Add to Cart Button */}
             <button
+                onClick={handleAddToCart}
                 className="bg-black text-white w-full max-w-sm py-3 rounded-full text-center font-semibold hover:bg-gray-800"
             >
                 ADD TO CART

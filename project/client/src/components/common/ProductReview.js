@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, onSubmitReview } from 'react';
 
-const ProductReview = () => {
-  // State for rating and review text
-  const [rating, setRating] = useState(0);  // Rating is from 0 to 5
+const ProductReview = ({onSubmitReview}) => {
+  
+  const [rating, setRating] = useState(0);  
   const [reviewText, setReviewText] = useState('');
 
-  // Handle rating change (star selection)
   const handleRating = (value) => {
     setRating(value);
   };
 
-  // Handle review text change
   const handleReviewChange = (event) => {
     setReviewText(event.target.value);
   };
 
-  // Handle form submission (log to console for now)
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Review Submitted:', { rating, reviewText });
-    // Reset form after submission
+    onSubmitReview({ rating, reviewText });
     setRating(0);
     setReviewText('');
   };
 
-  // Generate an array for star icons based on rating
   const stars = Array(5).fill(false).map((_, index) => index < rating);
 
   return (
     <div className="max-w-xl mx-auto p-6 border rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Product Review</h2>
-      
+
       <form onSubmit={handleSubmit}>
         {/* Rating Section */}
         <div className="mb-4">

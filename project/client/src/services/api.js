@@ -7,7 +7,6 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
-    // 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).access_token}`
   },
   withCredentials: true
 });

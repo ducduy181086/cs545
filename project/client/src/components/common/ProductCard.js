@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
       {/* Ratings */}
       <div className="flex items-center mt-2 justify-center ">
         <div className="flex text-yellow-400 text-sm">
-          {"★".repeat(Math.floor(product?.averageRating ?? 0))}{"☆".repeat(5 - Math.floor(4))}
+          {"★".repeat(Math.floor(product?.averageRating ?? 0))}{"☆".repeat(5 - Math.floor(product?.averageRating ?? 5))}
         </div>
         <span className="text-sm text-gray-600 ml-2">
           {product?.averageRating ?? 0}/5.0 ({product.reviewCount})
@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
       {/* Pricing */}
       <div className="mt-4">
         <p className="text-xl font-semibold text-gray-800">${product.price}</p>
-        <p className="text-sm text-gray-500 line-through">${Math.floor((product.price + product.discount ?? 0) * 100) / 100}</p>
+        {product.discount&&<p className="text-sm text-gray-500 line-through">${Math.floor((product.price + (product.discount*product.price)/100 ) * 100) / 100}</p>}
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
 import AttributeSelector from 'components/common/AttributeSelector';
 import ImageSlider from 'components/common/ImageSlider';
 import ProductQuantity from 'components/common/ProductQuantity';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ProductDescription from './ProductDescription';
+import { validateColor, validateSize } from "utils/utils";
+import { useNavigate } from 'react-router-dom';
+import { addItemToCart } from 'services/cartService';
 
 const ProductInfo = ({ product }) => {
 
@@ -12,6 +15,8 @@ const ProductInfo = ({ product }) => {
 
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleSelectedSizeChanged = (size) => {
     setSelectedSize(size);
@@ -19,6 +24,33 @@ const ProductInfo = ({ product }) => {
 
   const handleSelectedColorChanged = (color) => {
     setSelectedColor(color);
+  }
+
+  const handleAddToCart = (quantity) => {
+    if (selectedSize && selectedColor) {
+      // product.selected = {
+      //   size: selectedSize,
+      //   color: selectedColor,
+      //   qty: quantity
+      // };
+      // addToCart(product);
+      // navigate('/cart');
+      // console.log(product, quantity);
+
+      addItemToCart(product.id, quantity, selectedSize, selectedColor).then(res => {
+        if (res) {
+          navigate('/cart');
+        }
+      }).finally(() => {});
+
+    } else {
+      const errors = {
+        color: validateColor(selectedColor),
+        size: validateSize(selectedSize),
+      };
+
+      setErrors(errors);
+    }
   }
 
   // Format the price and discount to show in a readable way
@@ -38,9 +70,9 @@ const ProductInfo = ({ product }) => {
             {product.subcategory && <span> '● ' {product.subcategory.name}</span>}
           </p>
         </div>
-        
+
         <div className='w-60'>
-        {product.newArrival && (
+          {product.newArrival && (
             <span className="w-4 mr-4 text-xs bg-green-300 text-black font-semibold px-2 py-1 rounded-full z-10">
               New Arrival
             </span>
@@ -52,7 +84,7 @@ const ProductInfo = ({ product }) => {
             </span>
           )}
         </div>
-       
+
       </div>
 
       {/* Product Price and Discount */}
@@ -60,13 +92,13 @@ const ProductInfo = ({ product }) => {
       <div className="mt-2 flex items-center">
         {product.discount > 0 && (
           <span className="text-md line-through text-blue-500">
-            ${(product.price + product.discount).toFixed(2)}
+            ${(product.price + (product.discount * product.price) / 100).toFixed(2)}
           </span>
         )}
         {product.discount > 0 && (
           <p>
             <span className="ml-4 text-md text-red-500">
-              -${product.discount}
+              -{product.discount}%
             </span>
             <span className="text-md text-gray-500"> Original price</span>
           </p>
@@ -84,9 +116,9 @@ const ProductInfo = ({ product }) => {
         <span className="font-semibold">Model Year:</span> {product.modelYear}
       </p>
 
-       {/* Instock */}
-       <p className="mt-2 text-md text-gray-600">
-        <span className="font-semibold">In Stock:</span> {product.inStock ?'Yes':'No'}
+      {/* Instock */}
+      <p className="mt-2 text-md text-gray-600">
+        <span className="font-semibold">In Stock:</span> {product.inStock ? 'Yes' : 'No'}
       </p>
 
       {/* Product Material */}
@@ -94,8 +126,8 @@ const ProductInfo = ({ product }) => {
         <span className="font-semibold">Material:</span> {product.material}
       </p>
 
-       {/* Product Material */}
-       <p className="mt-2 text-md text-gray-600">
+      {/* Product Material */}
+      <p className="mt-2 text-md text-gray-600">
         <span className="font-semibold">Features:</span> {product.features}
       </p>
 
@@ -104,7 +136,11 @@ const ProductInfo = ({ product }) => {
           {/* Product Size */}
           <p className="mt-2 text-md text-gray-600">
             <AttributeSelector title={'Size'} data={product.sizes} selectedValue={selectedSize} onSelectedChange={handleSelectedSizeChanged} />
+            {errors.size && (
+              <p className="text-red-500 text-sm mt-1">{errors.size}</p>
+            )}
           </p>
+
 
 
         </div>
@@ -112,11 +148,16 @@ const ProductInfo = ({ product }) => {
           {/* Product Color */}
           <p className="ml-12 mt-2 text-md text-gray-600">
             <AttributeSelector title={'Color'} data={product.colors} selectedValue={selectedColor} onSelectedChange={handleSelectedColorChanged} />
+            {errors.color && (
+              <p className="text-red-500 text-sm mt-1">{errors.color}</p>
+            )}
           </p>
+
+
         </div>
       </div>
       {/* Product qty */}
-      <ProductQuantity />
+      <ProductQuantity max={product.quantity} onAddItemToCart={handleAddToCart} />
 
       {/* Product desc */}
       <ProductDescription description={product.description} />

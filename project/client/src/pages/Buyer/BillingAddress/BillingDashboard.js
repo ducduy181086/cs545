@@ -1,12 +1,24 @@
-import React from 'react';
+import React ,{useEffect, useState, useContext }from 'react';
 import CartSummary from '../Cart/CartSummary';
 import BillingAddressForm from './BillingAddressForm';
 import CheckOutProgress from 'components/common/CheckOutProgreess';
 import { useNavigate } from 'react-router-dom';
 import Header from 'components/layout/Header';
+import { fetchCart} from 'services/cartService';
+import { CartContext } from 'context/CartContext';
 
 const BillingDashboard = () => {
     const navigate = useNavigate();
+    const [cart, setCart] = useState(null);
+    const { updateCounter } = useContext(CartContext);
+
+    useEffect(() => {
+        fetchCart().then(res => {
+            setCart(res);
+            updateCounter(res?.items?.length??0);
+        }).finally(() => {
+        });
+    }, []);
 
     return (
         <div >
@@ -26,7 +38,7 @@ const BillingDashboard = () => {
                     {/* Cart summary */}
                     <div className="md:col-span-1 mt-4 ml-4 me-4">
                         <h2 className="text-xl font-semibold">Summary</h2>
-                        <CartSummary />
+                        <CartSummary data={cart?.items}/>
                     </div>
                 </div>
             </div>
