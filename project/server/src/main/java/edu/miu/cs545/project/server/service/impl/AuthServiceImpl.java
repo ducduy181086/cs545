@@ -71,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
-        boolean isRefreshTokenValid = jwtUtil.validateToken(refreshTokenRequest.getRefreshToken());
+        boolean isRefreshTokenValid = jwtUtil.validateToken(refreshTokenRequest.getRefreshToken()).isSuccess();
         if (isRefreshTokenValid) {
             String userName = jwtUtil.getSubject(refreshTokenRequest.getRefreshToken());
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
