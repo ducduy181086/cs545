@@ -36,7 +36,7 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
 
         // Check if there are no errors
         if (Object.values(errors).every((error) => error === null)) {
-            onSubmitReview(product?.productId, rating, reviewText);  // Pass data to parent component
+            onSubmitReview(product.id, rating, reviewText);  // Pass data to parent component
             // Reset form after submission
             setRating(0);
             setReviewText('');
@@ -46,7 +46,7 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
     };
 
     const hanldeViewDetail = () => {
-        onViewDetail(product?.productId);
+        onViewDetail(product.id);
     }
 
     // Handle opening and closing modal

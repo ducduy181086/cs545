@@ -11,7 +11,7 @@ const AttributeSelector = ({title, data, selectedValue, onSelectedChange, isRead
             key={item}
             onClick={() => onSelectedChange(item)}
             className={`px-2 py-1 border rounded ${
-              selectedValue == item ? "bg-blue-200 border-blue-500" : "bg-white border-black"
+              selectedValue === item ? "bg-blue-200 border-blue-500" : "bg-white border-black"
             } hover:bg-blue-100 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed`}
             disabled={isReadOnly}
           >

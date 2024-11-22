@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import HomeDropdownMenu from "./HomeDropdownMenu";
-import logo from '../../assets/icons/lad-icon.svg';
+import logo from '../../assets/icons/lad-ico.svg';
 import { CartContext } from 'context/CartContext';
 import AuthContext from "context/AuthContext";
 
