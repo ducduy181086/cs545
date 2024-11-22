@@ -10,16 +10,16 @@ const SingleChoiceSelect = ({ options, onChange }) => {
 
   return (
     <div className="space-y-2">
-      {options.map((option) => (
+      {options.map((option, index) => (
         <label
-          key={option.id}
+          key={index}
           className={`flex items-center space-x-2 cursor-pointer`}
         >
           <input
             type="radio"
             name="single-choice"
-            value={option.id}
-            checked={selectedOption?.id === option.id}
+            value={option}
+            checked={selectedOption === option}
             onChange={() => handleSelect(option)}
             className="text-blue-500 focus:ring-blue-300"
           />
