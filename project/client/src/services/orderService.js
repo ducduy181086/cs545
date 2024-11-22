@@ -7,13 +7,13 @@ export const fetchOrdersHistory = async () => {
 };
 
 export const fetchOrdersByStatus = async (status) => {
-  // const response = await api.get(`/order/history/${status}`);
-  // return response.data;
+  const response = await api.get(`/order?status=${status.toUpperCase()}`);
+  return response.data;
 
   //mock
-  if (status === "All") return ordersData;
+  // if (status === "All") return ordersData;
 
-  return ordersData?.filter(o => o.status === status);
+  // return ordersData?.filter(o => o.status === status);
 };
 
 export const fetchOrderById = async (orderId) => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { fetchOrdersByStatus } from "services/orderService";
 import OrderCard from "./OrderCard";
 import { useNavigate } from 'react-router-dom';
+import Pagination from "components/Pagination";
+import EmptyHistory from "./EmptyHistory";
 
 const OrderHistory = () => {
     const navigate = useNavigate();
@@ -16,12 +18,19 @@ const OrderHistory = () => {
 
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const [orders, setOrders] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(1);
+
+    const handleOnPgaeChange = (page) => {
+        setCurrentPage(page - 1);
+    }
 
     useEffect(() => {
         fetchOrdersByStatus(activeTab.label).then(res => {
             setOrders(res);
+            setTotalPage(res.totalPages);
         });
-    }, [activeTab])
+    }, [activeTab, currentPage])
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -30,6 +39,12 @@ const OrderHistory = () => {
     const handleOnItemClick = (orderId) => {
         navigate(`/order-history/${orderId}`);
     };
+
+    // if (!orders || !orders.content || orders.content.length === 0) {
+    //     return (
+    //         <EmptyHistory/>
+    //     );
+    // }
 
     return (
         <div className="w-full mt-12">
@@ -51,7 +66,12 @@ const OrderHistory = () => {
             </div>
 
             <div className="w-full mt-12">
-                {orders && orders.map((order) => <div key={order.orderId} >{OrderCard(order, handleOnItemClick)}</div>)}
+                {orders &&orders.content && orders.content.map((order) => <div key={order.orderId} >{OrderCard(order, handleOnItemClick)}</div>)}
+            </div>
+
+            {/* Pagination */}
+            <div className="mt-16">
+                <Pagination currentPage={(currentPage + 1)} totalPages={totalPage} onPageChange={handleOnPgaeChange} />
             </div>
         </div>
     );
