@@ -1,4 +1,3 @@
-import ordersData from "../mock_orders.json";
 import { api } from "./api";
 
 export const fetchOrdersHistory = async () => {

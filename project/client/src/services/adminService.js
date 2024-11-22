@@ -1,10 +1,14 @@
 import { api } from "./api";
 
-export const adminFetchUsers = async () => {
-    const response = await api.get('/users');
+export const adminFetchUsers = async (page) => {
+    const response = await api.get(`/users?page=${page}`);
     return response.data;
 };
 
+export const adminFetchProducts = async (currentPage) => {
+    const response = await api.get(`/products?page=${currentPage}`);
+    return response.data;
+  };  
 
 export const adminFetchSellersUnapproved = async () => {
     const response = await api.get('/admin/unapproved');

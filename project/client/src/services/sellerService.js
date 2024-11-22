@@ -1,10 +1,10 @@
 import { api } from "./api";
 
-export const sellerFetchProducts = async (ownerId) => {
-
-  const response = await api.get(`/products?sellerid=${ownerId}`);
+export const sellerFetchProducts = async (ownerId, currentPage) => {
+  const response = await api.get(`/products?sellerid=${ownerId}&page=${currentPage}`);
   return response.data;
 };
+
 export const sellerFetchProductById = async (productId, pageSize = 3) => {
   try {
     const [productDetail, productReviews] = await Promise.all([
@@ -49,8 +49,8 @@ export const sellerDeleteProduct = async (id) => {
   return response.data;
 }
 
-export const sellerFetchOrders = async () => {
-  const response = await api.get('/order/history');
+export const sellerFetchOrders = async (page) => {
+  const response = await api.get(`/order/history?page=${page??0}`);
   return response.data;
 };
 

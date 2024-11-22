@@ -52,11 +52,11 @@ api.interceptors.response.use(
         }
       }
 
-      if (status === 401 || status === 403) {
-        console.log('Unauthorized! Redirecting to login.');
-        localStorage.removeItem('user');
-        window.location.href = '/login';
-      }
+      // if (status === 401 || status === 403) {
+      // console.log('Unauthorized! Redirecting to login.');
+      // localStorage.removeItem('user');
+      // window.location.href = '/login';
+      // }
     }
     return Promise.reject(error);
   }
