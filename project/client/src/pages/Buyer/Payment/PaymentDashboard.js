@@ -10,6 +10,8 @@ import { CartContext } from 'context/CartContext';
 import { submitPayment } from 'services/paymentService';
 import { ShippingContext } from 'context/ShippingContext';
 import { buildShippingInfo } from 'utils/utils';
+import Footer from 'components/layout/Footer';
+
 
 const PaymentDashboard = () => {
     const navigate = useNavigate();
@@ -43,12 +45,12 @@ const PaymentDashboard = () => {
     };
 
     return (
-        <div >
+        <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
             <Headers />
 
             {/* {Body component} */}
-            <div className="container mx-auto p-4 mt-20">
+            <div className="flex-grow px-20 p-4 mt-20">
                 <CheckOutProgress step={4} totalSteps={4} title={'Shipping'} onBack={() => { navigate('/shipping/confirmation-address') }} />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* Payment method */}
@@ -66,6 +68,9 @@ const PaymentDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* {Footer component} */}
+            <Footer className="mt-12" />
         </div>
     );
 };

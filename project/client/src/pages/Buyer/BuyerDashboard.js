@@ -5,6 +5,7 @@ import Header from 'components/layout/Header';
 import React, { useState } from 'react';
 
 import Pagination from 'components/Pagination';
+import Footer from 'components/layout/Footer';
 
 const BuyerDashboard = () => {
 
@@ -26,13 +27,13 @@ const BuyerDashboard = () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
             <Header />
 
             {/* {Body component} */}
-            <div className="mt-28 text-center p-8 bg-gray-50">
-                <div className="flex h-screen">
+            <div className="flex-grow mt-28 text-center p-8 bg-gray-50">
+                <div className="flex h-full">
                     {/* First Column: Wrap Content */}
                     <div className="flex-none">
                         <div className="w-auto">
@@ -51,6 +52,10 @@ const BuyerDashboard = () => {
                     </div>
                 </div>
             </div>
+            
+            {/* {Footer component} */}
+            <Footer className="mt-12" />
+            
         </div>
     );
 };

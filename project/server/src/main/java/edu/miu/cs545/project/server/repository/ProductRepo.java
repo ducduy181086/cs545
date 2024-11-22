@@ -1,6 +1,5 @@
 package edu.miu.cs545.project.server.repository;
 
-import edu.miu.cs545.project.server.entity.Category;
 import edu.miu.cs545.project.server.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +17,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             "JOIN p.seller s " +
             "LEFT JOIN p.compatibleProducts cp " +
             "WHERE (:categoryIds IS NULL OR c.id IN :categoryIds) " +
+            "AND (:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))) " +
             "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
             "AND (:maxPrice IS NULL OR p.price <= :maxPrice) " +
             "AND (:brand IS NULL OR p.brand = :brand) " +
@@ -39,32 +39,29 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             "AND (:usage IS NULL OR p.usage LIKE %:usage%) " +
             "AND (:occasion IS NULL OR p.occasion LIKE %:occasion%)")
     Page<Product> filterProducts(
-            @Param("categoryIds") List<Long> categoryIds,
-            @Param("minPrice") Double minPrice,
-            @Param("maxPrice") Double maxPrice,
-            @Param("brand") String brand,
-            @Param("minRating") Double minRating,
-            @Param("inStock") Boolean inStock,
-            @Param("isNewArrival") Boolean isNewArrival,
-            @Param("isBestSeller") Boolean isBestSeller,
-            @Param("type") String type,
-            @Param("color") String color,
-            @Param("size") String size,
-            @Param("material") String material,
-            @Param("features") String features,
-            @Param("compatibleProductId") Long compatibleProductId,
-            @Param("modelYear") String modelYear,
-            @Param("deliveryOptions") String deliveryOptions,
-            @Param("sellerId") Long sellerId,
-            @Param("paymentOptions") List<String> paymentOptions,
-            @Param("demographics") String demographics,
-            @Param("usage") String usage,
-            @Param("occasion") String occasion,
-            Pageable pageable);
-
-    // Query DISTINCT categories
-    @Query("SELECT DISTINCT p.category FROM Product p")
-    List<Category> findDistinctCategories();
+        @Param("name") String name,
+        @Param("categoryIds") List<Long> categoryIds,
+        @Param("minPrice") Double minPrice,
+        @Param("maxPrice") Double maxPrice,
+        @Param("brand") String brand,
+        @Param("minRating") Double minRating,
+        @Param("inStock") Boolean inStock,
+        @Param("isNewArrival") Boolean isNewArrival,
+        @Param("isBestSeller") Boolean isBestSeller,
+        @Param("type") String type,
+        @Param("color") String color,
+        @Param("size") String size,
+        @Param("material") String material,
+        @Param("features") String features,
+        @Param("compatibleProductId") Long compatibleProductId,
+        @Param("modelYear") String modelYear,
+        @Param("deliveryOptions") String deliveryOptions,
+        @Param("sellerId") Long sellerId,
+        @Param("paymentOptions") List<String> paymentOptions,
+        @Param("demographics") String demographics,
+        @Param("usage") String usage,
+        @Param("occasion") String occasion,
+        Pageable pageable);
 
     // Query DISTINCT brands
     @Query("SELECT DISTINCT p.brand FROM Product p ORDER BY p.brand")
