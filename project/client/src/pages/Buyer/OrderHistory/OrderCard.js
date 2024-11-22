@@ -13,7 +13,7 @@ function OrderCard(order, handleOnItemClick) {
                 {
                     order.items.map((item) => (
                         <div key={item.id} className="flex flex-col items-center w-120 p-4">
-                            <img className="w-32 h-32 object-cover" src={item.product.imageUrl} alt="Product Image" />
+                            <img className="w-32 h-32 object-cover rounded-md" src={item.product.imageUrl} alt="Product Image" />
                             <p className="mt-2 mb-4 text-sm text-center truncate" style={{ maxWidth: '150px' }}>
                                 {item.product.name.length > 10 ? item.product.name.slice(0, 10) + '...' : item.product.name}
                             </p>

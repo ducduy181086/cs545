@@ -39,7 +39,7 @@ const RatingView = ({ product }) => {
                 style={{ width: `${percentage[5 - star]}%` }}
               />
             </div>
-            <span className="w-8 ml-2 text-gray-500 text-md">{percentage[5 - star]}%</span>
+            <span className="w-8 ml-2 text-gray-500 text-md">{!isNaN( percentage[5 - star])? percentage[5 - star]:0}%</span>
           </div>
         ))}
       </div>

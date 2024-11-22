@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { formatNumber } from 'utils/utils';
 
 const ProductCard = ({ product }) => {
 
@@ -43,8 +44,8 @@ const ProductCard = ({ product }) => {
 
       {/* Pricing */}
       <div className="mt-4">
-        <p className="text-xl font-semibold text-gray-800">${product.price}</p>
-        {product.discount&&<p className="text-sm text-gray-500 line-through">${Math.floor((product.price + (product.discount*product.price)/100 ) * 100) / 100}</p>}
+        <p className="text-xl font-semibold text-gray-800">${formatNumber(product.price)}</p>
+        {product.discount&&<p className="text-sm text-gray-500 line-through">${formatNumber(Math.floor((product.price + (product.discount*product.price)/100 ) * 100) / 100)}</p>}
       </div>
     </div>
   );
