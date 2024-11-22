@@ -9,33 +9,16 @@ const OrderTable = (props) => {
     const { ordersData } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const ordersPerPage = 10;
+    const ordersPerPage = ordersData.pageable.pageSize;
 
-    const totalPages = Math.ceil(ordersData.length / ordersPerPage);
+    const totalPages = ordersData.totalPages;
 
-    const startIndex = (currentPage - 1) * ordersPerPage;
-    const currentOrders = ordersData.slice(startIndex, startIndex + ordersPerPage);
+    // const startIndex = (currentPage - 1) * ordersPerPage;
+    const currentOrders = ordersData.content;
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    // const handleCancelOrder = (orderId) => {
-    //     const updatedOrders = orders.map((order) =>
-    //         order.orderId === orderId
-    //             ? { ...order, status: "Cancelled" }
-    //             : order
-    //     );
-    //     setOrders(updatedOrders);
-    // };
-
-    // const handleStatusChange = (orderId, newStatus) => {
-    //     const updatedOrders = orders.map((order) =>
-    //         order.orderId === orderId
-    //             ? { ...order, status: newStatus }
-    //             : order
-    //     );
-    //     setOrders(updatedOrders);
-    // };
 
     const handleViewDetail = (orderId) => {
         console.log('handleViewDetail of id: ', orderId)
@@ -59,13 +42,13 @@ const OrderTable = (props) => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {currentOrders.map((order) => (
-                            <tr key={order.orderId}
-                                onClick={() => handleViewDetail(order.orderId)}
+                            <tr key={order.id}
+                                onClick={() => handleViewDetail(order.id)}
                             >
-                                <td className="px-6 py-4 text-sm text-gray-900">{order.orderId}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">{order.customer.name}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.deliveryDate).toLocaleDateString()}</td>
+                                <td className="px-6 py-4 text-sm text-gray-900">{order.id}</td>
+                                <td className="px-6 py-4 text-sm text-gray-500">{order.id}</td>
+                                {/* <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td> */}
+                                {/* <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.deliveryDate).toLocaleDateString()}</td> */}
                                 {/* <td className="px-6 py-4 text-sm text-gray-500">
 
                                     <select
@@ -80,7 +63,7 @@ const OrderTable = (props) => {
                                     </select>
                                 </td> */}
                                 <td className="px-6 py-4 text-sm text-gray-500">{order.status}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">${order.payment.totalAmount.toFixed(2)}</td>
+                                <td className="px-6 py-4 text-sm text-gray-500">${order.total}</td>
                                 {/* <td className="px-6 py-4 text-sm text-gray-500">
                                     {order.status === "Pending" ? <button
                                         onClick={

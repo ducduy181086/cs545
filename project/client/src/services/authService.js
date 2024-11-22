@@ -7,10 +7,12 @@ const parseAuthorityFromResponse = (response) => {
         const decodedToken = jwtDecode(access_token);
         const authority = decodedToken.roles?.[0]?.authority || null;
         const email = decodedToken.sub;
+        const ownerId = decodedToken.ownerId;
 
         return {
             role: authority,
-            email: email
+            email: email,
+            ownerId: ownerId
         };
     } catch (error) {
         console.error('Failed to parse authority:', error);

@@ -24,9 +24,16 @@ const OrderDetail = (props) => {
     }, [])
 
     const updateOrderStatus = () => {
+
         setOrder({ ...order, status: newStatus });
         setShowDialog(false);
     };
+
+    const cancelOrder = () => {
+        
+
+    }
+
     const handlePrint = () => {
         const printContent = receiptRef.current.innerHTML;
         const printWindow = window.open("", "_blank");
@@ -54,7 +61,7 @@ const OrderDetail = (props) => {
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Order Details of ID: {param.id}</h1>
                         <div>
                             <button
-                                className="me-2 px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-500"
+                                className="me-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-500"
                                 onClick={() => setShowDialog(true)}
                             >
                                 Change Status
@@ -63,6 +70,12 @@ const OrderDetail = (props) => {
                                 onClick={() => handlePrint()}
                             >
                                 Print Order
+                            </button>
+                            <button
+                                className="ms-2 me-2 px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-500"
+                                onClick={() => setShowDialog(true)}
+                            >
+                                Cancel Order
                             </button>
                         </div>
                     </div>
@@ -200,7 +213,6 @@ const OrderDetail = (props) => {
                                             <option value="Pending">Pending</option>
                                             <option value="Shipped">Shipped</option>
                                             <option value="Delivered">Delivered</option>
-                                            <option value="Cancelled">Cancelled</option>
                                         </select>
                                     </div>
                                     <div className="mt-6 flex justify-end space-x-4">
