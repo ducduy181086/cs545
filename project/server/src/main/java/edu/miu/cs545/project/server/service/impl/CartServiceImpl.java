@@ -65,8 +65,8 @@ public class CartServiceImpl implements CartService {
     public void updateCartItem(Long cartItemId, int quantity, String size, String color) {
         CartItem cartItem = cartItemRepo.findById(cartItemId).orElseThrow();
         cartItem.setQuantity(quantity);
-        cartItem.setSize(size);
-        cartItem.setColor(color);
+        if (size != null) cartItem.setSize(size);
+        if (color != null) cartItem.setColor(color);
         cartItemRepo.save(cartItem);
     }
 

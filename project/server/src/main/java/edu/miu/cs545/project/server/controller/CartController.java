@@ -17,12 +17,12 @@ public class CartController {
     }
 
     @PostMapping("/add-item")
-    public CartDto addItem(@RequestParam Long productId, @RequestParam int quantity, @RequestParam String size, @RequestParam String color) {
+    public CartDto addItem(@RequestParam Long productId, @RequestParam int quantity, @RequestParam(required = false) String size, @RequestParam(required = false) String color) {
         return cartService.addItemToCart(productId, quantity, size, color);
     }
 
     @PutMapping("/update-item/{cartItemId}")
-    public void updateItem(@PathVariable Long cartItemId, @RequestParam int quantity, @RequestParam String size, @RequestParam String color) {
+    public void updateItem(@PathVariable Long cartItemId, @RequestParam int quantity, @RequestParam(required = false) String size, @RequestParam(required = false) String color) {
         cartService.updateCartItem(cartItemId, quantity, size, color);
     }
 
