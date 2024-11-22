@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import SellerHeader from "../SellerHeader";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState } from "react";
 import { sellerFetchProductById } from "services/sellerService";
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
