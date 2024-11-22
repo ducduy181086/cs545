@@ -14,14 +14,14 @@ const ProductCard = ({ product }) => {
       {/* Image */}
       <div className="relative flex items-center justify-center">
         {product.bestSeller && (
-          <span className="absolute top-2 left-2 text-xs bg-yellow-300 text-gray-700 font-semibold px-2 py-1 rounded-full z-10">
+          <span className="absolute top-1 left-2 text-xs bg-yellow-300 text-gray-700 font-semibold px-2 py-1 rounded-full z-10 border-white border-2">
             Bestseller
           </span>
         )}
         <img
           src={product.imageUrl ?? 'https://via.placeholder.com/180x160'}
           alt={product.name}
-          className="mt-4 max-w-[180px] max-h-[160px] min-w-[120px] min-h-[100px] object-cover rounded-md"
+          className="mt-4 w-80 h-80 object-cover rounded-md"
         />
       </div>
 

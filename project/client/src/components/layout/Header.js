@@ -43,7 +43,7 @@ const Header = () => {
 
                         <img className="w-32 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
 
-                        <div className=" ml-8 relative">
+                        {/* <div className=" ml-8 relative">
                             <input
                                 type="text"
                                 placeholder="Search for products"
@@ -52,7 +52,7 @@ const Header = () => {
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-symbols-outlined">
                                 search
                             </span>
-                        </div>
+                        </div> */}
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">

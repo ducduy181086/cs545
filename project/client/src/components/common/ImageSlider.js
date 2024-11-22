@@ -28,7 +28,7 @@ const ImageSlider = ({ images }) => {
                 <img
                     src={images[currentIndex]}
                     alt={`Slide ${currentIndex}`}
-                    className="w-64 h-64 object-cover transition-all duration-500 justify-center"
+                    className="w-80 h-80 object-cover rounded-md transition-all duration-500 justify-center"
                 />
             </div>
 

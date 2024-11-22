@@ -1,13 +1,7 @@
 import { api } from './api';
 import { REACT_APP_API_PRODUCT_PER_PAGE } from 'config';
-import qs from "qs";
-
 
 export const fetchProducts = async (requestData) => {
-  console.log(`requestData: ${JSON.stringify(requestData)}`);
-  // const queryParams = qs.stringify(requestData.filter, { encode: false });
-  // console.log(`queryParams: ${queryParams}`);
-
   const params = {
     page: requestData.page,
     pagesize: REACT_APP_API_PRODUCT_PER_PAGE,

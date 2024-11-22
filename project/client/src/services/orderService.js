@@ -7,7 +7,7 @@ export const fetchOrdersHistory = async () => {
 };
 
 export const fetchOrdersByStatus = async (status) => {
-  const response = await api.get(`/order?status=${status.toUpperCase()}`);
+  const response = await api.get(`/order?status=${status.toUpperCase().replace('ALL', '')}`);
   return response.data;
 
   //mock

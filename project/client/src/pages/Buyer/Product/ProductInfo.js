@@ -28,15 +28,6 @@ const ProductInfo = ({ product }) => {
 
   const handleAddToCart = (quantity) => {
     if (selectedSize && selectedColor) {
-      // product.selected = {
-      //   size: selectedSize,
-      //   color: selectedColor,
-      //   qty: quantity
-      // };
-      // addToCart(product);
-      // navigate('/cart');
-      // console.log(product, quantity);
-
       addItemToCart(product.id, quantity, selectedSize, selectedColor).then(res => {
         if (res) {
           navigate('/cart');
@@ -73,13 +64,13 @@ const ProductInfo = ({ product }) => {
 
         <div className='w-60'>
           {product.newArrival && (
-            <span className="w-4 mr-4 text-xs bg-green-300 text-black font-semibold px-2 py-1 rounded-full z-10">
+            <span className="w-4 mr-4 text-xs bg-green-300 text-black font-semibold px-2 py-1 rounded-full z-10 border-white border-2">
               New Arrival
             </span>
           )}
 
           {product.bestSeller && (
-            <span className=" text-xs bg-yellow-300 text-black font-semibold px-2 py-1 rounded-full z-10">
+            <span className=" text-xs bg-yellow-300 text-black font-semibold px-2 py-1 rounded-full z-10 border-white border-2">
               Bestseller
             </span>
           )}
