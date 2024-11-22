@@ -1,21 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { adminFetchUsers } from "services/adminService";
 import AdminHeader from "./AdminHeader";
 import AdminUserTable from "components/common/AdminUserTable";
 
-const ManageUsers = (props) => {
-    const navigate = useNavigate()
-    const [users, setUsers] = useState()
-
-    useEffect(() => {
-        adminFetchUsers().then(res => {
-            setUsers(res);
-        }).catch(err => {
-            navigate('/login')
-        });
-    }, [])
-
+const ManageUsers = () => {
 
     return <>
         <div className="min-h-full">
@@ -27,7 +13,7 @@ const ManageUsers = (props) => {
             </header>
             <main>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    {users && <AdminUserTable users={users} />}
+                    <AdminUserTable />
                 </div>
             </main>
         </div>

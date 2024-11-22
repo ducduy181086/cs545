@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> filterProducts(
+        @RequestParam(name="name", defaultValue = "", required = false) String name,
         @RequestParam(name="categoryids", required = false) List<Long> categoryIds, // Accept categoryIds as list
         @RequestParam(name="minprice", required = false) Double minPrice,
         @RequestParam(name="maxprice", required = false) Double maxPrice,
@@ -48,12 +50,14 @@ public class ProductController {
         @RequestParam(required = false) String demographics,
         @RequestParam(required = false) String usage,
         @RequestParam(required = false) String occasion,
+        @RequestParam(name = "sortby", defaultValue = "id") String sortBy,
+        @RequestParam(name = "direction", defaultValue = "asc") String direction,
         @RequestParam(name="page", defaultValue = "0") int page,
         @RequestParam(name="pagesize", defaultValue = "10") int pageSize) {
 
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy));
         Page<ProductDto> products = productService.filterProducts(
-            categoryIds, minPrice, maxPrice, brand, minRating, inStock,
+            name, categoryIds, minPrice, maxPrice, brand, minRating, inStock,
             isNewArrival, isBestSeller, type, color, size, material, features,
             compatibleProductId, modelYear, deliveryOptions, sellerId, paymentOptions,
             demographics, usage, occasion, pageable);
