@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,18 +28,22 @@ public class OrderController {
 
     @GetMapping("/history")
     public Page<OrderDto> getOrderHistory(
+        @RequestParam(name = "sortby", defaultValue = "orderDate") String sortBy,
+        @RequestParam(name = "direction", defaultValue = "desc") String direction,
         @RequestParam(name="page", defaultValue = "0") int page,
         @RequestParam(name="pagesize", defaultValue = "10") int pageSize) throws Exception {
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy));
         return orderService.getOrderHistory(pageable);
     }
 
     @GetMapping()
     public Page<OrderDto> getOrderStatus(
         @RequestParam(name="status", defaultValue = "") String status,
+        @RequestParam(name = "sortby", defaultValue = "orderDate") String sortBy,
+        @RequestParam(name = "direction", defaultValue = "desc") String direction,
         @RequestParam(name="page", defaultValue = "0") int page,
         @RequestParam(name="pagesize", defaultValue = "10") int pageSize) throws Exception {
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy));
         if ("".equals(status)) {
             return orderService.getOrderHistory(pageable);
         }
