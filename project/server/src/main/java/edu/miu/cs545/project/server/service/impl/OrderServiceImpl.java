@@ -31,7 +31,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getById(Long id) {
-        return orderRepo.findById(id).map(m -> modelMapper.map(m, OrderDto.class)).orElse(null);
+        return orderRepo.findById(id).map(m -> {
+            var r = modelMapper.map(m, OrderDto.class);
+            r.setBuyerEmail(m.getBuyer().getUser().getEmail());
+            return r;
+        }).orElse(null);
     }
 
     @Override
