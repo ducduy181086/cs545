@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { fetchOrderById } from "services/orderService";
+import { fetchOrderById, requestCancelPendingOrder } from "services/orderService";
 import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
 import Header from "components/layout/Header";
 import { submitReview } from "services/reviewService";
-import { formatDateTime, formatMoney } from "utils/utils";
 import SuccessDialog from "components/layout/SuccessDialog";
 import Footer from 'components/layout/Footer';
 
@@ -69,6 +68,9 @@ const OrderHistoryDetail = () => {
         navigate(`/products/${productId}`);
     };
 
+    const handleCancel = () => {
+        requestCancelPendingOrder(id)
+    }
 
     if (!order) return (<>   </>);
 
@@ -174,7 +176,7 @@ const OrderHistoryDetail = () => {
                                     onSubmitReview={handleSubmitReview}
                                     onViewDetail={handleViewDetail} />
                             </div>)}
-                       <div className="border-b mt-2 pb-2">
+                        <div className="border-b mt-2 pb-2">
                             <div className="flex flex-col bg-white shadow-md rounded-lg p-6 space-y-4 items-end">
                                 {/* Subtotal Row */}
                                 <div className="flex justify-between w-full max-w-xs">
@@ -212,7 +214,9 @@ const OrderHistoryDetail = () => {
                                 Print receipt
                             </button>}
 
-                            {order && order.status === 'PENDING' && <button className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
+                            {order && order.status === 'PENDING' && <button
+                                onClick={handleCancel}
+                                className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
                                 Cancel order
                             </button>}
 
