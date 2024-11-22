@@ -15,11 +15,9 @@ const OrderDetail = () => {
     const param = useParams();
 
     useEffect(() => {
-        console.log('pramid = ', param.id)
         sellerFetchOrderById(param.id).then((res) => {
             setOrder(res)
             setNewStatus(res.status)
-            console.log('res = ', res)
         })
     }, [])
 
