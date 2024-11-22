@@ -6,6 +6,7 @@ import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
 import Header from "components/layout/Header";
 import { submitReview } from "services/reviewService";
+import { formatDateTime, formatMoney } from "utils/utils";
 
 const OrderHistoryDetail = () => {
     const navigate = useNavigate();
@@ -69,7 +70,7 @@ const OrderHistoryDetail = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="md:col-span-4 ml-4 me-4 mt-4">
                         <div className="flex border-b mt-2 pb-2">
-                            <p className="text-md font-bold">Order detail # {order.orderId} - {new Date(order.deliveryDate).toLocaleDateString()} - {order.items.length} {order.items.length > 1 ? 'items' : 'item'}</p>
+                            <p className="text-md font-bold">Order detail # {order.orderId} - {new Date(order.orderDate).toLocaleDateString()} - {order.items.length} {order.items.length > 1 ? 'items' : 'item'}</p>
                             <div className="ml-auto">{OrderStatus(order.status)}
                             </div>
                         </div>
@@ -79,23 +80,34 @@ const OrderHistoryDetail = () => {
 
                         <div className="flex  border-b mt-2 pb-2">
                             <div>
-                                <div className="ml-auto mt-4">Transaction Id: {order.payment.transactionId} </div>
-                                <div className="ml-auto mt-2">Payment method: {order.payment.method}</div>
-                                <div className="ml-auto mt-2 font-semibold">Total amount: {order.payment.totalAmount} {order.payment.currency} </div>
+                                <div className="ml-auto mt-4 border-b pb-2">Order date: {formatDateTime(order.orderDate)} </div>
+                                <div className="ml-auto mt-4">Transaction Id: {order.buyerEmail} </div>
+                                <div className="ml-auto ">Payment Method: {order.paymentType}</div>
+                                <div className="ml-auto ">Payment Status: {order.paymentStatus}</div>
+                                <div className="ml-auto border-b pb-1 mb-2 ">Email: {order.buyerEmail}</div>
+                                <div className="ml-auto ">Shipping Phone: {order.shippingPhone}</div>
+                                <div className="ml-auto ">Shipping Address: {order.shippingAddress}</div>
+                                <div className="ml-auto ">Billing Phone: {order.billingPhone}</div>
+                                <div className="ml-auto ">Shipping Address: {order.billingAddress}</div>
+
+                                <div className="ml-auto mt-2 font-semibold">Sub total: {formatMoney(order.subtotal )} </div>
+                                <div className="ml-auto font-semibold">Total discount: {formatMoney(order.totalDiscount)}</div>
+                                <div className="ml-auto  font-semibold">Tax: {formatMoney(order.tax)}</div>
+                                <div className="ml-auto  font-semibold">Total amount: {formatMoney(order.total)} </div>
                             </div>
                             <div className="ml-auto">
-                                {order && order.status === 'Delivered' && <span className="material-symbols-outlined text-8xl text-blue-200">
+                                {order && order.status === 'DELIVERED' && <span className="material-symbols-outlined text-8xl text-blue-200">
                                     receipt_long
                                 </span>}
                             </div>
                         </div>
 
                         <div className="flex mt-12 justify-center">
-                            {order && order.status === 'Delivered' && <button className="bg-blue-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-blue-600 mr-4" onClick={handlePrint}>
+                            {order && order.status === 'DELIVERED' && <button className="bg-blue-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-blue-600 mr-4" onClick={handlePrint}>
                                 Print receipt
                             </button>}
 
-                            {order && order.status === 'Pending' && <button className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
+                            {order && order.status === 'PENDING' && <button className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
                                 Cancel order
                             </button>}
 

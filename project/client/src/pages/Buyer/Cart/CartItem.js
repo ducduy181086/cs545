@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { formatNumber } from "utils/utils";
 
 const CartItem = ({ item, onRemove, onUpdateQuantity }) => {
 
@@ -29,9 +30,9 @@ const CartItem = ({ item, onRemove, onUpdateQuantity }) => {
                 <p className="text-sm text-gray-500">Color: {item.color ?? ''}</p>
                 <div className="flex">
 
-                    <span className="text-md font-medium ">${product.price.toFixed(2)}</span>
+                    <span className="text-md font-medium ">${formatNumber(product.price*100/100)}</span>
                     <span className="text-md line-through text-gray-500 ml-4">
-                        ${(product.price + (product.discount * product.price) / 100).toFixed(2)}
+                        ${formatNumber((product.price + (product.discount * product.price) / 100)*100/100)}
                     </span>
 
                 </div>

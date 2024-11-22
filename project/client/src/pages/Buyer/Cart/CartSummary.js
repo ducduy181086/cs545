@@ -1,12 +1,13 @@
-import React  from "react";
+import React from "react";
 
 import { useNavigate } from 'react-router-dom';
+import { formatNumber } from "utils/utils";
 
 const CartSummary = ({ data }) => {
 
   const navigate = useNavigate();
 
-  if(!data){
+  if (!data) {
     return <div>.</div>
   }
 
@@ -59,11 +60,11 @@ const CartSummary = ({ data }) => {
       <div className="mt-6 border-t pt-4 pb-4">
         <div className="flex justify-between text-sm">
           <span>Subtotal</span>
-          <span>${calculateSubtotal().toFixed(2)}</span>
+          <span>${formatNumber(calculateSubtotal() * 100 / 100)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span>Discount</span>
-          <span>-{calculateTotalDiscount().toFixed(2)}</span>
+          <span>-{formatNumber(calculateTotalDiscount() * 100 / 100)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span>Shipping Fee</span>
@@ -71,12 +72,12 @@ const CartSummary = ({ data }) => {
         </div>
         <div className="flex justify-between text-sm">
           <span>Estimated taxes</span>
-          <span>${tax().toFixed(2)}</span>
+          <span>${formatNumber(tax() * 100 / 100)}</span>
 
         </div>
         <div className="flex justify-between text-lg font-bold mt-4">
           <span>Total</span>
-          <span>${calculateTotal()}</span>
+          <span>${formatNumber(calculateTotal() * 100 / 100)}</span>
         </div>
       </div>
 

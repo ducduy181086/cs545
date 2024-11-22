@@ -45,7 +45,8 @@ const ProductQuantity = ({ max = 3, onAddItemToCart }) => {
             {/* Add to Cart Button */}
             <button
                 onClick={handleAddToCart}
-                className="bg-black text-white w-full max-w-sm py-3 rounded-full text-center font-semibold hover:bg-gray-800"
+                className="bg-black text-white w-full max-w-sm py-3 rounded-full text-center font-semibold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={max === 0}
             >
                 ADD TO CART
             </button>
