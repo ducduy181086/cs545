@@ -6,6 +6,7 @@ import { sellerDeleteProduct, sellerFetchProductById, sellerUpdateProduct } from
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
 import AuthContext from "context/AuthContext";
+import AdminHeader from "pages/Admin/AdminHeader";
 
 const ProductDetail = () => {
 
@@ -22,12 +23,8 @@ const ProductDetail = () => {
     useEffect(() => {
         sellerFetchProductById(param.id, 5)
             .then(({ productDetail, productReviews }) => {
-
                 setProduct(productDetail)
                 setReviews(productReviews)
-                console.log("Product Detail:", productDetail);
-                console.log("Product Reviews:", productReviews);
-
             }).catch(error => {
                 console.error("Failed to fetch product details:", error);
             })
@@ -41,24 +38,25 @@ const ProductDetail = () => {
         setViewMode('view')
     }
 
-    const handleDelete = () => {
-        sellerDeleteProduct(product.id)
+    const handleDelete = async () => {
+        await sellerDeleteProduct(product.id)
         navigate('/seller/manage-products')
     }
 
-    const handleUpdateProduct = (newProduct) => {
-        sellerUpdateProduct({
+    const handleUpdateProduct = async (newProduct) => {
+        await sellerUpdateProduct({
             ...product,
             ...newProduct
-        }).then(res => {
-            navigate('/seller/manage-products')
         })
+        navigate('/seller/manage-products')
     }
 
 
     return <>
         <div className="min-h-full pb-40">
-            <SellerHeader />
+            {user.role === 'ADMIN' ?
+                <AdminHeader /> : <SellerHeader />
+            }
             <header className="bg-white shadow">
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex item-center justify-between">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Product Details of ID: {param.id}</h1>

@@ -9,16 +9,13 @@ const CategoryListbox = (props) => {
     const [selected, setSelected] = useState(null);
 
     const handleSelected = (e) => {
-        console.log('eee = ', e)
         if (disabled) return;
-        console.log('setSelected = ', e)
 
         setSelected(e)
         onSelectCategory(e)
     }
 
     useEffect(() => {
-        console.log('setSelected = ', selectedCategory)
         if (selectedCategory) {
             setSelected(selectedCategory);
         }
