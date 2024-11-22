@@ -6,6 +6,7 @@ import edu.miu.cs545.project.server.repository.UserRepo;
 import edu.miu.cs545.project.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
     @Override
-    public List<UserDto> getAll() {
-        return userRepo.findAll().stream().map(user -> modelMapper.map(user, UserDto.class)).toList();
+    public List<UserDto> getAll(Sort sort) {
+        return userRepo.findAll(sort).stream().map(user -> modelMapper.map(user, UserDto.class)).toList();
     }
 
     @Override
