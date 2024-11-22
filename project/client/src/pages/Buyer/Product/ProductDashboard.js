@@ -7,6 +7,8 @@ import { fetchProductById } from 'services/productService';
 import Header from 'components/layout/Header';
 import Loading from 'components/layout/Loading';
 import { useNavigate } from 'react-router-dom';
+import Footer from 'components/layout/Footer';
+
 
 export default function ProductDashboard() {
     const [product, setProduct] = useState(null);
@@ -35,12 +37,12 @@ export default function ProductDashboard() {
     }
 
     return (
-        <div >
+        <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
             <Header />
 
             {/* {Body component} */}
-            <div className="container mx-auto p-4 mt-20">
+            <div className="flex-grow px-20 p-4 mt-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* Cart items */}
                     <div className="md:col-span-2 p-4 ">
@@ -59,6 +61,9 @@ export default function ProductDashboard() {
                 </div>
 
             </div>
+
+            {/* {Footer component} */}
+            <Footer className="mt-12" />
         </div>
     );
 }

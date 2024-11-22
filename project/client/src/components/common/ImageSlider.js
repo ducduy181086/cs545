@@ -34,12 +34,12 @@ const ImageSlider = ({ images }) => {
 
             {/* Navigation buttons */}
             <div className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-4xl cursor-pointer">
-                <button onClick={prevSlide}><span class="material-symbols-outlined">
+                <button onClick={prevSlide}><span className="material-symbols-outlined">
                     arrow_back_ios
                 </span></button>
             </div>
             <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 text-4xl cursor-pointer">
-                <button onClick={nextSlide}><span class="material-symbols-outlined">
+                <button onClick={nextSlide}><span className="material-symbols-outlined">
                     arrow_forward_ios
                 </span></button>
             </div>
@@ -49,7 +49,7 @@ const ImageSlider = ({ images }) => {
                 {images.map((_, index) => (
                     <span
                         key={index}
-                        className={`w-2 h-2 rounded-full cursor-pointer ${currentIndex == index ? 'bg-blue-500' : 'bg-white'
+                        className={`w-2 h-2 rounded-full cursor-pointer ${currentIndex === index ? 'bg-blue-500' : 'bg-white'
                             }`}
                         onClick={() => setCurrentIndex(index)}
                     />

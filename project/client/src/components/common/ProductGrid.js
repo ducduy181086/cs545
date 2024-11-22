@@ -6,7 +6,6 @@ function ProductGrid({ filter, currentPage, updateTotalPage }) {
 
     const [products, setProducts] = useState([]);
 
-
     useEffect(() => {
         const requestData = {
             page: currentPage,

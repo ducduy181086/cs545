@@ -46,7 +46,7 @@ function NotFound() {
                             padding: 0,
                         }}
                     >
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             arrow_back
                         </span>
 
