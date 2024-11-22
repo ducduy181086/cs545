@@ -28,7 +28,7 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> filterProducts(
-        @RequestParam(name="name", required = false) String name,
+        @RequestParam(name="name", defaultValue = "", required = false) String name,
         @RequestParam(name="categoryids", required = false) List<Long> categoryIds, // Accept categoryIds as list
         @RequestParam(name="minprice", required = false) Double minPrice,
         @RequestParam(name="maxprice", required = false) Double maxPrice,
