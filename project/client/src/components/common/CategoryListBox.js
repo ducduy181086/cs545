@@ -38,7 +38,12 @@ const CategoryListbox = (props) => {
                     </span>
                 </ListboxButton>
                 {
-                    !disabled && <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    !disabled &&
+
+                    // <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    //     {renderCategories(hierarchicalData)}
+                    // </ListboxOptions>
+                     <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {categoryData.map((category) => (
                             <div key={category.id}>
                                 <ListboxOption
@@ -48,7 +53,7 @@ const CategoryListbox = (props) => {
                                     <span className="font-bold">{category.name}</span>
                                 </ListboxOption>
 
-                                {/* {category.subcategories.map((subcategory) => (
+                                {category?.subCategories?.map((subcategory) => (
                                     <ListboxOption
                                         key={subcategory.id}
                                         value={subcategory}
@@ -56,10 +61,11 @@ const CategoryListbox = (props) => {
                                     >
                                         <span className="block truncate">{subcategory.name}</span>
                                     </ListboxOption>
-                                ))} */}
+                                ))}
                             </div>
                         ))}
-                    </ListboxOptions>}
+                    </ListboxOptions>
+                }
             </div>
         </Listbox>
     );

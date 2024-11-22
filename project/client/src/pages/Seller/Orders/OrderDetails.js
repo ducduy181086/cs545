@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
-import { sellerFetchOrderById } from "services/sellerService";
+import { sellerCancelOrder, sellerFetchOrderById, sellerUpdateOrderStatus } from "services/sellerService";
 import SellerHeader from "../SellerHeader";
 import OrderReceipt from "./OrderReceipt";
 
@@ -23,14 +23,15 @@ const OrderDetail = (props) => {
         })
     }, [])
 
-    const updateOrderStatus = () => {
-
+    const updateOrderStatus = async () => {
+        await sellerUpdateOrderStatus(order.id, newStatus.toUpperCase())
         setOrder({ ...order, status: newStatus });
         setShowDialog(false);
     };
 
-    const cancelOrder = () => {
-
+    const cancelOrder = async () => {
+        await sellerCancelOrder(order.id)
+        setOrder({ ...order, status: 'CANCELLED' });
 
     }
 
@@ -59,25 +60,32 @@ const OrderDetail = (props) => {
                 <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex item-center justify-between">
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Order Details of ID: {param.id}</h1>
-                        <div>
+                        {order && <div>
                             <button
-                                className="me-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-500"
+                                className={`px-4 py-2 text-white ${order.status === 'CANCELLED' ? "bg-gray-500" : "bg-blue-600"
+                                    } rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                                disabled={order.status === 'CANCELLED'}
                                 onClick={() => setShowDialog(true)}
                             >
                                 Change Status
                             </button>
-                            <button className="px-4 py-2 text-white bg-indigo-600 rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+                            <button
+                                className={`ms-3 px-4 py-2 text-white ${order.status === 'CANCELLED' ? "bg-gray-500" : "bg-indigo-600"
+                                    } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                                disabled={order.status === 'CANCELLED'}
                                 onClick={() => handlePrint()}
                             >
                                 Print Order
                             </button>
                             <button
-                                className="ms-2 me-2 px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-500"
-                                onClick={() => setShowDialog(true)}
+                                className={`ms-3 px-4 py-2 text-white ${(order.status === 'CANCELLED' || order.status === 'DELIVERED')? "bg-gray-500" : "bg-red-600"
+                                    } rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm`}
+                                disabled={order.status === 'CANCELLED' || order.status === 'DELIVERED'}
+                                onClick={cancelOrder}
                             >
                                 Cancel Order
                             </button>
-                        </div>
+                        </div>}
                     </div>
                 </header>
                 <main>
@@ -86,57 +94,86 @@ const OrderDetail = (props) => {
                         {order && (
                             <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                                 <div className="bg-white shadow-md rounded-lg p-6">
-                                    {/* Order Information */}
-                                    <h2 className="text-xl font-semibold text-gray-800">Order Information</h2>
-                                    <div className="mt-4">
-                                        <p className="text-gray-600">
-                                            <strong>Order ID:</strong> {order.orderId}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Order Date:</strong>{" "}
-                                            {new Date(order.orderDate).toLocaleDateString()}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Delivery Date:</strong>{" "}
-                                            {new Date(order.deliveryDate).toLocaleDateString()}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Status:</strong>{" "}
-                                            <span
-                                                className={`px-2 py-1 rounded text-white ${order.status === "Pending"
-                                                    ? "bg-yellow-500"
-                                                    : order.status === "Shipped"
-                                                        ? "bg-blue-500"
-                                                        : order.status === "Cancelled"
-                                                            ? "bg-red-500"
-                                                            : "bg-green-500"
-                                                    }`}
-                                            >
-                                                {order.status}
-                                            </span>
-                                        </p>
+                                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {/* Order Information */}
+                                            <div className="bg-white shadow-md rounded-lg p-6">
+                                                <h2 className="text-xl font-semibold text-gray-800">Order Information</h2>
+                                                <div className="mt-4">
+                                                    <p className="text-gray-600">
+                                                        <strong>Order ID:</strong> {order.id}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Order Date:</strong>{" "}
+                                                        {new Date(order.orderDate).toLocaleDateString()}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Delivery Date:</strong>{" "}
+                                                        {new Date(order.orderDate).toLocaleDateString()}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Status:</strong>{" "}
+                                                        <span
+                                                            className={`px-2 py-1 rounded text-white ${order.status === "PENDING"
+                                                                ? "bg-yellow-500"
+                                                                : order.status === "SHIPPED"
+                                                                    ? "bg-blue-500"
+                                                                    : order.status === "CANCELLED"
+                                                                        ? "bg-red-500"
+                                                                        : "bg-green-500"
+                                                                }`}
+                                                        >
+                                                            {order.status.toUpperCase()}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {/* Payment Information */}
+                                            <div className="bg-white shadow-md rounded-lg p-6">
+                                                <h2 className="text-xl font-semibold text-gray-800">Payment Information</h2>
+                                                <div className="mt-4">
+                                                    <p className="text-gray-600">
+                                                        <strong>Payment Method:</strong> {order.paymentType}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Total Amount:</strong> ${order.total}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {/* Shipping Information */}
+                                            <div className="bg-white shadow-md rounded-lg p-6">
+                                                <h2 className="text-xl font-semibold text-gray-800">Shipping Information</h2>
+                                                <div className="mt-4">
+                                                    <p className="text-gray-600">
+                                                        <strong>Customer Name:</strong> {order.customerName || "N/A"}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Shipping Address:</strong> {order.shippingAddress}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Shipping Phone:</strong> {order.shippingPhone}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {/* Billing Information */}
+                                            <div className="bg-white shadow-md rounded-lg p-6">
+                                                <h2 className="text-xl font-semibold text-gray-800">Billing Information</h2>
+                                                <div className="mt-4">
+                                                    <p className="text-gray-600">
+                                                        <strong>Billing Address:</strong> {order.billingAddress}
+                                                    </p>
+                                                    <p className="text-gray-600">
+                                                        <strong>Billing Phone:</strong> {order.billingPhone}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    {/* Customer Information */}
-                                    <h2 className="text-xl font-semibold text-gray-800 mt-6">
-                                        Customer Information
-                                    </h2>
-                                    {order.customer && <div className="mt-4">
-                                        <p className="text-gray-600">
-                                            <strong>Name:</strong> {order.customer?.name ?? 'Customer'}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Email:</strong> {order.customer?.email ?? 'Email'}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Phone:</strong> {order.customer?.phone ?? ''}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Address:</strong>{" "}
-                                            {/* {`${order.customer.address.street}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.zipcode}, ${order.customer.address.country}`} */}
-                                        </p>
-                                    </div>
-                                    }
+
                                     {/* Products Table */}
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Products
@@ -145,6 +182,9 @@ const OrderDetail = (props) => {
                                         <table className="min-w-full divide-y divide-gray-200 bg-white">
                                             <thead className="bg-gray-50">
                                                 <tr>
+                                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Image
+                                                    </th>
                                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                                         Product
                                                     </th>
@@ -161,41 +201,70 @@ const OrderDetail = (props) => {
                                             </thead>
                                             <tbody className="divide-y divide-gray-200">
                                                 {order.items.map((item) => (
-                                                    <tr key={item.productId}>
+                                                    <tr key={item.id}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {item.productName}
+                                                            <img
+                                                                src={item.product.imageUrl ?? 'https://via.placeholder.com/180x160'}
+                                                                alt={item.product.name}
+                                                                className="mt-4 max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] object-cover rounded-md"
+                                                            />
+                                                        </td>
+
+                                                        <td className="px-6 py-4 text-sm text-gray-800">
+                                                            {item.product.name}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-600">
                                                             {item.quantity}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-600">
-                                                            ${item.product.price.toFixed(2)}
+                                                            ${item.product.price}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800 font-medium">
+                                                            ${item.product.price * item.quantity}
                                                             {/* ${item.totalPrice.toFixed(2)} */}
                                                         </td>
+
                                                     </tr>
                                                 ))}
+                                                {/* Subtotal Row */}
+                                                <tr>
+                                                    <td colSpan="4" className="px-6 py-4 text-right text-sm font-semibold text-gray-800">
+                                                        Subtotal:
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm font-bold text-gray-900">
+                                                        ${order.subtotal.toFixed(2)}
+                                                    </td>
+                                                </tr>
+                                                {/* Total Discount Row */}
+                                                <tr>
+                                                    <td colSpan="4" className="px-6 py-4 text-right text-sm font-semibold text-gray-800">
+                                                        Discount:
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm font-bold text-gray-900">
+                                                        -${order.totalDiscount.toFixed(2)}
+                                                    </td>
+                                                </tr>
+                                                {/* Tax Row */}
+                                                <tr>
+                                                    <td colSpan="4" className="px-6 py-4 text-right text-sm font-semibold text-gray-800">
+                                                        Tax:
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm font-bold text-gray-900">
+                                                        ${order.tax.toFixed(2)}
+                                                    </td>
+                                                </tr>
+                                                {/* Total Row */}
+                                                <tr>
+                                                    <td colSpan="4" className="px-6 py-4 text-right text-sm font-semibold text-gray-800">
+                                                        Total:
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm font-bold text-gray-900">
+                                                        ${order.total.toFixed(2)}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    {/* Payment Information */}
-                                    <h2 className="text-xl font-semibold text-gray-800 mt-6">
-                                        Payment Information
-                                    </h2>
-                                    {order.payment && <div className="mt-4">
-                                        <p className="text-gray-600">
-                                            <strong>Payment Method:</strong> {order.payment.method}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Transaction ID:</strong> {order.payment.transactionId}
-                                        </p>
-                                        <p className="text-gray-600">
-                                            <strong>Total Amount:</strong> ${order.payment.totalAmount}{" "}
-                                            {order.payment.currency}
-                                        </p>
-                                    </div>}
                                 </div>
                             </div>
                         )}
@@ -210,9 +279,9 @@ const OrderDetail = (props) => {
                                             onChange={(e) => setNewStatus(e.target.value)}
                                             className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                                         >
-                                            <option value="Pending">Pending</option>
-                                            <option value="Shipped">Shipped</option>
-                                            <option value="Delivered">Delivered</option>
+                                            <option value="PENDING">PENDING</option>
+                                            <option value="SHIPPED">SHIPPED</option>
+                                            <option value="DELIVERED">DELIVERED</option>
                                         </select>
                                     </div>
                                     <div className="mt-6 flex justify-end space-x-4">
@@ -236,7 +305,7 @@ const OrderDetail = (props) => {
                         {/* Hidden Receipt for Printing/Downloading */}
                         {order && <div className="hidden">
                             <div ref={receiptRef}>
-                                {/* <OrderReceipt order={order} /> */}
+                                <OrderReceipt order={order} />
                             </div>
                         </div>}
                     </div>
