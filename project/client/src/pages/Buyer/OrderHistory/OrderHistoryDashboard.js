@@ -17,12 +17,6 @@ const OrderHistoryDashboard = () => {
                         <h2 className="text-xl font-semibold">Order history</h2>
                         <OrderHistory />
                     </div>
-
-                    {/* Cart summary */}
-                    {/* <div className="md:col-span-1 mt-4 ml-4 mr-4">
-                        <h2 className="text-xl font-semibold">Summary</h2>
-
-                    </div> */}
                 </div>
             </div>
         </div>

@@ -2,46 +2,72 @@ import React, { useEffect, useState } from "react";
 import RangeSlider from "../../common/RangeSlider";
 import { fetchFilterConfig } from "services/productService";
 import MultiSelectCheckbox from "components/common/MultiSelectCheckbox";
-import MultiSelectCheckboxWithChildren from "components/common/MultiSelectCheckboxWithChildren";
 import SingleChoiceSelect from "components/common/SingleChoiceSelect";
+import TreeWithMultiSelect from "components/common/TreeWithMultiSelect";
 
 const FilterComponent = ({ onFilterChanged }) => {
-    const [minOrder, setMinOrder] = useState(500); // State for Min Order slider
-    const [priceRange, setPriceRange] = useState({ min: 100, max: 6000 }); // State for Price range
+    const [priceRange, setPriceRange] = useState({ minPrice: 100, maxPrice: 6000 }); // State for Price range
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
+    const [colors, setColors] = useState([]);
+    const [sizes, setSizes] = useState([]);
+    const [materials, setMaterials] = useState([]);
+    const [newArrival, setNewArrival] = useState(null);
+
     const [filterConfig, setFilterConfig] = useState(null);
 
+    {/* Update filter when any of the filter options change */}
     useEffect(() => {
-        onFilterChanged({ minOrder, priceRange });
-    }, [minOrder, priceRange]);
+        onFilterChanged({ priceRange: priceRange, categoryids: categories, brand: brands, color: colors, size: sizes, material: materials, isnewarrival:newArrival });
+    }, [priceRange, categories, brands, colors, sizes, materials, newArrival]);
 
+    {/* Fetch filter configuration */}
     useEffect(() => {
         fetchFilterConfig().then((response) => {
             setFilterConfig(response);
         });
-    }, [minOrder, priceRange]);
+    }, [priceRange]);
 
+    {/* Handle Price range change */}
+    const handlePriceRangeChanged = (min, max) => {
+        // console.log(min, max);
+        setPriceRange({ minPrice: min, maxPrice: max });
+    };
+
+    {/* Handle Category change */}
     const handleCategoryChanged = (selectedCategories) => {
-        console.log(selectedCategories);
+        // console.log(selectedCategories);
+        setCategories(selectedCategories);
     }
 
+    {/* Handle Brand change */}
     const handleBrandChanged = (selectedBrands) => {
-        console.log(selectedBrands);
+        // console.log(selectedBrands);
+        setBrands(selectedBrands);
     }
 
+    {/* Handle Color change */}
     const handleColorChanged = (selectedColors) => {
-        console.log(selectedColors);
+        // console.log(selectedColors);
+        setColors(selectedColors);
     }
 
+    {/* Handle Size change */}
     const handleSizeChanged = (selectedSizes) => {
-        console.log(selectedSizes);
+        // console.log(selectedSizes);
+        setSizes(selectedSizes);
     }
 
+    {/* Handle Material change */}
     const handleMaterialChanged = (selectedMaterials) => {
-        console.log(selectedMaterials);
+        // console.log(selectedMaterials);
+        setMaterials(selectedMaterials);
     }
 
+    {/* Handle New Arrival change */}
     const handleNewArrivalChanged = (selectedOption) => {
-        console.log(selectedOption);
+        // console.log(`selectedOption: ${selectedOption}`);
+        setNewArrival(selectedOption);
     };
 
     if (!filterConfig) {
@@ -53,17 +79,17 @@ const FilterComponent = ({ onFilterChanged }) => {
             {/* Price range */}
             <div>
                 <h3 className="text-left font-semibold mb-2">Price</h3>
-                <RangeSlider />
+                <RangeSlider minLimit={0} maxLimit={2000} onValueChanged={handlePriceRangeChanged} />
 
             </div>
 
             {/* Category/Subcategory */}
             <div className="mb-6">
                 <h3 className="text-left font-semibold mb-2">Category</h3>
-                {/* <MultiSelectCheckboxWithChildren
-                    options={filterConfig.categories}
+                <TreeWithMultiSelect
+                    data={filterConfig.categories}
                     onSelectionChange={handleCategoryChanged}
-                /> */}
+                />
             </div>
 
             {/* New Arrival */}
