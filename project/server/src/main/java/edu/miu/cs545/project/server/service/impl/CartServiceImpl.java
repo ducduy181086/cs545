@@ -78,7 +78,10 @@ public class CartServiceImpl implements CartService {
     @Override
     public void clearCart(Long cartId) {
         Cart cart = cartRepo.findById(cartId).orElseThrow();
-        cartItemRepo.deleteAll(cart.getItems());
+        for (var item : cart.getItems()) {
+            cartItemRepo.deleteById(item.getId());
+        }
+        cartItemRepo.flush();
     }
 
     private Optional<Buyer> getCurrentBuyer() {
