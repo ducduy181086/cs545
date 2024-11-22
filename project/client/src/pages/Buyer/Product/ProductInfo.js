@@ -1,11 +1,12 @@
 import AttributeSelector from 'components/common/AttributeSelector';
 import ImageSlider from 'components/common/ImageSlider';
 import ProductQuantity from 'components/common/ProductQuantity';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ProductDescription from './ProductDescription';
 import { validateColor, validateSize } from "utils/utils";
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from 'services/cartService';
+import { formatNumber } from 'utils/utils';
 
 const ProductInfo = ({ product }) => {
 
@@ -32,7 +33,7 @@ const ProductInfo = ({ product }) => {
         if (res) {
           navigate('/cart');
         }
-      }).finally(() => {});
+      }).finally(() => { });
 
     } else {
       const errors = {
@@ -79,11 +80,11 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Product Price and Discount */}
-      <p className="text-xl font-bold text-red-500 mt-6">${product.price}</p>
+      <p className="text-xl font-bold text-red-500 mt-6">${formatNumber(product.price)}</p>
       <div className="mt-2 flex items-center">
         {product.discount > 0 && (
           <span className="text-md line-through text-blue-500">
-            ${(product.price + (product.discount * product.price) / 100).toFixed(2)}
+            ${formatNumber((product.price + (product.discount * product.price) / 100) * 100 / 100)}
           </span>
         )}
         {product.discount > 0 && (
@@ -132,8 +133,6 @@ const ProductInfo = ({ product }) => {
             )}
           </p>
 
-
-
         </div>
         <div>
           {/* Product Color */}
@@ -148,7 +147,7 @@ const ProductInfo = ({ product }) => {
         </div>
       </div>
       {/* Product qty */}
-      <ProductQuantity max={product.quantity} onAddItemToCart={handleAddToCart} />
+      {product.inStock && <ProductQuantity max={product.quantity} onAddItemToCart={handleAddToCart} />}
 
       {/* Product desc */}
       <ProductDescription description={product.description} />

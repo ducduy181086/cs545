@@ -9,18 +9,10 @@ export const fetchOrdersHistory = async () => {
 export const fetchOrdersByStatus = async (status) => {
   const response = await api.get(`/order?status=${status.toUpperCase().replace('ALL', '')}`);
   return response.data;
-
-  //mock
-  // if (status === "All") return ordersData;
-
-  // return ordersData?.filter(o => o.status === status);
 };
 
 export const fetchOrderById = async (orderId) => {
-  // const response = await api.get(`/orders-history/${orderId}`);
-  // return response.data;
-
-  console.log(orderId);
-  return ordersData.find(order => order.orderId == orderId);
+  const response = await api.get(`/order/${orderId}`);
+  return response.data;
 };
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import HomeDropdownMenu from "./HomeDropdownMenu";
-import logo from '../../assets/icons/lad-icon.png';
+import logox from '../../assets/icons/lad-icon.svg';
+import logo from '../../assets/icons/lad-ico.svg';
 import { CartContext } from 'context/CartContext';
 import AuthContext from "context/AuthContext";
 
@@ -41,7 +42,7 @@ const Header = () => {
                     {/* Left Section */}
                     <div className="flex items-center space-x-4">
 
-                        <img className="w-32 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
+                        <img className="w-40 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
 
                         {/* <div className=" ml-8 relative">
                             <input
