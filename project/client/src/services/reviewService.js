@@ -6,6 +6,6 @@ export const fetchReviews = async (id) => {
 };
 
 export const submitReview = async (id, content) => {
-  const response = await api.post(`/products/${id}/reviews`, { content });
+  const response = await api.post(`/products/${id}/reviews`, content);
   return response.data;
 };

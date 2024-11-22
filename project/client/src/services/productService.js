@@ -42,11 +42,6 @@ export const fetchProductById = async (id) => {
   return response.data;
 };
 
-export const createProduct = async (productData) => {
-  // const response = await api.post('/products', productData);
-  // return response.data;
-};
-
 export const fetchFilterConfig = async () => {
   const response = await api.get('/products/filter-config');
   return response.data;

@@ -7,12 +7,23 @@ import OrderStatus from "./OrderStatus";
 import Header from "components/layout/Header";
 import { submitReview } from "services/reviewService";
 import { formatDateTime, formatMoney } from "utils/utils";
+import SuccessDialog from "components/layout/SuccessDialog";
+import Footer from 'components/layout/Footer';
 
 const OrderHistoryDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [order, setOrder] = useState(null);
     const receiptRef = useRef();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const handleOpenDialog = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+    };
 
     useEffect(() => {
         fetchOrderById(id).then(res => {
@@ -49,11 +60,12 @@ const OrderHistoryDetail = () => {
             "rating": rating
         }
 
-        submitReview({ rating, content }).then(res => { });
+        submitReview(productId, content).then(res => {
+            handleOpenDialog();
+        });
     };
 
     const handleViewDetail = (productId) => {
-        console.log(`Viewing details for product ${productId}`);
         navigate(`/products/${productId}`);
     };
 
@@ -61,12 +73,12 @@ const OrderHistoryDetail = () => {
     if (!order) return (<>   </>);
 
     return (
-        < div ref={receiptRef}>
+        < div className="flex flex-col min-h-screen" ref={receiptRef}>
             {/* {Header component} */}
             <Header />
 
             {/* {Body component} */}
-            <div className="container mx-auto p-4 mt-20">
+            <div className="flex-grow px-20 p-4 mt-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="md:col-span-4 ml-4 me-4 mt-4">
                         <div className="flex border-b mt-2 pb-2">
@@ -76,7 +88,7 @@ const OrderHistoryDetail = () => {
                         </div>
 
                         <div className="mt-8"></div>
-                        {order && order.items.map((product) => <div key={product.productId} className="pt-2 pb-2"> <OrderProductCard product={product} onSubmitReview={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
+                        {order && order.items.map((product) => <div key={product.id} className="pt-2 pb-2"> <OrderProductCard product={product} onSubmitReview={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
 
                         <div className="flex  border-b mt-2 pb-2">
                             <div>
@@ -90,7 +102,7 @@ const OrderHistoryDetail = () => {
                                 <div className="ml-auto ">Billing Phone: {order.billingPhone}</div>
                                 <div className="ml-auto ">Shipping Address: {order.billingAddress}</div>
 
-                                <div className="ml-auto mt-2 font-semibold">Sub total: {formatMoney(order.subtotal )} </div>
+                                <div className="ml-auto mt-2 font-semibold">Sub total: {formatMoney(order.subtotal)} </div>
                                 <div className="ml-auto font-semibold">Total discount: {formatMoney(order.totalDiscount)}</div>
                                 <div className="ml-auto  font-semibold">Tax: {formatMoney(order.tax)}</div>
                                 <div className="ml-auto  font-semibold">Total amount: {formatMoney(order.total)} </div>
@@ -116,6 +128,16 @@ const OrderHistoryDetail = () => {
                     </div>
                 </div>
             </div>
+
+            {/* {Footer component} */}
+            <Footer className="mt-12" />
+
+            {/* {SuccessDialog component} */}
+            <SuccessDialog
+                open={isDialogOpen}
+                onClose={handleCloseDialog}
+                title='Review Submitted!'
+                message='Thank you for your feedback.' />
         </div>
     );
 };
