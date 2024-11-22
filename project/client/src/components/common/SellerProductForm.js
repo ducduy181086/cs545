@@ -14,8 +14,6 @@ const ProductForm = (props) => {
     category: null,
     price: "",
     brand: "",
-    sizes: "",
-    colors: "",
     material: "",
     discount: "",
     quantity: "",

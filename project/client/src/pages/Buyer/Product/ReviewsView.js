@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchReviews as fetchReviews } from "services/reviewService";
+import { fetchReviews } from "services/reviewService";
 import { useParams } from 'react-router-dom';
 import ReviewItem from "./ReviewItem";
 
@@ -13,7 +13,7 @@ const ReviewView = () => {
     });
   }, [id])
 
-  if (!reviews || !reviews.content || reviews.content.length==0) return <><p></p></>;
+  if (!reviews || !reviews.content || reviews.content.length === 0) return <><p></p></>;
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-8 ">
