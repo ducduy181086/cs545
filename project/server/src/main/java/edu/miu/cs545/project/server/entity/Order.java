@@ -21,6 +21,7 @@ public class Order {
     private Double tax;
     private Double total;
 
+    private String customerName;
     private String shippingAddress;
     private String shippingPhone;
     private String billingAddress;
