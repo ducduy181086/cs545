@@ -12,8 +12,7 @@ const Header = () => {
 
     const navigate = useNavigate();
     const { counter } = useContext(CartContext);
-    const { isAuthenticated } = useContext(AuthContext);
-
+    const { user } = useContext(AuthContext)
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -57,15 +56,13 @@ const Header = () => {
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
-                        {/* Notification Icon */}
-                        <button className="relative" onClick={() => navigate('/cart')}>
+                       {user?.role !== 'SELLER' && user?.role !=='ADMIN' && <button className="relative" onClick={() => navigate('/cart')}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>
                             {counter > 0 && <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                                 {counter}
                             </span>}
-                        </button>
+                        </button>}
 
-                        {/* Profile Section */}
                         <HomeDropdownMenu />
                     </div>
                 </div>

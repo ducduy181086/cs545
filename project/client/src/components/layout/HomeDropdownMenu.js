@@ -21,65 +21,90 @@ const HomeDropdownMenu = () => {
     setAnchorEl(null);
   };
 
-  const onClickOrderHistory = () => {
-    handleClose();
-    navigate('/order-history');
-  }
-
   const handleLogout = () => {
     logout();
     navigate('/login')
   }
 
+  const handleNavigation = (path) => {
+    handleClose();
+    navigate(path);
+  };
+
   return (
-    <div style={{ padding: '20px' }}>
-      {!isAuthenticated &&
-        <Link to={'/login'}>
-          <button>
-            Sign in
+    <div className="relative">
+      {!isAuthenticated && (
+        <Link to="/login">
+          <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            Sign In
           </button>
-        </Link>}
-      {/* Arrow Down Icon button */}
-      {isAuthenticated &&
-        <div className="flex items-center space-x-2">
-          <h4>
-            Hi, {user.email}
-          </h4>
+        </Link>
+      )}
+
+      {isAuthenticated && (
+        <div className="flex items-center space-x-3 cursor-pointer">
+          <div>
+            <p className="font-medium text-gray-800">Hi, {user?.email || 'Guest'}</p>
+          </div>
           <img
-            src="https://i.pravatar.cc/150?img=5"
+            src={user?.avatar || 'https://i.pravatar.cc/150?img=5'}
             alt="Profile"
-            className="w-10 h-10 rounded-full border"
+            className="w-10 h-10 rounded-full border border-gray-300"
             onClick={handleClick}
           />
-          <ArrowDropDownIcon onClick={handleClick} />
+          <ArrowDropDownIcon onClick={handleClick} className="text-gray-600 hover:text-gray-800" />
         </div>
-      }
+      )}
 
-      {/* Menu component */}
-      {isAuthenticated && <Menu
-        anchorEl={anchorEl}        // The element that the menu is anchored to
-        open={Boolean(anchorEl)}    // Whether the menu is open or not
-        onClose={handleClose}       // Close the menu when clicked outside or on an item
-        anchorOrigin={{
-          vertical: 'bottom',      // Position the menu below the button
-          horizontal: 'left',      // Align the menu to the left of the button
-        }}
-        transformOrigin={{
-          vertical: 'top',         // Align the top of the menu with the bottom of the button
-          horizontal: 'left',      // Align the left of the menu with the left of the button
-        }}
-      >
-        {/* Menu Items */}
-        <MenuItem onClick={onClickOrderHistory} sx={{
-          fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
-          fontSize: '1.0rem',
-        }}>Order History</MenuItem>
+      {isAuthenticated && (
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
 
-        <MenuItem onClick={handleLogout} sx={{
-          fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
-          fontSize: '1.0rem',
-        }}>Logout</MenuItem>
-      </Menu>}
+        >
+          {isAuthenticated && user.role === 'SELLER' &&
+            <MenuItem
+              onClick={() => handleNavigation('/seller')}
+              className="text-gray-700 hover:text-indigo-600"
+              sx={{ fontSize: '1rem', fontWeight: 500 }}
+            >
+              Seller Dashboard
+            </MenuItem>
+          }
+          {isAuthenticated && user.role === 'ADMIN' &&
+            <MenuItem
+              onClick={() => handleNavigation('/admin')}
+              className="text-gray-700 hover:text-indigo-600"
+              sx={{ fontSize: '1rem', fontWeight: 500 }}
+            >
+              Admin Dashboard
+            </MenuItem>
+          }
+          <MenuItem
+            onClick={() => handleNavigation('/order-history')}
+            className="text-gray-700 hover:text-indigo-600"
+            sx={{ fontSize: '1rem', fontWeight: 500 }}
+          >
+            Order History
+          </MenuItem>
+          <MenuItem
+            onClick={handleLogout}
+            className="text-gray-700 hover:text-red-600"
+            sx={{ fontSize: '1rem', fontWeight: 500 }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      )}
     </div>
   );
 };
