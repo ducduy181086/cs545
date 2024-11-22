@@ -150,7 +150,7 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-            Price
+            Price ($)
           </label>
           <input
             type="number"
@@ -225,13 +225,15 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="discount" className="block text-sm font-medium text-gray-700">
-            Discount
+            Discount (%)
           </label>
           <input
             type="number"
             id="discount"
             name="discount"
             value={product.discount}
+            min="0"
+            max="100"
             onChange={handleChange}
             disabled={isViewMode}
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"

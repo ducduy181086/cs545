@@ -7,7 +7,7 @@ const CartItem = ({ item, onRemove, onUpdateQuantity }) => {
 
     const handleQuantityChange = (event) => {
         setQuantity(event.target.value);
-        onUpdateQuantity(product.id, event.target.value)
+        onUpdateQuantity(item.id, event.target.value)
     };
 
     const product = item.product;
@@ -30,9 +30,9 @@ const CartItem = ({ item, onRemove, onUpdateQuantity }) => {
                 <p className="text-sm text-gray-500">Color: {item.color ?? ''}</p>
                 <div className="flex">
 
-                    <span className="text-md font-medium ">${formatNumber(product.price*100/100)}</span>
+                    <span className="text-md font-medium ">${formatNumber(product.price * 100 / 100)}</span>
                     <span className="text-md line-through text-gray-500 ml-4">
-                        ${formatNumber((product.price + (product.discount * product.price) / 100)*100/100)}
+                        ${formatNumber((product.price + (product.discount * product.price) / 100) * 100 / 100)}
                     </span>
 
                 </div>

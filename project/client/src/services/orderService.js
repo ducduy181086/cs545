@@ -15,3 +15,7 @@ export const fetchOrderById = async (orderId) => {
   return response.data;
 };
 
+export const requestCancelPendingOrder = async (orderId) => {
+  const response = await api.put(`/order/cancel/${orderId}`)
+  return response.data;
+}
