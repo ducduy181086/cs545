@@ -86,26 +86,119 @@ const OrderHistoryDetail = () => {
                             <div className="ml-auto">{OrderStatus(order.status)}
                             </div>
                         </div>
+                        <div className="mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Order Information */}
+                                <div className="bg-white shadow-md rounded-lg p-6">
+                                    <h2 className="text-xl font-semibold text-gray-800">Order Information</h2>
+                                    <div className="mt-4">
+                                        <p className="text-gray-600">
+                                            <strong>Order ID:</strong> {order.id}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Order Date:</strong>{" "}
+                                            {new Date(order.orderDate).toLocaleDateString()}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Delivery Date:</strong>{" "}
+                                            {new Date(order.orderDate).toLocaleDateString()}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Status:</strong>{" "}
+                                            <span
+                                                className={`px-2 py-1 rounded text-white ${order.status === "PENDING"
+                                                    ? "bg-yellow-500"
+                                                    : order.status === "SHIPPED"
+                                                        ? "bg-blue-500"
+                                                        : order.status === "CANCELLED"
+                                                            ? "bg-red-500"
+                                                            : "bg-green-500"
+                                                    }`}
+                                            >
+                                                {order.status.toUpperCase()}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Payment Information */}
+                                <div className="bg-white shadow-md rounded-lg p-6">
+                                    <h2 className="text-xl font-semibold text-gray-800">Payment Information</h2>
+                                    <div className="mt-4">
+                                        <p className="text-gray-600">
+                                            <strong>Payment Method:</strong> {order.paymentType}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Total Amount:</strong> ${order?.total?.toFixed(2)}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Shipping Information */}
+                                <div className="bg-white shadow-md rounded-lg p-6">
+                                    <h2 className="text-xl font-semibold text-gray-800">Shipping Information</h2>
+                                    <div className="mt-4">
+                                        <p className="text-gray-600">
+                                            <strong>Customer Name:</strong> {order.customerName || "N/A"}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Shipping Address:</strong> {order.shippingAddress}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Shipping Phone:</strong> {order.shippingPhone}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Billing Information */}
+                                <div className="bg-white shadow-md rounded-lg p-6">
+                                    <h2 className="text-xl font-semibold text-gray-800">Billing Information</h2>
+                                    <div className="mt-4">
+                                        <p className="text-gray-600">
+                                            <strong>Billing Address:</strong> {order.billingAddress}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            <strong>Billing Phone:</strong> {order.billingPhone}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="mt-8"></div>
-                        {order && order.items.map((product) => <div key={product.id} className="pt-2 pb-2"> <OrderProductCard product={product} onSubmitReview={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
+                        {order && order.items.map((product) =>
+                            <div key={product.id} className="pt-2 pb-2">
+                                <OrderProductCard
+                                    key={product.id}
+                                    product={product}
+                                    onSubmitReview={handleSubmitReview}
+                                    onViewDetail={handleViewDetail} />
+                            </div>)}
+                       <div className="border-b mt-2 pb-2">
+                            <div className="flex flex-col bg-white shadow-md rounded-lg p-6 space-y-4 items-end">
+                                {/* Subtotal Row */}
+                                <div className="flex justify-between w-full max-w-xs">
+                                    <span className="text-sm font-semibold text-gray-800">Subtotal:</span>
+                                    <span className="text-sm font-bold text-gray-900">${order.subtotal.toFixed(2)}</span>
+                                </div>
 
-                        <div className="flex  border-b mt-2 pb-2">
-                            <div>
-                                <div className="ml-auto mt-4 border-b pb-2">Order date: {formatDateTime(order.orderDate)} </div>
-                                <div className="ml-auto mt-4">Transaction Id: {order.buyerEmail} </div>
-                                <div className="ml-auto ">Payment Method: {order.paymentType}</div>
-                                <div className="ml-auto ">Payment Status: {order.paymentStatus}</div>
-                                <div className="ml-auto border-b pb-1 mb-2 ">Email: {order.buyerEmail}</div>
-                                <div className="ml-auto ">Shipping Phone: {order.shippingPhone}</div>
-                                <div className="ml-auto ">Shipping Address: {order.shippingAddress}</div>
-                                <div className="ml-auto ">Billing Phone: {order.billingPhone}</div>
-                                <div className="ml-auto ">Shipping Address: {order.billingAddress}</div>
+                                {/* Total Discount Row */}
+                                <div className="flex justify-between w-full max-w-xs">
+                                    <span className="text-sm font-semibold text-gray-800">Discount:</span>
+                                    <span className="text-sm font-bold text-red-600">-${order.totalDiscount.toFixed(2)}</span>
+                                </div>
 
-                                <div className="ml-auto mt-2 font-semibold">Sub total: {formatMoney(order.subtotal)} </div>
-                                <div className="ml-auto font-semibold">Total discount: {formatMoney(order.totalDiscount)}</div>
-                                <div className="ml-auto  font-semibold">Tax: {formatMoney(order.tax)}</div>
-                                <div className="ml-auto  font-semibold">Total amount: {formatMoney(order.total)} </div>
+                                {/* Tax Row */}
+                                <div className="flex justify-between w-full max-w-xs">
+                                    <span className="text-sm font-semibold text-gray-800">Tax:</span>
+                                    <span className="text-sm font-bold text-gray-900">${order.tax.toFixed(2)}</span>
+                                </div>
+
+                                {/* Total Row */}
+                                <div className="flex justify-between w-full max-w-xs">
+                                    <span className="text-sm font-semibold text-gray-800">Total:</span>
+                                    <span className="text-lg font-bold text-gray-900">${order.total.toFixed(2)}</span>
+                                </div>
                             </div>
                             <div className="ml-auto">
                                 {order && order.status === 'DELIVERED' && <span className="material-symbols-outlined text-8xl text-blue-200">
