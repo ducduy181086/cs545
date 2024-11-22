@@ -48,6 +48,7 @@ const adminRoutes = [
 const buyerRoutes = [
   { path: "/cart", element: <CartDashboard /> },
   { path: "/shipping/confirmation-address", element: <ShippingDashboard /> },
+  { path: "/shipping/billing-address", element: <BillingDashboard /> },
   { path: "/payment", element: <PaymentDashboard /> },
   { path: "/order-history", element: <OrderHistoryDashboard /> },
   { path: "/order-history/:id", element: <OrderHistoryDetail /> },

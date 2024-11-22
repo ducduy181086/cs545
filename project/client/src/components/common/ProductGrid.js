@@ -1,6 +1,23 @@
 import ProductCard from "./ProductCard";
+import React, { useState, useEffect } from 'react'
+import { useLocation } from "react-router-dom";
+import { fetchProducts } from 'services/productService';
 
-export default function ProductGrid({ products }) {
+function ProductGrid({filter, currentPage, updateTotalPage }) {
+
+    const [products, setProducts] = useState([]);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.data) {
+            setProducts(location.state.data);
+        } else {
+            fetchProducts(currentPage).then(res => {
+                setProducts(res.content);
+                updateTotalPage(res.totalPages);
+            });
+        }
+    }, [location.state, currentPage])
 
     return (
         <div>
@@ -10,6 +27,7 @@ export default function ProductGrid({ products }) {
                 {products.map((item, index) =><div key={index}><ProductCard product ={item}/></div>)}
             </div>
         </div>
-
     );
 }
+
+export default ProductGrid;

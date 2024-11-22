@@ -1,25 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import CartItem from "./CartItem";
-import { CartContext } from "../../../context/CartContext";
 import EmptyCart from "./EmptyCart";
 
-function CartDetail() {
-    
-    const { cart, removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
-
-    if (cart.length === 0) {
+function CartDetail({data, onRemove, onUpdate}) {
+    if (!data || data.length === 0) {
         return (
             <EmptyCart />
         );
     }
     return (
         <div className="pt-8">
-            {cart.map((item) => (
+            {data?.map((item) => (
                 <CartItem
                     key={item.id}
-                    product={item}
-                    onRemove={removeFromCart}
-                    onUpdateQuantity={updateQuantity}
+                    item={item}
+                    onRemove={onRemove}
+                    onUpdateQuantity={onUpdate}
                 />
             ))}
         </div>

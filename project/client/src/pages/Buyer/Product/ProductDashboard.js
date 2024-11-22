@@ -6,23 +6,31 @@ import { useParams } from 'react-router-dom';
 import { fetchProductById } from 'services/productService';
 import Header from 'components/layout/Header';
 import Loading from 'components/layout/Loading';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductDashboard() {
     const [product, setProduct] = useState(null);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
         fetchProductById(id).then(res => {
             console.log(res);
             setProduct(res);
-        }).finally(() => {
-            setLoading(false);
-        });
+        }).
+            catch(err => {
+                setError(true);
+                navigate('/404');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [id])
 
-    if (loading) {
+    if (error || loading) {
         return <Loading />
     }
 
@@ -46,7 +54,7 @@ export default function ProductDashboard() {
                     <div className="md:col-span-1 mt-4 ml-4 me-4">
                         <h2 className="text-xl font-semibold">Rating & reviews</h2>
                         <RatingView product={product} />
-                        <ReviewView /> 
+                        <ReviewView />
                     </div>
                 </div>
 

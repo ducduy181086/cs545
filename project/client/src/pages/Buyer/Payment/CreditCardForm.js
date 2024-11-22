@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { validateCardHolder, validateCVV, validateCardNumber, validateExpirationDate } from "utils/utils";
 
-const CreditCardForm = () => {
+const CreditCardForm = ({onSubmitPayment}) => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     cardNumber: "",
@@ -12,7 +12,16 @@ const CreditCardForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const formattedValue =
+      name === "cardNumber" ? formatCardNumber(value) : value;
+
+    setFormData({ ...formData, [name]: formattedValue });
+  };
+
+  const formatCardNumber = (value) => {
+    value = value.replace(/\D/g, "");
+    value = value.slice(0, 16);
+    return value.replace(/(\d{4})(?=\d)/g, "$1 ");
   };
 
   const handleSubmit = (e) => {
@@ -30,7 +39,7 @@ const CreditCardForm = () => {
     // Check if there are no errors
     if (Object.values(errors).every((error) => error === null)) {
       console.log("Form Data:", formData);
-      alert("Payment submitted successfully!");
+      onSubmitPayment(formData);
     }
   };
 
@@ -55,7 +64,7 @@ const CreditCardForm = () => {
             required
           />
           <span className="absolute left-3 top-2 text-gray-400 material-symbols-outlined">
-          credit_card
+            credit_card
           </span>
         </div>
         {errors.cardNumber && (
@@ -101,9 +110,9 @@ const CreditCardForm = () => {
               maxLength={3}
               required
             />
-            
+
             <span className="absolute left-3 top-2 text-gray-400 material-symbols-outlined">
-                pin
+              pin
             </span>
           </div>
           {errors.cvv && (
