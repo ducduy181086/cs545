@@ -3,6 +3,7 @@ import { REACT_APP_API_PRODUCT_PER_PAGE } from 'config';
 
 export const fetchProducts = async (requestData) => {
   const params = {
+    name: requestData.keyword,
     page: requestData.page,
     pagesize: REACT_APP_API_PRODUCT_PER_PAGE,
     minprice: requestData.filter?.priceRange?.minPrice,

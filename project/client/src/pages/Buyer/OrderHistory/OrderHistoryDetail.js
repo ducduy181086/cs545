@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { fetchOrderById } from "services/orderService";
+import { fetchOrderById, requestCancelPendingOrder } from "services/orderService";
 import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
 import Header from "components/layout/Header";
 import { submitReview } from "services/reviewService";
-import { formatDateTime, formatMoney } from "utils/utils";
 import SuccessDialog from "components/layout/SuccessDialog";
 import Footer from 'components/layout/Footer';
 
@@ -69,16 +68,19 @@ const OrderHistoryDetail = () => {
         navigate(`/products/${productId}`);
     };
 
+    const handleCancel = () => {
+        requestCancelPendingOrder(id)
+    }
 
     if (!order) return (<>   </>);
 
     return (
-        < div className="flex flex-col min-h-screen" ref={receiptRef}>
+        < div className="flex flex-col min-h-screen">
             {/* {Header component} */}
             <Header />
 
             {/* {Body component} */}
-            <div className="flex-grow px-20 p-4 mt-20">
+            <div className="flex-grow px-20 p-4 mt-20" ref={receiptRef}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="md:col-span-4 ml-4 me-4 mt-4">
                         <div className="flex border-b mt-2 pb-2">
@@ -86,10 +88,10 @@ const OrderHistoryDetail = () => {
                             <div className="ml-auto">{OrderStatus(order.status)}
                             </div>
                         </div>
-                        <div className="mx-auto px-4 py-6 sm:px-6 lg:px-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="mx-auto pt-20  py-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white shadow-md rounded-lg p-6">
                                 {/* Order Information */}
-                                <div className="bg-white shadow-md rounded-lg p-6">
+                                <div className="p-6">
                                     <h2 className="text-xl font-semibold text-gray-800">Order Information</h2>
                                     <div className="mt-4">
                                         <p className="text-gray-600">
@@ -122,7 +124,7 @@ const OrderHistoryDetail = () => {
                                 </div>
 
                                 {/* Payment Information */}
-                                <div className="bg-white shadow-md rounded-lg p-6">
+                                <div className="p-6">
                                     <h2 className="text-xl font-semibold text-gray-800">Payment Information</h2>
                                     <div className="mt-4">
                                         <p className="text-gray-600">
@@ -135,7 +137,7 @@ const OrderHistoryDetail = () => {
                                 </div>
 
                                 {/* Shipping Information */}
-                                <div className="bg-white shadow-md rounded-lg p-6">
+                                <div className=" p-6">
                                     <h2 className="text-xl font-semibold text-gray-800">Shipping Information</h2>
                                     <div className="mt-4">
                                         <p className="text-gray-600">
@@ -151,7 +153,7 @@ const OrderHistoryDetail = () => {
                                 </div>
 
                                 {/* Billing Information */}
-                                <div className="bg-white shadow-md rounded-lg p-6">
+                                <div className=" p-6">
                                     <h2 className="text-xl font-semibold text-gray-800">Billing Information</h2>
                                     <div className="mt-4">
                                         <p className="text-gray-600">
@@ -166,16 +168,18 @@ const OrderHistoryDetail = () => {
                         </div>
 
                         <div className="mt-8"></div>
-                        {order && order.items.map((product) =>
-                            <div key={product.id} className="pt-2 pb-2">
-                                <OrderProductCard
-                                    key={product.id}
-                                    product={product}
-                                    onSubmitReview={handleSubmitReview}
-                                    onViewDetail={handleViewDetail} />
-                            </div>)}
-                       <div className="border-b mt-2 pb-2">
-                            <div className="flex flex-col bg-white shadow-md rounded-lg p-6 space-y-4 items-end">
+                        <div className="bg-white shadow-md rounded-lg p-6">
+                            {order && order.items.map((product) =>
+                                <div key={product.id} className="pt-2 pb-2">
+                                    <OrderProductCard
+                                        key={product.id}
+                                        product={product}
+                                        onSubmitReview={handleSubmitReview}
+                                        onViewDetail={handleViewDetail} />
+                                </div>)}
+                        </div>
+                        <div className=" mt-2 pb-2">
+                            <div className="flex flex-col rounded-lg p-6 space-y-4 items-end">
                                 {/* Subtotal Row */}
                                 <div className="flex justify-between w-full max-w-xs">
                                     <span className="text-sm font-semibold text-gray-800">Subtotal:</span>
@@ -200,11 +204,6 @@ const OrderHistoryDetail = () => {
                                     <span className="text-lg font-bold text-gray-900">${order.total.toFixed(2)}</span>
                                 </div>
                             </div>
-                            <div className="ml-auto">
-                                {order && order.status === 'DELIVERED' && <span className="material-symbols-outlined text-8xl text-blue-200">
-                                    receipt_long
-                                </span>}
-                            </div>
                         </div>
 
                         <div className="flex mt-12 justify-center">
@@ -212,7 +211,9 @@ const OrderHistoryDetail = () => {
                                 Print receipt
                             </button>}
 
-                            {order && order.status === 'PENDING' && <button className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
+                            {order && order.status === 'PENDING' && <button
+                                onClick={handleCancel}
+                                className="bg-red-500 ps-8 pe-8 text-white rounded-full p-2 hover:bg-red-600">
                                 Cancel order
                             </button>}
 
