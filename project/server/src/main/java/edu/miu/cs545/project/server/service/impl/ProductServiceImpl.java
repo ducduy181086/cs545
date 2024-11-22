@@ -142,10 +142,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public FilterConfigResponse getFilterConfig() {
         FilterConfigResponse filterConfig = new FilterConfigResponse();
-
-        filterConfig.setCategories(productRepo.findDistinctCategories()
-            .stream().map(m -> modelMapper.map(m, CategoryDto.class))
-            .toList());
         filterConfig.setBrands(productRepo.findDistinctBrands());
         filterConfig.setColors(productRepo.findDistinctColors());
         filterConfig.setSizes(productRepo.findDistinctSizes());

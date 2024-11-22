@@ -5,6 +5,7 @@ import edu.miu.cs545.project.server.entity.dto.ReviewDto;
 import edu.miu.cs545.project.server.entity.dto.request.AddReviewRequest;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
 import edu.miu.cs545.project.server.entity.dto.response.FilterConfigResponse;
+import edu.miu.cs545.project.server.service.CategoryService;
 import edu.miu.cs545.project.server.service.ProductService;
 import edu.miu.cs545.project.server.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final ReviewService reviewService;
+    private final CategoryService categoryService;
 
     @GetMapping()
     public ResponseEntity<Page<ProductDto>> filterProducts(
@@ -71,7 +73,9 @@ public class ProductController {
 
     @GetMapping("/filter-config")
     public FilterConfigResponse getConfig() {
-        return productService.getFilterConfig();
+        var r = productService.getFilterConfig();
+        r.setCategories(categoryService.getAllCategories());
+        return r;
     }
 
     @GetMapping("/{id}/compatibility")

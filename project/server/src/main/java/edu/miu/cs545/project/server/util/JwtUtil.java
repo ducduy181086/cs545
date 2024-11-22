@@ -2,6 +2,7 @@ package edu.miu.cs545.project.server.util;
 
 import edu.miu.cs545.project.server.entity.Role;
 import edu.miu.cs545.project.server.entity.RoleType;
+import edu.miu.cs545.project.server.entity.dto.response.JwtResponse;
 import edu.miu.cs545.project.server.service.impl.MyUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -105,25 +106,27 @@ public class JwtUtil {
             .getSubject();
     }
 
-    public boolean validateToken(String token) {
+    public JwtResponse validateToken(String token) {
+        String code = "";
         try {
             Jwts.parser()
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(token);
-            return true;
+            return new JwtResponse(true, code);
         } catch (SignatureException e) {
             System.out.println(e.getMessage());
         } catch (MalformedJwtException e) {
             System.out.println(e.getMessage());
         } catch (ExpiredJwtException e) {
+            code = "EXPIRED";
             System.out.println(e.getMessage());
         } catch (UnsupportedJwtException e) {
             System.out.println(e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return new JwtResponse(false, code);
     }
 
     public Authentication getAuthentication(String token) {
