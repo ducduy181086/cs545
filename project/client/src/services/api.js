@@ -6,7 +6,6 @@ const api = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
   },
   withCredentials: true
 });
@@ -25,11 +24,38 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
+
     if (error.response) {
-      const { status } = error.response;
+      const { status, data } = error.response;
+
+      if (status === 401 && data.code === 'EXPIRED') {
+        const user = localStorage.getItem('user');
+        const refreshToken = user ? JSON.parse(user).refresh_token : null;
+
+        if (refreshToken) {
+          try {
+            const response = await apiAuthenticator.post('/authenticate/refresh-token', { refresh_token: refreshToken });
+            const { access_token, refresh_token } = response.data;
+
+            const updatedUser = { ...JSON.parse(user), access_token, refresh_token };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+
+            originalRequest.headers.Authorization = `Bearer ${access_token}`;
+            return api(originalRequest);
+          } catch (refreshError) {
+            console.log('Refresh token failed:', refreshError);
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+          }
+        }
+      }
+
       if (status === 401 || status === 403) {
         console.log('Unauthorized! Redirecting to login.');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
       }
     }
     return Promise.reject(error);
