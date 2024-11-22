@@ -65,21 +65,9 @@ const OrderTable = () => {
                                 <td className="px-6 py-4 text-sm text-gray-500">{order.customerName ?? 'N/A'}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td>
                                 {/* <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.deliveryDate).toLocaleDateString()}</td> */}
-                                <td className="px-6 py-4 text-sm text-gray-500">{order.status ?? 'N/A'}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{order.status}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">${order.total}</td>
-                                {/* <td className="px-6 py-4 text-sm text-gray-500">
-                                    {order.status === "Pending" ? <button
-                                        onClick={
-                                            order.status === "Pending" ?
-                                                () =>
-                                                    handleCancelOrder(order.orderId) : undefined}
-                                        className="text-red-600 hover:text-red-800"
-                                    >
-                                        Cancel
-                                    </button>
-                                        : <label>Cancel</label>}
-                                </td> */}
+                                <td className="px-6 py-4 text-sm text-gray-500">${order?.total?.toFixed(2)}</td>
+
                             </tr>
                         ))}
                     </tbody>
