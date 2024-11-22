@@ -2,8 +2,10 @@ package edu.miu.cs545.project.server.service.impl;
 
 import edu.miu.cs545.project.server.entity.Category;
 import edu.miu.cs545.project.server.entity.Product;
+import edu.miu.cs545.project.server.entity.dto.CategoryDto;
 import edu.miu.cs545.project.server.entity.dto.ProductDto;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
+import edu.miu.cs545.project.server.entity.dto.response.FilterConfigResponse;
 import edu.miu.cs545.project.server.helper.UserHelper;
 import edu.miu.cs545.project.server.repository.CategoryRepo;
 import edu.miu.cs545.project.server.repository.ProductRepo;
@@ -93,8 +95,12 @@ public class ProductServiceImpl implements ProductService {
         }
         if (productEntity != null) {
             modelMapper.map(product, productEntity);
-            if (product.getCategoryId() != 0) {
-                categoryRepo.findById(product.getCategoryId()).ifPresent(productEntity::setCategory);
+            productEntity.setInStock(product.getQuantity() > 0);
+            if (product.getCcategoryId() != null && product.getCcategoryId() > 0) {
+                categoryRepo.findById(product.getCcategoryId()).ifPresent(productEntity::setCategory);
+            }
+            else {
+                productEntity.setCategory(null);
             }
             productRepo.save(productEntity);
         }
@@ -131,5 +137,20 @@ public class ProductServiceImpl implements ProductService {
         var compatibilityProduct = productRepo.findById(compatibilityProductId).orElseThrow();
         product.getCompatibleProducts().add(compatibilityProduct);
         productRepo.save(product);
+    }
+
+    @Override
+    public FilterConfigResponse getFilterConfig() {
+        FilterConfigResponse filterConfig = new FilterConfigResponse();
+
+        filterConfig.setCategories(productRepo.findDistinctCategories()
+            .stream().map(m -> modelMapper.map(m, CategoryDto.class))
+            .toList());
+        filterConfig.setBrands(productRepo.findDistinctBrands());
+        filterConfig.setColors(productRepo.findDistinctColors());
+        filterConfig.setSizes(productRepo.findDistinctSizes());
+        filterConfig.setMaterials(productRepo.findDistinctMaterials());
+
+        return filterConfig;
     }
 }

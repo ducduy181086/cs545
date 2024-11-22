@@ -9,4 +9,8 @@ public class CartItemDto {
     private ProductDto product;
 
     private int quantity;
+
+    private String size;
+
+    private String color;
 }

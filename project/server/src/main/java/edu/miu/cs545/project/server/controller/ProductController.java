@@ -4,6 +4,7 @@ import edu.miu.cs545.project.server.entity.dto.ProductDto;
 import edu.miu.cs545.project.server.entity.dto.ReviewDto;
 import edu.miu.cs545.project.server.entity.dto.request.AddReviewRequest;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
+import edu.miu.cs545.project.server.entity.dto.response.FilterConfigResponse;
 import edu.miu.cs545.project.server.service.ProductService;
 import edu.miu.cs545.project.server.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -66,6 +67,11 @@ public class ProductController {
         }
         product.setRatings(reviewService.countReviewsByRating(id));
         return ResponseEntity.ok(product);
+    }
+
+    @GetMapping("/filter-config")
+    public FilterConfigResponse getConfig() {
+        return productService.getFilterConfig();
     }
 
     @GetMapping("/{id}/compatibility")

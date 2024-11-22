@@ -37,7 +37,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto addItemToCart(Long productId, int quantity) {
+    public CartDto addItemToCart(Long productId, int quantity, String size, String color) {
         var buyer = getCurrentBuyer();
         if (buyer.isEmpty()) return null;
         var buyerId = buyer.get().getId();
@@ -54,15 +54,19 @@ public class CartServiceImpl implements CartService {
         cartItem.setCart(cartEntity);
         productRepo.findById(productId).ifPresent(cartItem::setProduct);
         cartItem.setQuantity(quantity);
+        cartItem.setSize(size);
+        cartItem.setColor(color);
         cartItemRepo.save(cartItem);
 
         return modelMapper.map(cartRepo.findById(cartEntity.getId()).orElseThrow(), CartDto.class);
     }
 
     @Override
-    public void updateCartItem(Long cartItemId, int quantity) {
+    public void updateCartItem(Long cartItemId, int quantity, String size, String color) {
         CartItem cartItem = cartItemRepo.findById(cartItemId).orElseThrow();
         cartItem.setQuantity(quantity);
+        if (size != null) cartItem.setSize(size);
+        if (color != null) cartItem.setColor(color);
         cartItemRepo.save(cartItem);
     }
 

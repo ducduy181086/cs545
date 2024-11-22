@@ -70,7 +70,8 @@ public class SecurityConfig {
             request.requestMatchers("/api/v1/cart/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/addresses/**").hasAnyAuthority(RoleType.BUYER.name());
             request.requestMatchers("/api/v1/payment/**").hasAnyAuthority(RoleType.BUYER.name());
-            request.requestMatchers("/api/v1/order/**").hasAnyAuthority(RoleType.BUYER.name());
+            request.requestMatchers(HttpMethod.PUT, "/api/v1/order/change/**").hasAnyAuthority(RoleType.SELLER.name());
+            request.requestMatchers("/api/v1/order/**").hasAnyAuthority(RoleType.BUYER.name(), RoleType.SELLER.name());
             request.anyRequest().authenticated();
         });
         http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

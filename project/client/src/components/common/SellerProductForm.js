@@ -1,13 +1,16 @@
 import CategoryListbox from "components/common/CategoryListBox";
 import React, { useEffect, useState } from "react";
-import categoryData from '../../mock_categories.json'
 import { sellerFetchCategories } from "services/sellerService";
 
 const ProductForm = (props) => {
 
   const { mode = "add", initialData = {}, onSubmit } = props;
+
+  const [categories, setCategories] = useState()
+
   const [product, setProduct] = useState({
     name: "",
+    description: "",
     category: null,
     price: "",
     brand: "",
@@ -16,7 +19,10 @@ const ProductForm = (props) => {
     material: "",
     discount: "",
     quantity: "",
+    imageUrl: "",
     ...initialData,
+    sizes: initialData.sizes?.join(", ") || "",
+    colors: initialData.colors?.join(", ") || "",
   });
 
   const isViewMode = mode === "view";
@@ -24,9 +30,25 @@ const ProductForm = (props) => {
 
   useEffect(() => {
     sellerFetchCategories()
-
-  }, [])
-
+      .then((res) => {
+        setCategories(res.content); // Dynamically load categories
+        if (isUpdateMode && initialData?.category) {
+          // Ensure pre-selection of category in update mode
+          const selectedCategory = res.content.find(
+            (category) => category.id === initialData.category.id
+          );
+          if (selectedCategory) {
+            setProduct((prevProduct) => ({
+              ...prevProduct,
+              category: selectedCategory,
+            }));
+          }
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching categories:", err);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,22 +78,28 @@ const ProductForm = (props) => {
       !product.colors ||
       !product.material ||
       !product.discount ||
-      !product.quantity
+      !product.quantity ||
+      !product.imageUrl
     ) {
       alert("Please fill in all fields.");
       return;
     }
+    const sizesArray = product.sizes.split(",").map((size) => size.trim());
+    const colorsArray = product.colors.split(",").map((size) => size.trim());
 
     onSubmit({
+      id: product.id ?? 0,
       name: product.name,
-      category: product.category,
+      description: product.description,
+      ccategoryId: product.category.id,
       price: parseFloat(product.price),
       brand: product.brand,
-      sizes: product.sizes,
-      colors: product.colors,
+      sizes: sizesArray,
+      colors: colorsArray,
       material: product.material,
       discount: parseFloat(product.discount),
-      quantity: parseInt(product.quantity)
+      quantity: parseInt(product.quantity),
+      imageUrl: product.imageUrl
     });
   };
 
@@ -92,6 +120,20 @@ const ProductForm = (props) => {
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
+        </div><div>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            Description
+          </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
         </div>
         <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700">
@@ -99,11 +141,12 @@ const ProductForm = (props) => {
           </label>
           {/* Category dropdown */}
           <CategoryListbox
-            categoryData={categoryData}
-            selectedCategory={product.category}
-            onSelectCategory={handleChangeCategory}
+            categoryData={categories || []} // Use fetched categories or an empty array as fallback
+            selectedCategory={product.category} // Pre-select the current category in update mode
+            onSelectCategory={handleChangeCategory} // Handle category changes
             disabled={isViewMode}
           />
+
         </div>
         <div>
           <label htmlFor="price" className="block text-sm font-medium text-gray-700">
@@ -137,7 +180,7 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="sizes" className="block text-sm font-medium text-gray-700">
-            Sizes
+          Sizes (comma-separated)
           </label>
           <input
             type="text"
@@ -152,7 +195,7 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="colors" className="block text-sm font-medium text-gray-700">
-            Colors
+          Colors (comma-separated)
           </label>
           <input
             type="text"
@@ -208,6 +251,26 @@ const ProductForm = (props) => {
             disabled={isViewMode}
             className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
+        </div>
+        <div>
+          <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
+            Image
+          </label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value={product.imageUrl}
+            onChange={handleChange}
+            disabled={isViewMode}
+            className={`mt-1 block w-full px-3 py-2 border ${isViewMode ? "bg-gray-100" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
+          <img
+            src={product.imageUrl ?? 'https://via.placeholder.com/180x160'}
+            alt={product.name}
+            className="mt-4 max-w-[180px] max-h-[160px] min-w-[120px] min-h-[100px] object-cover rounded-md"
           />
         </div>
       </div>

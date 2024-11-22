@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void saveCategory(SaveCategoryRequest category) {
         Category categoryEntity;
-        if (category.getId() == 0) {
+        if (category.getParentId() == null || category.getId() == 0) {
             categoryEntity = new Category();
         }
         else {
@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         if (categoryEntity != null) {
             modelMapper.map(category, categoryEntity);
-            if (category.getParentId() != 0) {
+            if (category.getParentId() != null && category.getParentId() > 0) {
                 categoryRepo.findById(category.getParentId())
                     .ifPresent(categoryEntity::setParentCategory);
             }

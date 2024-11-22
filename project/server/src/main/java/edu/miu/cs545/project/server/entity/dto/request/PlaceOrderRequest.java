@@ -5,6 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PlaceOrderRequest {
+public class PlaceOrderRequest extends PlaceOrderFromCartRequest {
     private List<PlaceOrderItemRequest> items;
 }

@@ -9,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface OrderService {
+    OrderDto getById(Long id);
     Page<OrderDto> getOrderHistory(Pageable pageable) throws Exception;
     Page<OrderDto> getOrdersByStatus(String status, Pageable pageable) throws Exception;
     boolean cancelOrder(Long orderId);
     void placeOrder(PlaceOrderRequest order);
+    boolean changeStatus(Long orderId, String status);
     List<OrderItemDto> getOrderItems(Long orderId);
 }

@@ -10,13 +10,15 @@ public class SaveProductRequest {
 
     private String name;
     private String description;
+    private String imageUrl;
 
+    private int quantity;
     private double price;
     private double discount; // % or value reduce
     private String brand;
     private String type;
 
-    private Long categoryId;
+    private Long ccategoryId;
 
     private double averageRating;
     private int reviewCount;

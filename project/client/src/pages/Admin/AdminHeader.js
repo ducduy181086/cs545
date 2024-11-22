@@ -4,9 +4,9 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const navigation = [
-    { name: 'Dashboard', href: '/admin/' },
     { name: 'Users', href: '/admin/manage-users' },
     { name: 'Sellers', href: '/admin/manage-sellers' },
+    { name: 'Category', href: '/admin/manage-categories' },
     { name: 'Order', href: '/admin/manage-orders' },
 ]
 const userNavigation = [
