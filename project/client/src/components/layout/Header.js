@@ -5,9 +5,12 @@ import logo from '../../assets/icons/lad-ico.svg';
 import { CartContext } from 'context/CartContext';
 import AuthContext from "context/AuthContext";
 
-const Header = () => {
+const Header = ({ showSearchBar = false, onKeywordChanged, delay=500 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false); // Track header state
     const [lastScrollY, setLastScrollY] = useState(0); // Track scroll position
+    const [searchText, setSearchText] = useState(""); // Track search text
+    const [debouncedText, setDebouncedText] = useState(searchText); // Track debounced search text
+
 
     const navigate = useNavigate();
     const { counter } = useContext(CartContext);
@@ -33,6 +36,26 @@ const Header = () => {
         };
     }, [lastScrollY]); // Effect runs when `lastScrollY` changes
 
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedText(searchText);
+        }, delay);
+
+        return () => clearTimeout(handler);
+    }, [searchText, delay]);
+
+    useEffect(() => {
+        if (onKeywordChanged) {
+            onKeywordChanged(debouncedText);
+        }
+    }, [debouncedText, onKeywordChanged]);
+
+    const handleChange = (e) => {
+        const newValue = e.target.value;
+        setSearchText(newValue);
+    };
+
     return (
         <header className={`fixed top-0 w-full z-50 transition-transform duration-300 bg-white shadow-md ${isCollapsed ? "-translate-y-full" : "translate-y-0"}`}>
             <div className="container mx-auto">
@@ -42,20 +65,22 @@ const Header = () => {
 
                         <img className="w-32 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
 
-                        {/* <div className=" ml-8 relative">
+                        {showSearchBar && <div className=" ml-8 relative">
                             <input
                                 type="text"
                                 placeholder="Search for products"
+                                value={searchText}
+                                onChange={handleChange}
                                 className="w-96 p-3 pl-10 bg-white border rounded-full text-sm shadow-sm focus:outline-none focus:border-blue-500 focus:text-black"
                             />
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-symbols-outlined">
                                 search
                             </span>
-                        </div> */}
+                        </div>}
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
-                       {user?.role !== 'SELLER' && user?.role !=='ADMIN' && <button className="relative" onClick={() => navigate('/cart')}>
+                        {user?.role !== 'SELLER' && user?.role !== 'ADMIN' && <button className="relative" onClick={() => navigate('/cart')}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>
                             {counter > 0 && <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                                 {counter}

@@ -12,6 +12,7 @@ const BuyerDashboard = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPage, setTotalPage] = useState(1);
     const [filter, setFilter] = useState(null);
+    const [keyword, setKeyWord] = useState('');
 
     const handleOnPgaeChange = (page) => {
         setCurrentPage(page - 1);
@@ -26,10 +27,15 @@ const BuyerDashboard = () => {
         setFilter(filter);
     }
 
+    const handleSearch = (keyword) => {
+        console.log(keyword);
+        setKeyWord(keyword);
+    }
+
     return (
         <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
-            <Header />
+            <Header showSearchBar ={true} onKeywordChanged={handleSearch} />
 
             {/* {Body component} */}
             <div className="flex-grow mt-28 text-center p-8 bg-gray-50">
