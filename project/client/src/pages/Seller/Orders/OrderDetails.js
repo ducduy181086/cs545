@@ -136,7 +136,7 @@ const OrderDetail = () => {
                                                         <strong>Payment Method:</strong> {order.paymentType}
                                                     </p>
                                                     <p className="text-gray-600">
-                                                        <strong>Total Amount:</strong> ${order.total}
+                                                        <strong>Total Amount:</strong> ${order?.total?.toFixed(2)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -216,10 +216,10 @@ const OrderDetail = () => {
                                                             {item.quantity}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-600">
-                                                            ${item.product.price}
+                                                            ${item.product?.price?.toFixed(2)}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800 font-medium">
-                                                            ${item.product.price * item.quantity}
+                                                            ${(item.product.price * item.quantity)?.toFixed(2)}
                                                             {/* ${item.totalPrice.toFixed(2)} */}
                                                         </td>
 
