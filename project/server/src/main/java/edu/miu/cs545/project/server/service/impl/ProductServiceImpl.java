@@ -2,14 +2,11 @@ package edu.miu.cs545.project.server.service.impl;
 
 import edu.miu.cs545.project.server.entity.Category;
 import edu.miu.cs545.project.server.entity.Product;
-import edu.miu.cs545.project.server.entity.dto.CategoryDto;
 import edu.miu.cs545.project.server.entity.dto.ProductDto;
 import edu.miu.cs545.project.server.entity.dto.request.SaveProductRequest;
 import edu.miu.cs545.project.server.entity.dto.response.FilterConfigResponse;
 import edu.miu.cs545.project.server.helper.UserHelper;
-import edu.miu.cs545.project.server.repository.CategoryRepo;
-import edu.miu.cs545.project.server.repository.ProductRepo;
-import edu.miu.cs545.project.server.repository.SellerRepo;
+import edu.miu.cs545.project.server.repository.*;
 import edu.miu.cs545.project.server.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,10 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
     private final CategoryRepo categoryRepo;
     private final SellerRepo sellerRepo;
+    private final OrderItemRepo orderItemRepo;
 
     @Override
     public Page<ProductDto> filterProducts(
@@ -68,14 +63,27 @@ public class ProductServiceImpl implements ProductService {
             minPrice, maxPrice, brand, minRating, inStock, isNewArrival, isBestSeller, type, color, size,
             material, features, compatibleProductId, modelYear, deliveryOptions, sellerId,
             paymentOptions, demographics, usage, occasion, pageable);
-        return products.map(product -> modelMapper.map(product, ProductDto.class));
+        var productIds = products.stream().map(m -> m.getId()).toList();
+        var map = getProductQuantityMap(productIds);
+        return products.map(product -> {
+            var result = modelMapper.map(product, ProductDto.class);
+            if (map.containsKey(result.getId())) {
+                var canDelete = map.get(result.getId()) == 0;
+                result.setCanDelete(canDelete);
+            }
+            return result;
+        });
     }
 
     @Override
     public ProductDto getProductById(Long id) {
         Product product = productRepo.findById(id).orElse(null);
         if (product != null) {
-            return modelMapper.map(product, ProductDto.class);
+            var result = modelMapper.map(product, ProductDto.class);
+            var map = getProductQuantityMap(List.of(product.getId()));
+            var canDelete = map.get(product.getId()) == 0;
+            result.setCanDelete(canDelete);
+            return result;
         }
         return null;
     }
@@ -148,5 +156,16 @@ public class ProductServiceImpl implements ProductService {
         filterConfig.setMaterials(productRepo.findDistinctMaterials());
 
         return filterConfig;
+    }
+
+    private Map<Long, Integer> getProductQuantityMap(List<Long> productIds) {
+        List<Object[]> results = orderItemRepo.findProductQuantityMapByProductIds(productIds);
+
+        // Convert List<Object[]> to Map<Long, Integer>
+        return results.stream()
+            .collect(Collectors.toMap(
+                result -> (Long) result[0],  // productId
+                result -> ((Long) result[1]).intValue() // quantity as Integer
+            ));
     }
 }

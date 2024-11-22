@@ -72,7 +72,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         reviewRepo.save(review);
         product.setReviewCount((int) reviewsCount);
-        product.setAverageRating((double) sumValue / reviewsCount);
+        product.setAverageRating(reviewsCount == 0L ? 0D : (double) sumValue / reviewsCount);
         productRepo.save(product);
     }
 
