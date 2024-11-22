@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HomeDropdownMenu from "./HomeDropdownMenu";
 import logo from '../../assets/icons/lad-icon.png';
 import { CartContext } from 'context/CartContext';
+import AuthContext from "context/AuthContext";
 
 const Header = () => {
     const [isCollapsed, setIsCollapsed] = useState(false); // Track header state
@@ -10,6 +11,7 @@ const Header = () => {
 
     const navigate = useNavigate();
     const { counter } = useContext(CartContext);
+    const { isAuthenticated } = useContext(AuthContext);
 
 
     const handleScroll = () => {
@@ -63,13 +65,6 @@ const Header = () => {
                         </button>
 
                         {/* Profile Section */}
-                        <div className="flex items-center space-x-2">
-                            <img
-                                src="https://i.pravatar.cc/150?img=5"
-                                alt="Profile"
-                                className="w-10 h-10 rounded-full border"
-                            />
-                        </div>
                         <HomeDropdownMenu />
                     </div>
                 </div>

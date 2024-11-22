@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from 'context/AuthContext';
 
 
 const HomeDropdownMenu = () => {
   // State to control the open/close of the menu
-  const { logout } = useContext(AuthContext)
+  const { user, isAuthenticated, logout } = useContext(AuthContext)
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -33,13 +33,30 @@ const HomeDropdownMenu = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      {!isAuthenticated &&
+        <Link to={'/login'}>
+          <button>
+            Sign in
+          </button>
+        </Link>}
       {/* Arrow Down Icon button */}
-      <IconButton onClick={handleClick}>
-        <ArrowDropDownIcon />
-      </IconButton>
+      {isAuthenticated &&
+        <div className="flex items-center space-x-2">
+          <h4>
+            Hi, {user.email}
+          </h4>
+          <img
+            src="https://i.pravatar.cc/150?img=5"
+            alt="Profile"
+            className="w-10 h-10 rounded-full border"
+            onClick={handleClick}
+          />
+          <ArrowDropDownIcon onClick={handleClick} />
+        </div>
+      }
 
       {/* Menu component */}
-      <Menu
+      {isAuthenticated && <Menu
         anchorEl={anchorEl}        // The element that the menu is anchored to
         open={Boolean(anchorEl)}    // Whether the menu is open or not
         onClose={handleClose}       // Close the menu when clicked outside or on an item
@@ -57,11 +74,12 @@ const HomeDropdownMenu = () => {
           fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
           fontSize: '1.0rem',
         }}>Order History</MenuItem>
+
         <MenuItem onClick={handleLogout} sx={{
           fontFamily: '"Urbanist", sans-serif', // Apply custom font for this button only
           fontSize: '1.0rem',
         }}>Logout</MenuItem>
-      </Menu>
+      </Menu>}
     </div>
   );
 };
