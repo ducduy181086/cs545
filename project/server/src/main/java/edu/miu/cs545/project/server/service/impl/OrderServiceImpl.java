@@ -30,6 +30,11 @@ public class OrderServiceImpl implements OrderService {
     private final SellerRepo sellerRepo;
 
     @Override
+    public OrderDto getById(Long id) {
+        return orderRepo.findById(id).map(m -> modelMapper.map(m, OrderDto.class)).orElse(null);
+    }
+
+    @Override
     public Page<OrderDto> getOrderHistory(Pageable pageable) throws Exception {
         var buyer = getCurrentBuyer();
         if (buyer.isPresent()) {
