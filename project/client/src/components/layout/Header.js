@@ -5,7 +5,7 @@ import logo from '../../assets/icons/lad-ico.svg';
 import { CartContext } from 'context/CartContext';
 import AuthContext from "context/AuthContext";
 
-const Header = ({ showSearchBar = false, onKeywordChanged, delay=500 }) => {
+const Header = ({ showSearchBar = false, onKeywordChanged, delay = 500 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false); // Track header state
     const [lastScrollY, setLastScrollY] = useState(0); // Track scroll position
     const [searchText, setSearchText] = useState(""); // Track search text
@@ -56,6 +56,10 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay=500 }) => {
         setSearchText(newValue);
     };
 
+    const handleClear = () => {
+        setSearchText("");
+    }
+
     return (
         <header className={`fixed top-0 w-full z-50 transition-transform duration-300 bg-white shadow-md ${isCollapsed ? "-translate-y-full" : "translate-y-0"}`}>
             <div className="container mx-auto">
@@ -65,18 +69,34 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay=500 }) => {
 
                         <img className="w-32 h-16 cursor-pointer object-cover" src={logo} alt="home" onClick={() => navigate('/')} />
 
-                        {showSearchBar && <div className=" ml-8 relative">
-                            <input
-                                type="text"
-                                placeholder="Search for products"
-                                value={searchText}
-                                onChange={handleChange}
-                                className="w-96 p-3 pl-10 bg-white border rounded-full text-sm shadow-sm focus:outline-none focus:border-blue-500 focus:text-black"
-                            />
-                            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-symbols-outlined">
-                                search
-                            </span>
-                        </div>}
+                        {showSearchBar &&
+                            <div className="ml-8 relative">
+                                {/* Search field */}
+                                <input
+                                    type="text"
+                                    placeholder="Search for products"
+                                    value={searchText}
+                                    onChange={handleChange}
+                                    className="w-96 p-3 pl-10 bg-white border rounded-full text-sm shadow-sm focus:outline-none focus:border-blue-500 focus:text-black"
+                                />
+
+                                {/* Search Icon */}
+                                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-symbols-outlined">
+                                    search
+                                </span>
+
+                                {/* Clear Button */}
+                                {searchText && (
+                                    <button
+                                        type="button"
+                                        onClick={handleClear}
+                                        className="absolute mt-1 right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500"
+                                    >
+                                        <span className="material-symbols-outlined">close</span>
+                                    </button>
+                                )}
+                            </div>
+                        }
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">

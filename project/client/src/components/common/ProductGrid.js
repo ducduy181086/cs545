@@ -1,8 +1,9 @@
 import ProductCard from "./ProductCard";
 import React, { useState, useEffect } from 'react'
 import { fetchProducts } from 'services/productService';
+import ProductNotFound from "pages/Buyer/Cart/ProductNotFound";
 
-function ProductGrid({ filter, currentPage, updateTotalPage }) {
+function ProductGrid({ keyword, filter, currentPage, updateTotalPage }) {
 
     const [products, setProducts] = useState([]);
 
@@ -10,6 +11,7 @@ function ProductGrid({ filter, currentPage, updateTotalPage }) {
         const requestData = {
             page: currentPage,
             filter: filter,
+            keyword: keyword
         }
 
         fetchProducts(requestData).then(res => {
@@ -17,7 +19,11 @@ function ProductGrid({ filter, currentPage, updateTotalPage }) {
             updateTotalPage(res.totalPages);
         });
 
-    }, [filter, currentPage]);
+    }, [filter, currentPage, keyword]);
+
+    if (products.length === 0) {
+        return <ProductNotFound/>
+    }
 
     return (
         <div>

@@ -28,14 +28,13 @@ const BuyerDashboard = () => {
     }
 
     const handleSearch = (keyword) => {
-        console.log(keyword);
         setKeyWord(keyword);
     }
 
     return (
         <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
-            <Header showSearchBar ={true} onKeywordChanged={handleSearch} />
+            <Header showSearchBar={true} onKeywordChanged={handleSearch} />
 
             {/* {Body component} */}
             <div className="flex-grow mt-28 text-center p-8 bg-gray-50">
@@ -49,19 +48,26 @@ const BuyerDashboard = () => {
 
                     {/* Second Column: Full Width */}
                     <div className="flex-grow ml-8">
-                        <ProductGrid filter ={filter} currentPage={currentPage} updateTotalPage={onUpdateTotalPage} />
+                        <ProductGrid
+                            keyword={keyword}
+                            filter={filter}
+                            currentPage={currentPage}
+                            updateTotalPage={onUpdateTotalPage} />
 
                         {/* Pagination */}
-                        <div className="mt-16">
-                            <Pagination currentPage={(currentPage+1)} totalPages={totalPage} onPageChange={handleOnPgaeChange}/>    
-                        </div>
+                        {totalPage > 0 && <div className="mt-16">
+                            <Pagination
+                                currentPage={(currentPage + 1)}
+                                totalPages={totalPage}
+                                onPageChange={handleOnPgaeChange} />
+                        </div>}
                     </div>
                 </div>
             </div>
-            
+
             {/* {Footer component} */}
             <Footer className="mt-12" />
-            
+
         </div>
     );
 };
