@@ -1,20 +1,18 @@
 import ordersData from "../mock_orders.json";
+import { api } from "./api";
 
 export const fetchOrdersHistory = async () => {
-  // const response = await api.get('/orders');
-  // return response.data;
-
-  //mock
-  return ordersData;
+  const response = await api.get('/order/history');
+  return response.data;
 };
 
 export const fetchOrdersByStatus = async (status) => {
-  // const response = await api.get(`/orders/${productId}`);
+  // const response = await api.get(`/order/history/${status}`);
   // return response.data;
 
   //mock
   if (status === "All") return ordersData;
-  
+
   return ordersData?.filter(o => o.status === status);
 };
 

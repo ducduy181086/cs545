@@ -5,6 +5,7 @@ import { fetchOrderById } from "services/orderService";
 import OrderProductCard from "./OrderProductCard";
 import OrderStatus from "./OrderStatus";
 import Header from "components/layout/Header";
+import { submitReview } from "services/reviewService";
 
 const OrderHistoryDetail = () => {
     const navigate = useNavigate();
@@ -41,15 +42,20 @@ const OrderHistoryDetail = () => {
     };
 
     const handleSubmitReview = (productId, rating, reviewText) => {
-        console.log(`Submitting review for product ${productId}`);
-        console.log(`Rating: ${rating}, Review: ${reviewText}`);
-      };
-    
-      const handleViewDetail = (productId) => {
+        const content = {
+            "productId": productId,
+            "content": reviewText,
+            "rating": rating
+        }
+
+        submitReview({ rating, content }).then(res => { });
+    };
+
+    const handleViewDetail = (productId) => {
         console.log(`Viewing details for product ${productId}`);
         navigate(`/products/${productId}`);
-      };
-    
+    };
+
 
     if (!order) return (<>   </>);
 
@@ -69,7 +75,7 @@ const OrderHistoryDetail = () => {
                         </div>
 
                         <div className="mt-8"></div>
-                        {order && order.items.map((product) => <div key={product.productId} className="pt-2 pb-2"> <OrderProductCard product = {product} onSubmitReview ={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
+                        {order && order.items.map((product) => <div key={product.productId} className="pt-2 pb-2"> <OrderProductCard product={product} onSubmitReview={handleSubmitReview} onViewDetail={handleViewDetail} /> </div>)}
 
                         <div className="flex  border-b mt-2 pb-2">
                             <div>
@@ -78,7 +84,7 @@ const OrderHistoryDetail = () => {
                                 <div className="ml-auto mt-2 font-semibold">Total amount: {order.payment.totalAmount} {order.payment.currency} </div>
                             </div>
                             <div className="ml-auto">
-                                {order && order.status === 'Delivered' &&<span class="material-symbols-outlined text-8xl text-blue-200">
+                                {order && order.status === 'Delivered' && <span class="material-symbols-outlined text-8xl text-blue-200">
                                     receipt_long
                                 </span>}
                             </div>

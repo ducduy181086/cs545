@@ -10,8 +10,9 @@ function formatPhoneNumber(phoneNumber) {
 }
 
 const validateCardNumber = (number) => {
+    number = number.replace(/\s/g, '');
     const regex = /^[0-9]{16}$/;
-    if (!regex.test(number)) return "Card number must be 16 digits.";
+    if (!regex.test(number)) return "Card number must be 19 digits.";
     // Luhn Algorithm for credit card validation
     let sum = 0;
     for (let i = 0; i < number.length; i++) {
@@ -51,5 +52,30 @@ const validateCardHolder = (name) => {
     return null;
 };
 
+const validateColor = (color) => {
+    console.log(color);
+    if (!color) return "Please select a color.";
+    return null;
+};
 
-export { formatPhoneNumber, validateCardNumber, validateExpirationDate, validateCVV, validateCardHolder };
+const validateSize = (size) => {
+    if (!size) return "Please select a size.";
+    return null;
+};
+
+const buildShippingInfo = (shippingInfo = {}) => ({
+    phoneNumber: shippingInfo?.phoneNumber ?? "",
+    customerName: `${shippingInfo?.firstName ?? ""} ${shippingInfo?.lastName ?? ""}`,
+    shippingAddress: `${shippingInfo?.address ?? ""} ${shippingInfo?.apt ?? ""} ${shippingInfo?.zipCode ?? ""} ${shippingInfo?.city ?? ""} ${shippingInfo?.state ?? ""} ${shippingInfo?.country ?? ""}`,
+});
+
+export {
+    formatPhoneNumber,
+    validateCardNumber,
+    validateExpirationDate,
+    validateCVV,
+    validateCardHolder,
+    validateColor,
+    validateSize,
+    buildShippingInfo
+};

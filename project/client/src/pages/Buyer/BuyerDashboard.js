@@ -1,42 +1,29 @@
 // src/components/MacBookList.js
 import ProductGrid from 'components/common/ProductGrid';
-import FilterComponent from 'components/layout/FilterComponent';
+import FilterComponent from 'components/layout/Filter/FilterComponent';
 import Header from 'components/layout/Header';
-import React, { useState, useEffect } from 'react';
-import { fetchProducts } from 'services/productService';
-import { useLocation } from "react-router-dom";
-import Loading from 'components/layout/Loading';
+import React, { useState } from 'react';
 
+import Pagination from 'components/Pagination';
 
 const BuyerDashboard = () => {
 
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(1);
+    const [filter, setFilter] = useState(null);
 
-    const location = useLocation();
-
-    useEffect(() => {
-        if (location.state?.data) {
-            setProducts(location.state.data);
-            setLoading(false);
-        } else {
-            setLoading(true);
-            fetchProducts().then(res => {
-                setProducts(res.content);
-            }).finally(() => {
-                setLoading(false);
-            });
-        }
-    }, [location.state])
-
-    if (loading) {
-        return <Loading />
+    const handleOnPgaeChange = (page) => {
+        setCurrentPage(page - 1);
     }
 
-    if (!products) {
-        return <div>Loading...</div>;
+    const onUpdateTotalPage = (totalPage) => {
+        setTotalPage(totalPage);
     }
 
+    const handleFilter = (filter) => {
+        console.log(filter);
+        setFilter(filter);
+    }
 
     return (
         <div>
@@ -49,13 +36,18 @@ const BuyerDashboard = () => {
                     {/* First Column: Wrap Content */}
                     <div className="flex-none">
                         <div className="w-auto">
-                            <FilterComponent />
+                            <FilterComponent onFilterChanged={handleFilter} />
                         </div>
                     </div>
 
                     {/* Second Column: Full Width */}
                     <div className="flex-grow ml-8">
-                        <ProductGrid products={products} />
+                        <ProductGrid filter ={filter} currentPage={currentPage} updateTotalPage={onUpdateTotalPage} />
+
+                        {/* Pagination */}
+                        <div className="mt-16">
+                            <Pagination currentPage={(currentPage+1)} totalPages={totalPage} onPageChange={handleOnPgaeChange}/>    
+                        </div>
                     </div>
                 </div>
             </div>

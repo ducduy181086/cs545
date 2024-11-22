@@ -24,7 +24,7 @@ export default function ShippingSummary() {
                 </div>
             </div>
             {/* Bill Section */}
-            {shippingInfo.sameBillingAddress && <div>
+            {(shippingInfo.sameBillingAddress ?? false) && <div>
                 <h3 className="text-lg font-semibold">Bill to</h3>
                 <div className="mt-6 border-t pt-4 pb-4">
                     <div className="flex justify-between text-sm">
@@ -41,7 +41,7 @@ export default function ShippingSummary() {
                     </div>
                 </div>
             </div>}
-            {!shippingInfo.sameBillingAddress && <div>
+            {!(shippingInfo.sameBillingAddress ?? false) && <div>
                 <h3 className="text-lg font-semibold">Bill to</h3>
                 <div className="mt-6 border-t pt-4 pb-4">
                     <div className="flex justify-between text-sm">

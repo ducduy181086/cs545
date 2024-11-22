@@ -1,13 +1,45 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CartSummary from '../Cart/CartSummary';
 import CreditCardForm from './CreditCardForm';
 import ShippingSummary from '../ShippingAddress/ShippingSummary';
 import CheckOutProgress from 'components/common/CheckOutProgreess';
 import { useNavigate } from 'react-router-dom';
-import Headers from  'components/layout/Header';
+import Headers from 'components/layout/Header';
+import { fetchCart } from 'services/cartService';
+import { CartContext } from 'context/CartContext';
+import { submitPayment } from 'services/paymentService';
+import { ShippingContext } from 'context/ShippingContext';
+import { buildShippingInfo } from 'utils/utils';
 
 const PaymentDashboard = () => {
     const navigate = useNavigate();
+    const [cart, setCart] = useState(null);
+    const { updateCounter } = useContext(CartContext);
+    const { shippingInfo } = useContext(ShippingContext);
+
+    useEffect(() => {
+        fetchCart().then(res => {
+            setCart(res);
+            updateCounter(res?.items?.length ?? 0);
+        }).finally(() => {
+        });
+    }, []);
+
+    const handleSubmitPayment = (payment) => {
+        const shippingData = buildShippingInfo(shippingInfo);
+        const billingData = (shippingInfo.sameBillingAddress??false)? buildShippingInfo(shippingInfo.billingInfo): shippingData;
+        const paymentData = {
+            shippingAddress: shippingData.shippingAddress,
+            shippingPhone: shippingData.phoneNumber,
+            billingAddress: billingData.shippingAddress,
+            billingPhone: billingData.phoneNumber,
+            paymentType: 'credit/debit card',
+            paymentDetails: payment.cardNumber,
+            paymentStatus: 'paid'
+        };
+
+        submitPayment(paymentData).then(res => { console.log(res); navigate('/order-history') });
+    };
 
     return (
         <div >
@@ -21,14 +53,15 @@ const PaymentDashboard = () => {
                     {/* Payment method */}
                     <div className="md:col-span-2 p-4">
                         <h2 className="text-xl font-semibold">Payment detail</h2>
-                        <CreditCardForm />
+                        <CreditCardForm onSubmitPayment={handleSubmitPayment} />
+                        <ShippingSummary />
                     </div>
 
                     {/* Cart summary */}
                     <div className="md:col-span-1 mt-4 ml-4 me-4">
                         <h2 className="text-xl font-semibold">Summary</h2>
-                        <CartSummary />
-                        <ShippingSummary />
+                        <CartSummary data={cart?.items} />
+
                     </div>
                 </div>
             </div>
