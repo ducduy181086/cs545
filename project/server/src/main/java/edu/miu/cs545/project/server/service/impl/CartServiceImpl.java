@@ -13,6 +13,7 @@ import edu.miu.cs545.project.server.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -75,10 +76,16 @@ public class CartServiceImpl implements CartService {
         cartItemRepo.deleteById(cartItemId);
     }
 
+    @Transactional
     @Override
     public void clearCart(Long cartId) {
         Cart cart = cartRepo.findById(cartId).orElseThrow();
-        cartItemRepo.deleteAll(cart.getItems());
+        for (var item : cart.getItems()) {
+            cartItemRepo.deleteById(item.getId());
+        }
+        cart.getItems().clear();
+        cartRepo.save(cart);
+        cartItemRepo.flush();
     }
 
     private Optional<Buyer> getCurrentBuyer() {
