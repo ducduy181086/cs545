@@ -30,7 +30,7 @@ const OrderDetail = (props) => {
     };
 
     const cancelOrder = () => {
-        
+
 
     }
 
@@ -121,22 +121,22 @@ const OrderDetail = (props) => {
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Customer Information
                                     </h2>
-                                    <div className="mt-4">
+                                    {order.customer && <div className="mt-4">
                                         <p className="text-gray-600">
-                                            <strong>Name:</strong> {order.customer.name}
+                                            <strong>Name:</strong> {order.customer?.name ?? 'Customer'}
                                         </p>
                                         <p className="text-gray-600">
-                                            <strong>Email:</strong> {order.customer.email}
+                                            <strong>Email:</strong> {order.customer?.email ?? 'Email'}
                                         </p>
                                         <p className="text-gray-600">
-                                            <strong>Phone:</strong> {order.customer.phone}
+                                            <strong>Phone:</strong> {order.customer?.phone ?? ''}
                                         </p>
                                         <p className="text-gray-600">
                                             <strong>Address:</strong>{" "}
-                                            {`${order.customer.address.street}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.zipcode}, ${order.customer.address.country}`}
+                                            {/* {`${order.customer.address.street}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.zipcode}, ${order.customer.address.country}`} */}
                                         </p>
                                     </div>
-
+                                    }
                                     {/* Products Table */}
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Products
@@ -169,10 +169,10 @@ const OrderDetail = (props) => {
                                                             {item.quantity}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-600">
-                                                            ${item.price.toFixed(2)}
+                                                            ${item.product.price.toFixed(2)}
                                                         </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800 font-medium">
-                                                            ${item.totalPrice.toFixed(2)}
+                                                            {/* ${item.totalPrice.toFixed(2)} */}
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -184,7 +184,7 @@ const OrderDetail = (props) => {
                                     <h2 className="text-xl font-semibold text-gray-800 mt-6">
                                         Payment Information
                                     </h2>
-                                    <div className="mt-4">
+                                    {order.payment && <div className="mt-4">
                                         <p className="text-gray-600">
                                             <strong>Payment Method:</strong> {order.payment.method}
                                         </p>
@@ -195,7 +195,7 @@ const OrderDetail = (props) => {
                                             <strong>Total Amount:</strong> ${order.payment.totalAmount}{" "}
                                             {order.payment.currency}
                                         </p>
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                         )}
@@ -236,7 +236,7 @@ const OrderDetail = (props) => {
                         {/* Hidden Receipt for Printing/Downloading */}
                         {order && <div className="hidden">
                             <div ref={receiptRef}>
-                                <OrderReceipt order={order} />
+                                {/* <OrderReceipt order={order} /> */}
                             </div>
                         </div>}
                     </div>

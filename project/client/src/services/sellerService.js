@@ -48,18 +48,12 @@ export const sellerDeleteProduct = async (id) => {
 export const sellerFetchOrders = async () => {
   const response = await api.get('/order/history');
   return response.data;
-
-  //mock
-  // return ordersData;
 };
 
 export const sellerFetchOrderById = async (orderId) => {
-  // const response = await api.get(`/orders/${productId}`);
-  // return response.data;
-
-  //mock
-
-  return ordersData?.find(o => o.orderId === Number.parseInt(orderId));
+  const response = await api.get(`/order/${orderId}`);
+  return response.data;
+  // return ordersData?.find(o => o.orderId === Number.parseInt(orderId));
 };
 
 // export const createProduct = async (productData) => {
