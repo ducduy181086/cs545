@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "components/Pagination";
 import { useNavigate } from "react-router";
+import { sellerFetchOrders } from "services/sellerService";
+import Loading from "components/layout/Loading";
 
 
-const OrderTable = (props) => {
-
+const OrderTable = () => {
     const navigate = useNavigate();
-    const { ordersData } = props;
-
+    const [orders, setOrders] = useState()
     const [currentPage, setCurrentPage] = useState(1);
-    const ordersPerPage = ordersData.pageable.pageSize;
 
-    const totalPages = ordersData.totalPages;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
-    // const startIndex = (currentPage - 1) * ordersPerPage;
-    const currentOrders = ordersData.content;
+    useEffect(() => {
+        setLoading(true)
+        sellerFetchOrders((currentPage ?? 1) - 1)
+            .then(res => {
+                setOrders(res);
+            }).catch(err => {
+                setError(true)
+            }).finally(() => {
+                setLoading(false)
+            });
+    }, [currentPage])
+
+    if (error || loading) {
+        return <Loading />
+    }
+
+    const totalPages = orders.totalPages;
+
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -32,8 +48,8 @@ const OrderTable = (props) => {
                     <thead className="bg-gray-50">
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
-                            {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer Name</th> */}
-                            {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order Date</th> */}
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer Name</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order Date</th>
                             {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Delivery Date</th> */}
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Amount</th>
@@ -41,27 +57,15 @@ const OrderTable = (props) => {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {currentOrders.map((order) => (
+                        {orders && orders?.content.map((order) => (
                             <tr key={order.id}
                                 onClick={() => handleViewDetail(order.id)}
                             >
                                 <td className="px-6 py-4 text-sm text-gray-900">{order.id}</td>
-                                {/* <td className="px-6 py-4 text-sm text-gray-500">{order.id}</td> */}
-                                {/* <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td> */}
+                                <td className="px-6 py-4 text-sm text-gray-500">{order.customerName ?? 'N/A'}</td>
+                                <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.orderDate).toLocaleDateString()}</td>
                                 {/* <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.deliveryDate).toLocaleDateString()}</td> */}
-                                {/* <td className="px-6 py-4 text-sm text-gray-500">
-
-                                    <select
-                                        value={order.status}
-                                        onChange={(e) => handleStatusChange(order.orderId, e.target.value)}
-                                        className="border rounded px-2 py-1 mr-2"
-                                    >
-                                        <option value="Pending">Pending</option>
-                                        <option value="Shipped">Shipped</option>
-                                        <option value="On the way">On the way</option>
-                                        <option value="Delivered">Delivered</option>
-                                    </select>
-                                </td> */}
+                                <td className="px-6 py-4 text-sm text-gray-500">{order.status ?? 'N/A'}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">{order.status}</td>
                                 <td className="px-6 py-4 text-sm text-gray-500">${order.total}</td>
                                 {/* <td className="px-6 py-4 text-sm text-gray-500">

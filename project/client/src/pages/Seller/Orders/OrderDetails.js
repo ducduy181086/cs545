@@ -4,7 +4,7 @@ import { sellerCancelOrder, sellerFetchOrderById, sellerUpdateOrderStatus } from
 import SellerHeader from "../SellerHeader";
 import OrderReceipt from "./OrderReceipt";
 
-const OrderDetail = (props) => {
+const OrderDetail = () => {
 
     const [order, setOrder] = useState();
 
@@ -32,7 +32,6 @@ const OrderDetail = (props) => {
     const cancelOrder = async () => {
         await sellerCancelOrder(order.id)
         setOrder({ ...order, status: 'CANCELLED' });
-
     }
 
     const handlePrint = () => {
@@ -78,7 +77,7 @@ const OrderDetail = (props) => {
                                 Print Order
                             </button>
                             <button
-                                className={`ms-3 px-4 py-2 text-white ${(order.status === 'CANCELLED' || order.status === 'DELIVERED')? "bg-gray-500" : "bg-red-600"
+                                className={`ms-3 px-4 py-2 text-white ${(order.status === 'CANCELLED' || order.status === 'DELIVERED') ? "bg-gray-500" : "bg-red-600"
                                     } rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm`}
                                 disabled={order.status === 'CANCELLED' || order.status === 'DELIVERED'}
                                 onClick={cancelOrder}

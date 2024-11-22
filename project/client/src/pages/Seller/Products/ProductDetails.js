@@ -81,11 +81,11 @@ const ProductDetail = () => {
                         </button>}
 
                         <button
-                            className={`px-4 py-2 mx-1 text-sm font-medium ${user.role === 'ADMIN'
+                            className={`px-4 py-2 mx-1 text-sm font-medium ${user.role === 'ADMIN' || !product?.canDelete === true
                                 ? "bg-gray-300 text-gray-500"
                                 : "bg-red-600 text-white hover:bg-red-500"
                                 } rounded-lg`}
-                            disabled={user.role === 'ADMIN'}
+                            disabled={user.role === 'ADMIN' || !product?.canDelete === true}
                             onClick={handleDelete}>
                             Delete Product
                         </button>

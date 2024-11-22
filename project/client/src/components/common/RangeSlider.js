@@ -16,7 +16,7 @@ function RangeSlider({ minLimit, maxLimit, onValueChanged }) {
         <Slider
           valueLabelDisplay="auto"
           value={[minValue, maxValue]}
-          onChange={(e, newValue) => [setMinValue(newValue[0]), setMaxValue(newValue[1])]} min={minLimit} max={maxLimit} />
+          onChangeCommitted={(e, newValue) => [setMinValue(newValue[0]), setMaxValue(newValue[1])]} min={minLimit} max={maxLimit} />
       </div>
 
       {/* Display Min/Max Values */}

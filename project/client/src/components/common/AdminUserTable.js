@@ -1,19 +1,37 @@
+import Loading from "components/layout/Loading";
 import Pagination from "components/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { adminFetchUsers } from "services/adminService";
 
-const AdminUserTable = ({ users }) => {
+const AdminUserTable = () => {
+
+  const [users, setUsers] = useState()
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 10; // Number of users per page
-  const totalPages = Math.ceil(users.length / usersPerPage);
 
-  // Calculate the current users to display
-  const startIndex = (currentPage - 1) * usersPerPage;
-  const currentUsers = users.slice(startIndex, startIndex + usersPerPage);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    adminFetchUsers(currentPage - 1).then(res => {
+      setUsers(res);
+    }).catch(err => {
+      setError(true)
+      console.err(err)
+    }).finally(() => {
+      setLoading(false)
+    });
+  }, [currentPage])
+
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+
+  if (error || loading) {
+    return <Loading />
+  }
   return (
     <>
       <div className="overflow-hidden border rounded-lg shadow-sm bg-white mt-4">
@@ -26,7 +44,7 @@ const AdminUserTable = ({ users }) => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentUsers.map((user) => (
+            {users && users.map((user) => (
               <tr key={user.id}>
                 <td className="px-6 py-4 text-sm text-gray-900">{user.id}</td>
                 <td className="px-6 py-4 text-sm text-gray-900">{user.email}</td>
@@ -42,7 +60,7 @@ const AdminUserTable = ({ users }) => {
       {/* Pagination Component */}
       <Pagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={users?.totalPages}
         onPageChange={handlePageChange}
       />
     </>

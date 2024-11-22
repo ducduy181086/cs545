@@ -1,26 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import SellerHeader from "../SellerHeader"
-import { Link, useNavigate } from "react-router-dom";
-import { sellerFetchProducts } from "services/sellerService";
+import { Link } from "react-router-dom";
 import ProductTable from "components/common/SellerProductTable";
 import AuthContext from "context/AuthContext";
 import AdminHeader from "pages/Admin/AdminHeader";
 
-const ManageProduct = (props) => {
-    const navigate = useNavigate()
-    const [products, setProducts] = useState()
-
+const ManageProduct = () => {
     const { user } = useContext(AuthContext)
-
-    useEffect(() => {
-        console.log('fetch products')
-        sellerFetchProducts(user.ownerId).then(res => {
-            setProducts(res);
-        }).catch(err => {
-            navigate('/login')
-        });
-    }, [])
-
     return <>
         <div className="min-h-full">
             {user.role === 'ADMIN' ?
@@ -39,7 +25,7 @@ const ManageProduct = (props) => {
                                 Add Product
                             </button>
                         </Link>}
-                    {products && <ProductTable products={products} />}
+                    <ProductTable />
                 </div>
             </main>
         </div>
