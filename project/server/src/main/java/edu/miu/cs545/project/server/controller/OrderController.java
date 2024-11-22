@@ -2,21 +2,28 @@ package edu.miu.cs545.project.server.controller;
 
 import edu.miu.cs545.project.server.entity.dto.OrderDto;
 import edu.miu.cs545.project.server.entity.dto.OrderItemDto;
+import edu.miu.cs545.project.server.entity.dto.request.PlaceOrderFromCartRequest;
+import edu.miu.cs545.project.server.entity.dto.request.PlaceOrderItemRequest;
 import edu.miu.cs545.project.server.entity.dto.request.PlaceOrderRequest;
+import edu.miu.cs545.project.server.service.CartService;
 import edu.miu.cs545.project.server.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/order")
 @RequiredArgsConstructor
 public class OrderController {
+    private final ModelMapper modelMapper;
     private final OrderService orderService;
+    private final CartService cartService;
 
     @GetMapping("/history")
     public Page<OrderDto> getOrderHistory(
@@ -41,7 +48,14 @@ public class OrderController {
     }
 
     @PostMapping("/place")
-    public void placeOrder(@RequestBody PlaceOrderRequest order) {
+    public void placeOrder(@RequestBody PlaceOrderFromCartRequest orderRequest) {
+        var cart = cartService.getCart();
+        var items = cart.getItems();
+        var order = modelMapper.map(orderRequest, PlaceOrderRequest.class);
+        order.setItems(items.stream().map(item -> new PlaceOrderItemRequest(
+            item.getQuantity(), item.getProduct().getId(), item.getSize(), item.getColor()))
+            .collect(Collectors.toList()));
+        cartService.clearCart(cart.getId());
         orderService.placeOrder(order);
     }
 

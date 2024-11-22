@@ -59,8 +59,12 @@ public class AuthServiceImpl implements AuthService {
             throw new BadCredentialsException("Did not approve.");
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(result.getName());
+        var admin = user.getAdminDetails();
+        var buyer = user.getBuyerDetails();
+        var seller = user.getSellerDetails();
+        Long ownerId = admin != null ? admin.getId() : (buyer != null ? buyer.getId() : seller.getId());
 
-        final String accessToken = jwtUtil.generateToken(userDetails);
+        final String accessToken = jwtUtil.generateToken(userDetails, ownerId);
         final String refreshToken = jwtUtil.generateRefreshToken(userDetails.getUsername());
         return new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);
     }
@@ -71,7 +75,12 @@ public class AuthServiceImpl implements AuthService {
         if (isRefreshTokenValid) {
             String userName = jwtUtil.getSubject(refreshTokenRequest.getRefreshToken());
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-            String accessToken = jwtUtil.generateToken(userDetails);
+            var user = userRepo.findByEmail(userName).orElseThrow();
+            var admin = user.getAdminDetails();
+            var buyer = user.getBuyerDetails();
+            var seller = user.getSellerDetails();
+            Long ownerId = admin != null ? admin.getId() : (buyer != null ? buyer.getId() : seller.getId());
+            String accessToken = jwtUtil.generateToken(userDetails, ownerId);
             String refreshToken = jwtUtil.generateRefreshToken(userDetails.getUsername());
 
             return new LoginResponse(accessToken, refreshToken, jwtUtil.expiration / 1000);

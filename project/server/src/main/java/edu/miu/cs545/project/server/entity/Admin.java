@@ -1,10 +1,12 @@
 package edu.miu.cs545.project.server.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

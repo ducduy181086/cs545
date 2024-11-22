@@ -95,6 +95,8 @@ public class OrderServiceImpl implements OrderService {
                 var product = productMap.get(productItem.getProductId());
                 item.setProduct(product);
                 item.setQuantity(productItem.getQuantity());
+                item.setSize(productItem.getSize());
+                item.setColor(productItem.getColor());
                 orderItemRepo.save(item);
 
                 // reduce the quantity of product

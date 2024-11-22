@@ -21,6 +21,15 @@ public class Order {
     private Double tax;
     private Double total;
 
+    private String shippingAddress;
+    private String shippingPhone;
+    private String billingAddress;
+    private String billingPhone;
+
+    private String paymentType;
+    private String paymentDetails;
+    private String paymentStatus;
+
     private LocalDateTime orderDate;
 
     @ManyToOne
