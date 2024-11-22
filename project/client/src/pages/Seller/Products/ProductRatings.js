@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { sellerFetchProductById, sellerUpdateProduct } from "services/sellerService";
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
+import { adminDeleteRating } from "services/adminService";
 
 const ProductRatings = () => {
 
@@ -13,9 +14,12 @@ const ProductRatings = () => {
     const param = useParams();
 
     useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
         sellerFetchProductById(param.id, 10)
             .then(({ productDetail, productReviews }) => {
-
                 setProduct(productDetail)
                 setReviews(productReviews)
                 console.log("Product Detail:", productDetail);
@@ -24,8 +28,12 @@ const ProductRatings = () => {
             }).catch(error => {
                 console.error("Failed to fetch product details:", error);
             })
-    }, [])
+    }
 
+    const handleDeleteRating = (id) => async () => {
+        await adminDeleteRating(id)
+        fetchData()
+    }
 
     return <>
         <div className="min-h-full pb-40">
@@ -40,7 +48,7 @@ const ProductRatings = () => {
             <main>
 
                 {reviews && reviews?.content && reviews.content.map((review) => (
-                    <RatingComment key={review.id} review={review} />
+                    <RatingComment key={review.id} review={review} onDelete={handleDeleteRating(review.id)} />
                 ))}
             </main>
         </div>

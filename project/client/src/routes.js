@@ -40,9 +40,10 @@ const publicRoutes = [
 const adminRoutes = [
   { path: "/admin/manage-users", element: <ManageUsers /> },
   { path: "/admin/manage-sellers", element: <ManageSellersUnapproved /> },
-  // { path: "/admin/manage-products/:id", element: <ProductDetail /> },
   { path: "/admin/manage-categories", element: <ManageCategories /> },
-
+  { path: "/admin/manage-products", element: <ManageProducts /> },
+  { path: "/admin/manage-products/:id", element: <ProductDetail /> },
+  { path: "/admin/manage-products/:id/ratings", element: <ProductRatings /> },
 ]
 
 const buyerRoutes = [

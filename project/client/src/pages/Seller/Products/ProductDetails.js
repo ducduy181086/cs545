@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router";
 import SellerHeader from "../SellerHeader";
 import ProductForm from "components/common/SellerProductForm";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { sellerDeleteProduct, sellerFetchProductById, sellerUpdateProduct } from "services/sellerService";
 import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
+import AuthContext from "context/AuthContext";
 
 const ProductDetail = () => {
 
@@ -13,6 +14,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState();
     const [reviews, setReviews] = useState();
     const [viewMode, setViewMode] = useState('view')
+
+    const { user } = useContext(AuthContext)
 
     const param = useParams();
 
@@ -52,6 +55,7 @@ const ProductDetail = () => {
         })
     }
 
+
     return <>
         <div className="min-h-full pb-40">
             <SellerHeader />
@@ -60,22 +64,37 @@ const ProductDetail = () => {
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Product Details of ID: {param.id}</h1>
                     <div>
 
-                        {viewMode === 'view' && <button className="px-4 py-2 text-white bg-indigo-600 rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
-                            onClick={handleEdit}>
+                        {viewMode === 'view' && <button
+                            className={`px-4 py-2 mx-1 text-sm font-medium ${user.role === 'ADMIN'
+                                ? "bg-gray-300 text-gray-500"
+                                : "bg-indigo-600 text-white hover:bg-indigo-500"
+                                } rounded-lg`}
+                            onClick={handleEdit}
+                            disabled={user.role === 'ADMIN'}
+                        >
                             Edit Product
                         </button>}
-                        {viewMode === 'update' && <button className="px-4 py-2 text-white bg-orange-600 rounded-md shadow-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+                        {viewMode === 'update' && user.role === 'SELLER' && <button
+                            className={`px-4 py-2 mx-1 text-sm font-medium ${user.role === 'ADMIN'
+                                ? "bg-gray-300 text-gray-500"
+                                : "bg-orange-600 text-white hover:bg-orange-500"
+                                } rounded-lg`}
                             onClick={handleCancelEdit}>
                             Cancel
                         </button>}
 
-                        <button className="ms-3 px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-500"
+                        <button
+                            className={`px-4 py-2 mx-1 text-sm font-medium ${user.role === 'ADMIN'
+                                ? "bg-gray-300 text-gray-500"
+                                : "bg-red-600 text-white hover:bg-red-500"
+                                } rounded-lg`}
+                            disabled={user.role === 'ADMIN'}
                             onClick={handleDelete}>
                             Delete Product
                         </button>
                     </div>
                 </div>
-            </header>
+            </header >
             <main>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     {product && <>
@@ -104,7 +123,7 @@ const ProductDetail = () => {
                     </button>
                 </div>
             </main>
-        </div>
+        </div >
     </>
 }
 export default ProductDetail;
