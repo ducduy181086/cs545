@@ -24,11 +24,11 @@ const ManageSellersUnapproved = (props) => {
     const handleApprove = (userId) => async (event) => {
         event.preventDefault();
         try {
-            const result = adminPutSellersApprove(userId)
+            const result = await adminPutSellersApprove(userId)
             if (result) {
                 setIsSuccessDialogOpen(true);
                 setErrorMessage('') //clear
-                await handleFetch();
+                handleFetch();
             } else {
                 setErrorMessage('Error')
             }

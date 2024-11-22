@@ -48,7 +48,7 @@ const CategoryListbox = (props) => {
                                     <span className="font-bold">{category.name}</span>
                                 </ListboxOption>
 
-                                {category.subcategories.map((subcategory) => (
+                                {/* {category.subcategories.map((subcategory) => (
                                     <ListboxOption
                                         key={subcategory.id}
                                         value={subcategory}
@@ -56,7 +56,7 @@ const CategoryListbox = (props) => {
                                     >
                                         <span className="block truncate">{subcategory.name}</span>
                                     </ListboxOption>
-                                ))}
+                                ))} */}
                             </div>
                         ))}
                     </ListboxOptions>}

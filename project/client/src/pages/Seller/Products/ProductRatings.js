@@ -8,14 +8,22 @@ import RatingComment from "components/common/RatingComment";
 const ProductRatings = () => {
 
     const [product, setProduct] = useState();
+    const [reviews, setReviews] = useState();
 
     const param = useParams();
 
     useEffect(() => {
-        sellerFetchProductById(param.id).then((res) => {
-            setProduct(res)
-            console.log('res = ', res)
-        })
+        sellerFetchProductById(param.id, 10)
+            .then(({ productDetail, productReviews }) => {
+
+                setProduct(productDetail)
+                setReviews(productReviews)
+                console.log("Product Detail:", productDetail);
+                console.log("Product Reviews:", productReviews);
+
+            }).catch(error => {
+                console.error("Failed to fetch product details:", error);
+            })
     }, [])
 
 
@@ -30,11 +38,10 @@ const ProductRatings = () => {
                 </div>
             </header>
             <main>
-                <RatingComment />
-                <RatingComment />
-                <RatingComment />
-                <RatingComment />
-                <RatingComment />
+
+                {reviews && reviews?.content && reviews.content.map((review) => (
+                    <RatingComment key={review.id} review={review} />
+                ))}
             </main>
         </div>
     </>
