@@ -36,7 +36,10 @@ export const adminUpdateCategory = async (newCategory) => {
     return response.data
 }
 
-
+export const adminDeleteRating = async (id) => {
+    const response = await api.delete(`/reviews/${id}`)
+    return response.data
+}
 
 // export const sellerFetchProductById = async (productId) => {
 //     const response = await api.get(`/products/${productId}`);

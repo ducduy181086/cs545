@@ -1,11 +1,13 @@
+import AuthContext from "context/AuthContext";
+import { useContext } from "react";
+
 const RatingComment = (props) => {
 
-    const { review } = props;
+    const { user } = useContext(AuthContext)
+    const { review, onDelete } = props;
 
     return <>
-        <div
-            className="mt-4 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 bg-white shadow-md rounded-lg">
-
+        <div className="mt-4 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 bg-white shadow-md rounded-lg relative">
             <article>
                 <div className="flex items-center mb-4">
                     <img className="w-10 h-10 me-4 rounded-full" src="https://www.gravatar.com/avatar" alt="" />
@@ -34,7 +36,14 @@ const RatingComment = (props) => {
                 <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed in the United Kingdom on <time dateTime="2017-03-03 19:00">March 3, 2017</time></p></footer>
                 <p className="mb-2 text-gray-500 dark:text-gray-400">{review?.content}</p>
             </article>
-        </div>
+            {user.role === 'ADMIN' && <button
+                onClick={() => onDelete(review.id)}
+                className="absolute top-4 right-4 text-red-400 hover:text-red-500"
+                title="Delete"
+            >
+                DELETE
+            </button>}
+        </div >
     </>
 }
 export default RatingComment

@@ -7,7 +7,7 @@ const navigation = [
     { name: 'Users', href: '/admin/manage-users' },
     { name: 'Sellers', href: '/admin/manage-sellers' },
     { name: 'Category', href: '/admin/manage-categories' },
-    { name: 'Order', href: '/admin/manage-orders' },
+    { name: 'Products', href: '/admin/manage-products' },
 ]
 const userNavigation = [
     // { name: 'Sign out', href: '/login' },
