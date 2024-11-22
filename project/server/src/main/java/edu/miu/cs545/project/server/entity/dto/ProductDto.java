@@ -41,4 +41,7 @@ public class ProductDto {
     private String demographics;
     private String usage;
     private String occasion;
+
+    // computed Fields
+    private boolean canDelete;
 }
