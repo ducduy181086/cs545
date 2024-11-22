@@ -12,7 +12,7 @@ const CartSummary = ({ data }) => {
   }
 
   const calculateSubtotal = () =>
-    data.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    data.reduce((total, item) => total + (item.product.price + (item.product.price * item.product.discount / 100)) * item.quantity, 0);
   const calculateTotalDiscount = () =>
     data.reduce((total, item) => total + (item.product.price * item.product.discount / 100) * item.quantity, 0);
   const tax = () => calculateSubtotal() * 5.5 / 100;
@@ -71,9 +71,8 @@ const CartSummary = ({ data }) => {
           <span>Free</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span>Estimated taxes</span>
+          <span>Estimated taxes (5,5%)</span>
           <span>${formatNumber(tax() * 100 / 100)}</span>
-
         </div>
         <div className="flex justify-between text-lg font-bold mt-4">
           <span>Total</span>

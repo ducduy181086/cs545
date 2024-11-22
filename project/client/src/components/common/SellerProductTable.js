@@ -79,7 +79,7 @@ const ProductTable = () => {
                             <td className="px-6 py-4 text-sm text-gray-500">{product.category.name}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">${product.price.toFixed(2)}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.quantity === 0 ? 'Out of stock' : product.quantity}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">${product.discount}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{product.discount}%</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{product.canDelete ? 'Yes' : 'No'}</td>
                            
                         </tr>
