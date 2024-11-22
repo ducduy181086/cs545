@@ -17,7 +17,7 @@ const OrderHistory = () => {
     ];
 
     const [activeTab, setActiveTab] = useState(tabs[0]);
-    const [orders, setOrders] = useState([]);
+    const [order, setOrder] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPage, setTotalPage] = useState(1);
 
@@ -27,7 +27,7 @@ const OrderHistory = () => {
 
     useEffect(() => {
         fetchOrdersByStatus(activeTab.label).then(res => {
-            setOrders(res);
+            setOrder(res);
             setTotalPage(res.totalPages);
         });
     }, [activeTab, currentPage])
@@ -66,12 +66,13 @@ const OrderHistory = () => {
             </div>
 
             <div className="w-full mt-12">
-                {orders &&orders.content && orders.content.map((order) => <div key={order.orderId} >{OrderCard(order, handleOnItemClick)}</div>)}
+                {!order || !order.content || order.content.length === 0 && <EmptyHistory />}
+                {order && order.content && order.content.map((order, index) => <div key={index} >{OrderCard(order, handleOnItemClick)}</div>)}
             </div>
 
             {/* Pagination */}
             <div className="mt-16">
-                <Pagination currentPage={(currentPage + 1)} totalPages={totalPage} onPageChange={handleOnPgaeChange} />
+                {order && order.content && order.content.length!=0 && <Pagination currentPage={(currentPage + 1)} totalPages={totalPage} onPageChange={handleOnPgaeChange} />}
             </div>
         </div>
     );
