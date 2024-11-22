@@ -12,6 +12,7 @@ const BuyerDashboard = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPage, setTotalPage] = useState(1);
     const [filter, setFilter] = useState(null);
+    const [keyword, setKeyWord] = useState('');
 
     const handleOnPgaeChange = (page) => {
         setCurrentPage(page - 1);
@@ -26,10 +27,14 @@ const BuyerDashboard = () => {
         setFilter(filter);
     }
 
+    const handleSearch = (keyword) => {
+        setKeyWord(keyword);
+    }
+
     return (
         <div className="flex flex-col min-h-screen">
             {/* {Header component} */}
-            <Header />
+            <Header showSearchBar={true} onKeywordChanged={handleSearch} />
 
             {/* {Body component} */}
             <div className="flex-grow mt-28 text-center p-8 bg-gray-50">
@@ -43,19 +48,26 @@ const BuyerDashboard = () => {
 
                     {/* Second Column: Full Width */}
                     <div className="flex-grow ml-8">
-                        <ProductGrid filter ={filter} currentPage={currentPage} updateTotalPage={onUpdateTotalPage} />
+                        <ProductGrid
+                            keyword={keyword}
+                            filter={filter}
+                            currentPage={currentPage}
+                            updateTotalPage={onUpdateTotalPage} />
 
                         {/* Pagination */}
-                        <div className="mt-16">
-                            <Pagination currentPage={(currentPage+1)} totalPages={totalPage} onPageChange={handleOnPgaeChange}/>    
-                        </div>
+                        {totalPage > 0 && <div className="mt-16">
+                            <Pagination
+                                currentPage={(currentPage + 1)}
+                                totalPages={totalPage}
+                                onPageChange={handleOnPgaeChange} />
+                        </div>}
                     </div>
                 </div>
             </div>
-            
+
             {/* {Footer component} */}
             <Footer className="mt-12" />
-            
+
         </div>
     );
 };

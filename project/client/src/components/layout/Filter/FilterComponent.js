@@ -6,6 +6,7 @@ import SingleChoiceSelect from "components/common/SingleChoiceSelect";
 import TreeWithMultiSelect from "components/common/TreeWithMultiSelect";
 
 const FilterComponent = ({ onFilterChanged }) => {
+
     const [priceRange, setPriceRange] = useState({ minPrice: 100, maxPrice: 6000 }); // State for Price range
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
@@ -16,59 +17,72 @@ const FilterComponent = ({ onFilterChanged }) => {
 
     const [filterConfig, setFilterConfig] = useState(null);
 
-    {/* Update filter when any of the filter options change */}
+    {/* Update filter when any of the filter options change */ }
     useEffect(() => {
-        onFilterChanged({ priceRange: priceRange, categoryids: categories, brand: brands, color: colors, size: sizes, material: materials, isnewarrival:newArrival });
+        onFilterChanged({ priceRange: priceRange, categoryids: categories, brand: brands, color: colors, size: sizes, material: materials, isnewarrival: newArrival });
     }, [priceRange, categories, brands, colors, sizes, materials, newArrival]);
 
-    {/* Fetch filter configuration */}
+    {/* Fetch filter configuration */ }
     useEffect(() => {
+
         fetchFilterConfig().then((response) => {
             setFilterConfig(response);
         });
+
     }, [priceRange]);
 
-    {/* Handle Price range change */}
+    {/* Handle Price range change */ }
     const handlePriceRangeChanged = (min, max) => {
         // console.log(min, max);
         setPriceRange({ minPrice: min, maxPrice: max });
     };
 
-    {/* Handle Category change */}
+    {/* Handle Category change */ }
     const handleCategoryChanged = (selectedCategories) => {
         // console.log(selectedCategories);
         setCategories(selectedCategories);
     }
 
-    {/* Handle Brand change */}
+    {/* Handle Brand change */ }
     const handleBrandChanged = (selectedBrands) => {
         // console.log(selectedBrands);
         setBrands(selectedBrands);
     }
 
-    {/* Handle Color change */}
+    {/* Handle Color change */ }
     const handleColorChanged = (selectedColors) => {
         // console.log(selectedColors);
         setColors(selectedColors);
     }
 
-    {/* Handle Size change */}
+    {/* Handle Size change */ }
     const handleSizeChanged = (selectedSizes) => {
         // console.log(selectedSizes);
         setSizes(selectedSizes);
     }
 
-    {/* Handle Material change */}
+    {/* Handle Material change */ }
     const handleMaterialChanged = (selectedMaterials) => {
         // console.log(selectedMaterials);
         setMaterials(selectedMaterials);
     }
 
-    {/* Handle New Arrival change */}
+    {/* Handle New Arrival change */ }
     const handleNewArrivalChanged = (selectedOption) => {
         // console.log(`selectedOption: ${selectedOption}`);
         setNewArrival(selectedOption);
     };
+
+    const handleClearFilter = () => {
+        setPriceRange({ minPrice: 0, maxPrice: 2000 });
+        setCategories([]);
+        setBrands([]);
+        setColors([]);
+        setSizes([]);
+        setMaterials([]);
+        setNewArrival(null);
+        setFilterConfig(null);
+    }
 
     if (!filterConfig) {
         return <></>;
@@ -76,6 +90,13 @@ const FilterComponent = ({ onFilterChanged }) => {
 
     return (
         <div className="w-72 p-6 bg-white shadow rounded-lg">
+            <div className="flex border-b mb-6 pb-2 justify-between">
+                <p className="text-md font-semibold">Filter</p>
+                <button className="text-md font-semibold text-blue-500 hover:text-blue-700"
+                    onClick={handleClearFilter}
+                >Clear</button>
+            </div>
+
             {/* Price range */}
             <div>
                 <h3 className="text-left font-semibold mb-2">Price</h3>
