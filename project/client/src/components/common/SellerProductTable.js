@@ -9,6 +9,7 @@ const ProductTable = (props) => {
 
     const { products } = props;
 
+
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = products.pageable.pageSize;
 

@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class PlaceOrderFromCartRequest {
+    private String customerName;
     private String shippingAddress;
     private String shippingPhone;
     private String billingAddress;

@@ -28,6 +28,7 @@ const BillingAddressForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('billingInfo = ',shippingInfo )
     shippingInfo.billingInfo = formData;
     updateBillingInfo(shippingInfo);
     navigate('/payment');

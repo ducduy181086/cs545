@@ -84,7 +84,7 @@ const OrderHistoryDetail = () => {
                                 <div className="ml-auto mt-2 font-semibold">Total amount: {order.payment.totalAmount} {order.payment.currency} </div>
                             </div>
                             <div className="ml-auto">
-                                {order && order.status === 'Delivered' && <span class="material-symbols-outlined text-8xl text-blue-200">
+                                {order && order.status === 'Delivered' && <span className="material-symbols-outlined text-8xl text-blue-200">
                                     receipt_long
                                 </span>}
                             </div>

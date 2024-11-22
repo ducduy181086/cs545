@@ -1,6 +1,6 @@
 import CategoryListbox from "components/common/CategoryListBox";
 import React, { useEffect, useState } from "react";
-import { sellerFetchCategories } from "services/sellerService";
+import { sellerFetchCategoriesItems } from "services/sellerService";
 
 const ProductForm = (props) => {
 
@@ -29,12 +29,12 @@ const ProductForm = (props) => {
   const isUpdateMode = mode === "update";
 
   useEffect(() => {
-    sellerFetchCategories()
+    sellerFetchCategoriesItems()
       .then((res) => {
-        setCategories(res.content); // Dynamically load categories
+        setCategories(res); // Dynamically load categories
         if (isUpdateMode && initialData?.category) {
           // Ensure pre-selection of category in update mode
-          const selectedCategory = res.content.find(
+          const selectedCategory = res.find(
             (category) => category.id === initialData.category.id
           );
           if (selectedCategory) {
@@ -180,7 +180,7 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="sizes" className="block text-sm font-medium text-gray-700">
-          Sizes (comma-separated)
+            Sizes (comma-separated)
           </label>
           <input
             type="text"
@@ -195,7 +195,7 @@ const ProductForm = (props) => {
         </div>
         <div>
           <label htmlFor="colors" className="block text-sm font-medium text-gray-700">
-          Colors (comma-separated)
+            Colors (comma-separated)
           </label>
           <input
             type="text"

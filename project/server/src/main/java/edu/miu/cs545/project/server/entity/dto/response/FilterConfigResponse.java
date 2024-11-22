@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class FilterConfigResponse {
-    private List<CategoryDto> categories;
+    private List<CategoryResponse> categories;
     private List<String> brands;
     private List<String> colors;
     private List<String> sizes;

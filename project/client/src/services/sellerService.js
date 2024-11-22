@@ -1,4 +1,3 @@
-import ordersData from "../mock_orders.json";
 import { api } from "./api";
 
 export const sellerFetchProducts = async (ownerId) => {
@@ -28,6 +27,11 @@ export const sellerFetchCategories = async () => {
   return response.data
 }
 
+export const sellerFetchCategoriesItems = async () => {
+  const response = await api.get('/categories/items')
+  return response.data
+}
+
 export const sellerAddProduct = async (newProduct) => {
   await api.post(`/products`,
     newProduct
@@ -52,6 +56,18 @@ export const sellerFetchOrders = async () => {
 
 export const sellerFetchOrderById = async (orderId) => {
   const response = await api.get(`/order/${orderId}`);
+  return response.data;
+  // return ordersData?.find(o => o.orderId === Number.parseInt(orderId));
+};
+
+export const sellerUpdateOrderStatus = async (orderId, newStatus) => {
+  const response = await api.put(`/order/change/${orderId}?status=${newStatus}`);
+  return response.data;
+  // return ordersData?.find(o => o.orderId === Number.parseInt(orderId));
+};
+
+export const sellerCancelOrder = async (orderId) => {
+  const response = await api.put(`/order/cancel/${orderId}`);
   return response.data;
   // return ordersData?.find(o => o.orderId === Number.parseInt(orderId));
 };

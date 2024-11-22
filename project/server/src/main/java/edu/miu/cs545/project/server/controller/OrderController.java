@@ -35,10 +35,13 @@ public class OrderController {
 
     @GetMapping()
     public Page<OrderDto> getOrderStatus(
-        @RequestParam(name="status", defaultValue = "0") String status,
+        @RequestParam(name="status", defaultValue = "") String status,
         @RequestParam(name="page", defaultValue = "0") int page,
         @RequestParam(name="pagesize", defaultValue = "10") int pageSize) throws Exception {
         Pageable pageable = PageRequest.of(page, pageSize);
+        if ("".equals(status)) {
+            return orderService.getOrderHistory(pageable);
+        }
         return orderService.getOrdersByStatus(status, pageable);
     }
 

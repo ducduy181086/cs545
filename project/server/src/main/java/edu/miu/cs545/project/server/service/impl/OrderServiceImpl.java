@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -148,5 +149,18 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setTotalDiscount(totalDiscount);
         orderEntity.setTax(tax);
         orderEntity.setTotal(total);
+
+        // meta data
+        orderEntity.setCustomerName(order.getCustomerName());
+        orderEntity.setShippingAddress(order.getShippingAddress());
+        orderEntity.setShippingPhone(order.getShippingPhone());
+        orderEntity.setBillingAddress(order.getBillingAddress());
+        orderEntity.setBillingPhone(order.getBillingPhone());
+
+        orderEntity.setPaymentType(order.getPaymentType());
+        orderEntity.setPaymentDetails(order.getPaymentDetails());
+        orderEntity.setPaymentStatus(order.getPaymentStatus());
+
+        orderEntity.setOrderDate(LocalDateTime.now());
     }
 }
