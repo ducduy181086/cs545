@@ -68,7 +68,8 @@ public class ProductServiceImpl implements ProductService {
         return products.map(product -> {
             var result = modelMapper.map(product, ProductDto.class);
             if (map.containsKey(result.getId())) {
-                var canDelete = map.get(result.getId()) == 0;
+                var quantity = map.get(product.getId());
+                var canDelete = quantity == null || quantity == 0;
                 result.setCanDelete(canDelete);
             }
             return result;
@@ -81,7 +82,8 @@ public class ProductServiceImpl implements ProductService {
         if (product != null) {
             var result = modelMapper.map(product, ProductDto.class);
             var map = getProductQuantityMap(List.of(product.getId()));
-            var canDelete = map.get(product.getId()) == 0;
+            var quantity = map.get(product.getId());
+            var canDelete = quantity == null || quantity == 0;
             result.setCanDelete(canDelete);
             return result;
         }
