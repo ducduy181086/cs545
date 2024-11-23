@@ -68,8 +68,8 @@ const OrderHistoryDetail = () => {
         navigate(`/products/${productId}`);
     };
 
-    const handleCancel = () => {
-        requestCancelPendingOrder(id)
+    const handleCancel = async () => {
+        await requestCancelPendingOrder(id)
         fetchOrderById(id).then(res => {
             setOrder(res);
         });
