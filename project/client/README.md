@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+![alt text](./client/graphic/ss01.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Online store
+Online Store for WAA project
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+Click [Link](https://zealous-mushroom-0042a8d1e.5.azurestaticapps.net/) to see online demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Short video to show product overview
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/w4TOjGfZYXw/0.jpg)](https://www.youtube.com/watch?v=w4TOjGfZYXw)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Video explaining verbally the tasks
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/d2bodg2xvI0/0.jpg)](https://www.youtube.com/watch?v=d2bodg2xvI0)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ >>> Run client project
 
-### `npm run build`
+ ```bash
+ cd client
+ npm i
+ npm start
+ ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ >>> Run server project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ ```bash
+ cd server
+ open project
+ ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Swagger 
+Click this [link](https://mini-online-market-bngbdjhuand6cscg.westus-01.azurewebsites.net/swagger-ui/index.html#/) to see API document
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project structure
+```
+.
+├── client                      # Client folder
+│   ├── src                     # Source code
+│   │   ├── components          # Define all component of app
+│   │   ├── services            # External service (GeminiAPI)
+│   │   ├── App.css             # Custom style for widget
+│   │   ├── App.js              # Main app
+│   │   ├── ...                 # etc.
+│   ├── start-client.sh         # Start client app
+│   ├── .env                    # Config environment for app
+│   ├── ...                     # etc
+├── server                      # Server folder
+│   ├── config                  # Config for app (DB)
+│   ├── controllers             # App controllers
+│   ├── models                  # Models
+│   ├── routes                  # Routes
+│   ├── swagger                 # API document
+│   ├── app.js                  # Main app
+│   ├── package.json            # Config for app and hosting
+│   ├── start-server.sh         # Start server
+│   ├── .env                    # Config enviroment for app
+│   ├── ...                     # etc
+├── ...                         # etc
+└── README.md
+```
