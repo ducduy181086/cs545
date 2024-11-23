@@ -24,7 +24,7 @@ const AdminHeader = (props) => {
 
     const handleLogout = () => {
         logout();
-        navigate('/login')
+        navigate('/')
     }
 
     return <Disclosure as="nav" className="bg-gray-800">
@@ -76,7 +76,7 @@ const AdminHeader = (props) => {
                                     </MenuItem>
                                 ))}
 
-                                <MenuItem key='logout'>
+                                <MenuItem key='out'>
                                     <div
                                         onClick={handleLogout}
                                         className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"

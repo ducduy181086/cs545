@@ -23,7 +23,7 @@ const HomeDropdownMenu = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login')
+    navigate('/')
   }
 
   const handleNavigation = (path) => {

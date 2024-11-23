@@ -14,7 +14,7 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay = 500 }) => {
 
     const navigate = useNavigate();
     const { counter } = useContext(CartContext);
-    const { user } = useContext(AuthContext)
+    const { user, isAuthenticated } = useContext(AuthContext)
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -60,6 +60,14 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay = 500 }) => {
         setSearchText("");
     }
 
+    const handleCartClick = () => {
+        if (!isAuthenticated) {
+            navigate('/login')
+        } else {
+            navigate('/cart')
+        }
+    }
+
     return (
         <header className={`fixed top-0 w-full z-50 transition-transform duration-300 bg-white shadow-md ${isCollapsed ? "-translate-y-full" : "translate-y-0"}`}>
             <div className="container mx-auto">
@@ -100,7 +108,7 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay = 500 }) => {
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
-                        {user?.role !== 'SELLER' && user?.role !== 'ADMIN' && <button className="relative" onClick={() => navigate('/cart')}>
+                        {user?.role !== 'SELLER' && user?.role !== 'ADMIN' && <button className="relative" onClick={handleCartClick}>
                             <span className="w-8 material-symbols-outlined"> shopping_cart</span>
                             {counter > 0 && <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                                 {counter}
