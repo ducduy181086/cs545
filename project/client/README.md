@@ -34,28 +34,30 @@ Click this [link](https://mini-online-market-bngbdjhuand6cscg.westus-01.azureweb
 
 ## Project structure
 ```
-.
-├── client                      # Client folder
-│   ├── src                     # Source code
-│   │   ├── components          # Define all component of app
-│   │   ├── services            # External service (GeminiAPI)
-│   │   ├── App.css             # Custom style for widget
-│   │   ├── App.js              # Main app
-│   │   ├── ...                 # etc.
-│   ├── start-client.sh         # Start client app
-│   ├── .env                    # Config environment for app
-│   ├── ...                     # etc
-├── server                      # Server folder
-│   ├── config                  # Config for app (DB)
-│   ├── controllers             # App controllers
-│   ├── models                  # Models
-│   ├── routes                  # Routes
-│   ├── swagger                 # API document
-│   ├── app.js                  # Main app
-│   ├── package.json            # Config for app and hosting
-│   ├── start-server.sh         # Start server
-│   ├── .env                    # Config enviroment for app
-│   ├── ...                     # etc
-├── ...                         # etc
-└── README.md
+── public
+└── src
+    ├── assets
+    │   └── icons
+    ├── components
+    │   ├── common
+    │   └── layout
+    │       └── Filter
+    ├── context
+    ├── hooks
+    ├── mockData
+    ├── pages
+    │   ├── Admin
+    │   ├── Auth
+    │   ├── Buyer
+    │   │   ├── BillingAddress
+    │   │   ├── Cart
+    │   │   ├── OrderHistory
+    │   │   ├── Payment
+    │   │   ├── Product
+    │   │   └── ShippingAddress
+    │   └── Seller
+    │       ├── Orders
+    │       └── Products
+    ├── services
+    └── utils
 ```
