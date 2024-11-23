@@ -108,12 +108,14 @@ const Header = ({ showSearchBar = false, onKeywordChanged, delay = 500 }) => {
                     </div>
                     {/* Right Section */}
                     <div className="flex items-center space-x-4">
-                        {user?.role !== 'SELLER' && user?.role !== 'ADMIN' && <button className="relative" onClick={handleCartClick}>
-                            <span className="w-8 material-symbols-outlined"> shopping_cart</span>
-                            {counter > 0 && <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                                {counter}
-                            </span>}
-                        </button>}
+                        {user?.role !== 'SELLER' && user?.role !== 'ADMIN' &&
+                            <button className="relative" onClick={handleCartClick}>
+                                <span className="w-8 material-symbols-outlined"> shopping_cart</span>
+                                {counter > 0 &&
+                                    <span className=" absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                                        {counter}
+                                    </span>}
+                            </button>}
 
                         <HomeDropdownMenu />
                     </div>
