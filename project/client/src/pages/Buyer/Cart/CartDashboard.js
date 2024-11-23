@@ -39,7 +39,7 @@ const CartDashboard = () => {
             <Headers />
 
             {/* {Body component} */}
-            <div className="flex-grow px-20 p-4 mt-20">
+            <div className="flex-grow px-2 lg:px-20 p-4 mt-20">
                 {(!cart || !cart.items || cart.items.length === 0) && <EmptyCart />}
                 {(cart && cart.items && cart.items.length > 0) && <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* Cart items */}
