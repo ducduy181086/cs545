@@ -6,6 +6,11 @@ Online Store for WAA project
 
 Click [Link](https://zealous-mushroom-0042a8d1e.5.azurestaticapps.net/) to see online demo
 
+Admin account: uinan@miu.edu | 123
+Seller account: dean@miu.edu | 123
+Buyer account: abc@123.com | 123
+
+
 ## Short video to show product overview
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/w4TOjGfZYXw/0.jpg)](https://www.youtube.com/watch?v=w4TOjGfZYXw)
 
