@@ -14,6 +14,9 @@ export default function ShippingSummary() {
                     <span>{`${shippingInfo?.firstName ?? ""} ${shippingInfo?.lastName ?? ""}`}</span>
                 </div>
                 <div className="flex justify-between text-sm">
+                    <span>{`${shippingInfo?.address ?? ""}, ${shippingInfo?.apt ?? ""}`}</span>
+                </div>
+                <div className="flex justify-between text-sm">
                     <span>{`${shippingInfo?.city ?? ""}, ${shippingInfo?.state ?? ""} ${shippingInfo?.zipCode ?? ""}`}</span>
                 </div>
                 <div className="flex justify-between text-sm">
@@ -31,6 +34,9 @@ export default function ShippingSummary() {
                         <span>{`${shippingInfo?.firstName ?? ""} ${shippingInfo?.lastName ?? ""}`}</span>
                     </div>
                     <div className="flex justify-between text-sm">
+                        <span>{`${shippingInfo?.address ?? ""} ${shippingInfo?.apt ?? ""}`}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
                         <span>{`${shippingInfo?.city ?? ""}, ${shippingInfo?.state ?? ""} ${shippingInfo?.zipCode ?? ""}`}</span>
                     </div>
                     <div className="flex justify-between text-sm">
@@ -46,6 +52,9 @@ export default function ShippingSummary() {
                 <div className="mt-6 border-t pt-4 pb-4">
                     <div className="flex justify-between text-sm">
                         <span>{`${shippingInfo?.billingInfo?.firstName ?? ""} ${shippingInfo?.billingInfo?.lastName ?? ""}`}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                        <span>{`${shippingInfo?.billingInfo?.address ?? ""} ${shippingInfo?.billingInfo?.apt ?? ""}`}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span>{`${shippingInfo?.billingInfo?.city ?? ""}, ${shippingInfo?.billingInfo?.state ?? ""} ${shippingInfo?.billingInfo?.zipCode ?? ""}`}</span>

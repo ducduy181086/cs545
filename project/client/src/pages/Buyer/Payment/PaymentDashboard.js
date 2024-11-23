@@ -50,7 +50,7 @@ const PaymentDashboard = () => {
             <Headers />
 
             {/* {Body component} */}
-            <div className="flex-grow px-20 p-4 mt-20">
+            <div className="flex-grow px-2 lg:px-20 p-4 mt-20">
                 <CheckOutProgress step={4} totalSteps={4} title={'Shipping'} onBack={() => { navigate('/shipping/confirmation-address') }} />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* Payment method */}

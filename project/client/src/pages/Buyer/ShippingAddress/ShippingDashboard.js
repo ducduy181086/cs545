@@ -27,7 +27,7 @@ const ShippingDashboard = () => {
             <Header />
 
             {/* {Body component} */}
-            <div className="flex-grow px-20 p-4 mt-20">
+            <div className="flex-grow px-2 lg:px-20 p-4 mt-20">
                 <CheckOutProgress step={2} totalSteps={4} title={'Shipping'} onBack={() => { navigate('/cart') }} />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* Cart items */}
