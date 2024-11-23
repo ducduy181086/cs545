@@ -83,7 +83,7 @@ const OrderHistoryDetail = () => {
             <Header />
 
             {/* {Body component} */}
-            <div className="flex-grow px-20 p-4 mt-20" ref={receiptRef}>
+            <div className="flex-grow px-2 lg:px-20 p-4 mt-20" ref={receiptRef}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="md:col-span-4 ml-4 me-4 mt-4">
                         <div className="flex border-b mt-2 pb-2">
