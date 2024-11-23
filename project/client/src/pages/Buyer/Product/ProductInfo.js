@@ -1,12 +1,13 @@
 import AttributeSelector from 'components/common/AttributeSelector';
 import ImageSlider from 'components/common/ImageSlider';
 import ProductQuantity from 'components/common/ProductQuantity';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ProductDescription from './ProductDescription';
 import { validateColor, validateSize } from "utils/utils";
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from 'services/cartService';
 import { formatNumber } from 'utils/utils';
+import AuthContext from 'context/AuthContext';
 
 const ProductInfo = ({ product }) => {
 
@@ -18,6 +19,7 @@ const ProductInfo = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext)
 
   const handleSelectedSizeChanged = (size) => {
     setSelectedSize(size);
@@ -28,20 +30,24 @@ const ProductInfo = ({ product }) => {
   }
 
   const handleAddToCart = (quantity) => {
-    if (selectedSize && selectedColor) {
-      addItemToCart(product.id, quantity, selectedSize, selectedColor).then(res => {
-        if (res) {
-          navigate('/cart');
-        }
-      }).finally(() => { });
-
+    if (!isAuthenticated) {
+      navigate('/login')
     } else {
-      const errors = {
-        color: validateColor(selectedColor),
-        size: validateSize(selectedSize),
-      };
+      if (selectedSize && selectedColor) {
+        addItemToCart(product.id, quantity, selectedSize, selectedColor).then(res => {
+          if (res) {
+            navigate('/cart');
+          }
+        }).finally(() => { });
 
-      setErrors(errors);
+      } else {
+        const errors = {
+          color: validateColor(selectedColor),
+          size: validateSize(selectedSize),
+        };
+
+        setErrors(errors);
+      }
     }
   }
 

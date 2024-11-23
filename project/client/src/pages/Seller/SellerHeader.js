@@ -22,7 +22,7 @@ const SellerHeader = (props) => {
 
     const handleLogout = () => {
         logout();
-        navigate('/login')
+        navigate('/')
     }
 
     return <Disclosure as="nav" className="bg-gray-800">
