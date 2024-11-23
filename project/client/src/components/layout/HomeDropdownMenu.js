@@ -75,7 +75,7 @@ const HomeDropdownMenu = () => {
             <MenuItem
               onClick={() => handleNavigation('/seller')}
               className="text-gray-700 hover:text-blue-600"
-              sx={{ fontSize: '1rem', fontWeight: 500 }}
+              sx={{ fontFamily: '"Urbanist", sans-serif', fontSize: '1rem', fontWeight: 500 }}
             >
               Seller Dashboard
             </MenuItem>
@@ -84,7 +84,7 @@ const HomeDropdownMenu = () => {
             <MenuItem
               onClick={() => handleNavigation('/admin')}
               className="text-gray-700 hover:text-blue-600"
-              sx={{ fontSize: '1rem', fontWeight: 500 }}
+              sx={{ fontFamily: '"Urbanist", sans-serif', fontSize: '1rem', fontWeight: 500 }}
             >
               Admin Dashboard
             </MenuItem>
@@ -92,14 +92,17 @@ const HomeDropdownMenu = () => {
           <MenuItem
             onClick={() => handleNavigation('/order-history')}
             className="text-gray-700 hover:text-blue-600"
-            sx={{ fontSize: '1rem', fontWeight: 500 }}
+            sx={{ fontFamily: '"Urbanist", sans-serif', fontSize: '1rem', fontWeight: 500 }}
           >
             Order History
           </MenuItem>
           <MenuItem
             onClick={handleLogout}
             className="text-gray-700 hover:text-red-600"
-            sx={{ fontSize: '1rem', fontWeight: 500 }}
+            sx={{
+              fontFamily: '"Urbanist", sans-serif',
+              fontSize: '1rem', fontWeight: 500
+            }}
           >
             Logout
           </MenuItem>
