@@ -1,4 +1,7 @@
+import { BrowserRouter } from "react-router-dom";
+
 import './App.css';
+
 import { AuthProvider } from 'context/AuthContext';
 import { CartProvider } from 'context/CartContext';
 import AppRoutes from './routes';
@@ -9,7 +12,12 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <ShippingProvider>
-          <AppRoutes />
+          <BrowserRouter future={{
+            v7_relativeSplatPath: true,
+            v7_startTransition: true,
+          }}>
+            <AppRoutes />
+          </BrowserRouter>
         </ShippingProvider>
       </CartProvider>
     </AuthProvider>

@@ -1,5 +1,7 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, Route, Routes, Navigate } from 'react-router-dom';
+
+import { setNavigate } from "./utils/utils";
 
 // Import pages
 import Login from './pages/Auth/Login';
@@ -65,65 +67,65 @@ const sellerRoutes = [
 ];
 
 const AppRoutes = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    setNavigate(navigate);
+  }, [navigate]);
+
   return (
-    <BrowserRouter future={{
-      v7_relativeSplatPath: true,
-      v7_startTransition: true,
-    }}>
-      <Routes>
-        {publicRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              element
-            }
-          />
-        ))}
+    <Routes>
+      {publicRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            element
+          }
+        />
+      ))}
 
-        {/* Protected Routes */}
-        {adminRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              <PrivateRoute role="ADMIN">{element}</PrivateRoute>
-            }
-          />
-        ))}
+      {/* Protected Routes */}
+      {adminRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            <PrivateRoute role="ADMIN">{element}</PrivateRoute>
+          }
+        />
+      ))}
 
 
-        {/* --------------- Start Region - Buyer Routes ---------------*/}
-        <Route path="/admin" element={<Navigate replace to="/admin/manage-users" />} />
+      {/* --------------- Start Region - Buyer Routes ---------------*/}
+      <Route path="/admin" element={<Navigate replace to="/admin/manage-users" />} />
 
-        {buyerRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              element
-              // <PrivateRoute role="buyer">{element}</PrivateRoute>
-            }
-          />
-        ))}
+      {buyerRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            element
+            // <PrivateRoute role="buyer">{element}</PrivateRoute>
+          }
+        />
+      ))}
 
-        {/*  --------------- End Region - Buyer Routes --------------- */}
-        <Route path="/seller" element={<Navigate replace to="/seller/manage-products" />} />
+      {/*  --------------- End Region - Buyer Routes --------------- */}
+      <Route path="/seller" element={<Navigate replace to="/seller/manage-products" />} />
 
-        {sellerRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              <PrivateRoute role="SELLER">{element}</PrivateRoute>
-            }
-          />
-        ))}
+      {sellerRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            <PrivateRoute role="SELLER">{element}</PrivateRoute>
+          }
+        />
+      ))}
 
-        {/* Catch-All Route */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+      {/* Catch-All Route */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 

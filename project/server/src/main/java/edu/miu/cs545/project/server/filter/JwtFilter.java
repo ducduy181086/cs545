@@ -55,7 +55,6 @@ public class JwtFilter extends OncePerRequestFilter {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
         response.setContentType("application/json");
 
-        // Tạo JSON trả về
         var errorResponse = Map.of(
             "code", errorMessage
         );

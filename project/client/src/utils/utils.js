@@ -1,3 +1,9 @@
+let navigate;
+
+function setNavigate(navFunction) { navigate = navFunction; }
+
+function getNavigate() { return navigate; }
+
 function formatPhoneNumber(phoneNumber) {
     const cleaned = ('' + phoneNumber).replace(/\D/g, '');
     const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
@@ -104,6 +110,8 @@ const formatNumber = (number) => {
   };
 
 export {
+    setNavigate,
+    getNavigate,
     formatPhoneNumber,
     validateCardNumber,
     validateExpirationDate,

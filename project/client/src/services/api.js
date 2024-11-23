@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import { REACT_APP_API_BASE_URL } from 'config';
+import { getNavigate } from "../utils/utils";
 
 const api = axios.create({
   baseURL: REACT_APP_API_BASE_URL || 'http://localhost:8080/api',
@@ -47,18 +49,20 @@ api.interceptors.response.use(
           } catch (refreshError) {
             console.log('Refresh token failed:', refreshError);
             localStorage.removeItem('user');
-            window.location.href = '/';
+            const navigate = getNavigate();
+            navigate("/login");
           }
         }
       }
 
-      // if (status === 401 || status === 403) {
-      // console.log('Unauthorized! Redirecting to login.');
-      // localStorage.removeItem('user');
-      // window.location.href = '/login';
-      // }
+      if (status === 401 || status === 403) {
+        console.log('Unauthorized! Redirecting to login.');
+        localStorage.removeItem('user');
+        const navigate = getNavigate();
+        navigate("/login");
+      }
     }
-    return Promise.reject(error);
+    return error;
   }
 );
 

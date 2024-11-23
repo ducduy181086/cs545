@@ -132,22 +132,22 @@ const ProductInfo = ({ product }) => {
       <div className='flex justify-start mb-4'>
         <div>
           {/* Product Size */}
-          <p className="mt-2 text-md text-gray-600">
+          <div className="mt-2 text-md text-gray-600">
             <AttributeSelector title={'Size'} data={product.sizes} selectedValue={selectedSize} onSelectedChange={handleSelectedSizeChanged} />
             {errors.size && (
               <p className="text-red-500 text-sm mt-1">{errors.size}</p>
             )}
-          </p>
+          </div>
 
         </div>
         <div>
           {/* Product Color */}
-          <p className="ml-12 mt-2 text-md text-gray-600">
+          <div className="ml-12 mt-2 text-md text-gray-600">
             <AttributeSelector title={'Color'} data={product.colors} selectedValue={selectedColor} onSelectedChange={handleSelectedColorChanged} />
             {errors.color && (
               <p className="text-red-500 text-sm mt-1">{errors.color}</p>
             )}
-          </p>
+          </div>
 
 
         </div>
