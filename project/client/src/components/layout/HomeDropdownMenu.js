@@ -35,7 +35,7 @@ const HomeDropdownMenu = () => {
     <div className="relative">
       {!isAuthenticated && (
         <Link to="/login">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button className="md:visible px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Sign In
           </button>
         </Link>
@@ -43,7 +43,7 @@ const HomeDropdownMenu = () => {
 
       {isAuthenticated && (
         <div className="flex items-center space-x-3 cursor-pointer">
-          <div>
+          <div className="collapse md:visible max-md:w-1">
             <p className="font-medium text-gray-800">Hi, {user?.email || 'Guest'}</p>
           </div>
           <img
