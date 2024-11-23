@@ -27,10 +27,10 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-medium mt-4">{product.name}</h3>
+      <h3 className="text-lg font-medium mt-4 truncate">{product.name}</h3>
 
       {/* Specifications */}
-      <p className="text-sm text-gray-500">{product.description}</p>
+      <p className="text-sm text-gray-500 truncate">{product.description}</p>
 
       {/* Ratings */}
       <div className="flex items-center mt-2 justify-center ">

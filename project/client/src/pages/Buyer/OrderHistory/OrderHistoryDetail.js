@@ -70,6 +70,9 @@ const OrderHistoryDetail = () => {
 
     const handleCancel = () => {
         requestCancelPendingOrder(id)
+        fetchOrderById(id).then(res => {
+            setOrder(res);
+        });
     }
 
     if (!order) return (<>   </>);
@@ -174,6 +177,7 @@ const OrderHistoryDetail = () => {
                                     <OrderProductCard
                                         key={product.id}
                                         product={product}
+                                        orderStatus={order.status}
                                         onSubmitReview={handleSubmitReview}
                                         onViewDetail={handleViewDetail} />
                                 </div>)}

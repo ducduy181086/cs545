@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { validateComment, validateRating } from "utils/utils";
 
-const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
+const ProductReviewModal = ({ product, orderStatus, onSubmitReview, onViewDetail }) => {
     // State to control modal visibility
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -67,9 +67,9 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
         <div className="container mx-auto pt-4">
             {/* Button to open the modal */}
             <div className='flex'>
-                <button
+                {orderStatus === 'DELIVERED' && <button
                     onClick={openModal}
-                    className="text-blue-500 hover:text-blue-600"
+                    className="text-blue-500 hover:text-blue-600 me-4"
                 >
                     <div className='flex'>
                         <span className="material-symbols-outlined text-md">
@@ -77,11 +77,11 @@ const ProductReviewModal = ({ product, onSubmitReview, onViewDetail }) => {
                         </span>
                         <p className='ml-2 text-md border-b'>Write a Review</p>
                     </div>
-                </button>
+                </button>}
 
                 <button
                     onClick={hanldeViewDetail}
-                    className="text-blue-500 hover:text-blue-600 ml-4"
+                    className="text-blue-500 hover:text-blue-600"
                 >
                     <div className='flex'>
                         <span className="material-symbols-outlined text-md">

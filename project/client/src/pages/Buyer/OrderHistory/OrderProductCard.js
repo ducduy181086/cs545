@@ -2,7 +2,7 @@ import React from "react";
 import ProductReviewModal from "components/common/ProductReviewModel";
 import { formatMoney } from "utils/utils";
 
-export default function OrderProductCard({ product: item, onSubmitReview, onViewDetail }) {
+export default function OrderProductCard({ product: item, orderStatus, onSubmitReview, onViewDetail }) {
     return (
         <>
             <div className="w-full pb-4 border-b">
@@ -22,7 +22,7 @@ export default function OrderProductCard({ product: item, onSubmitReview, onView
                         <p className="mt-2 font-bold text-blue-500">${formatMoney(item.product.price * item.product.quantity)}</p>
                     </div>
                 </div>
-                <ProductReviewModal product={item.product} onSubmitReview={onSubmitReview} onViewDetail={onViewDetail} />
+                <ProductReviewModal product={item.product} orderStatus={orderStatus} onSubmitReview={onSubmitReview} onViewDetail={onViewDetail} />
             </div>
         </>
     );
