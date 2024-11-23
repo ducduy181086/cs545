@@ -31,7 +31,7 @@ const PaymentDashboard = () => {
         const shippingData = buildShippingInfo(shippingInfo);
         const billingData = (shippingInfo.sameBillingAddress ?? false) ? shippingData : buildShippingInfo(shippingInfo.billingInfo);
         const paymentData = {
-            customerName: payment.customerName,
+            customerName: shippingData.customerName,
             shippingAddress: shippingData.shippingAddress,
             shippingPhone: shippingData.phoneNumber,
             billingAddress: billingData.shippingAddress,
