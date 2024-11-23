@@ -7,6 +7,7 @@ import RatingStar from "components/common/RatingStar";
 import RatingComment from "components/common/RatingComment";
 import AuthContext from "context/AuthContext";
 import AdminHeader from "pages/Admin/AdminHeader";
+import { adminDeleteRating } from "services/adminService";
 
 const ProductDetail = () => {
 
@@ -49,6 +50,11 @@ const ProductDetail = () => {
             ...newProduct
         })
         navigate('/seller/manage-products')
+    }
+
+    const handleDeleteRating = (id) => async () => {
+        await adminDeleteRating(id)
+        fetchData()
     }
 
     return <>
@@ -109,7 +115,7 @@ const ProductDetail = () => {
                         ratings={product?.averageRating} reviewCount={product?.reviewCount} />
                 </div>
                 {reviews && reviews?.content && reviews.content.map((review) => (
-                    <RatingComment key={review.id} review={review} />
+                    <RatingComment key={review.id} review={review} onDelete={handleDeleteRating(review.id)} />
                 ))}
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-center">
                     <button type="button"
