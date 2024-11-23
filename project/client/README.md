@@ -1,5 +1,3 @@
-![alt text](./client/graphic/ss01.png)
-
 
 # Online store
 Online Store for WAA project
