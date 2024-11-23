@@ -13,6 +13,7 @@ const ProductDetail = () => {
 
     const navigate = useNavigate();
 
+    const [refreshSignal, setRefreshSignal] = useState({});
     const [product, setProduct] = useState();
     const [reviews, setReviews] = useState();
     const [viewMode, setViewMode] = useState('view')
@@ -29,7 +30,7 @@ const ProductDetail = () => {
             }).catch(error => {
                 console.error("Failed to fetch product details:", error);
             })
-    }, [])
+    }, [param.id, refreshSignal])
 
     const handleEdit = () => {
         setViewMode('update')
@@ -53,8 +54,8 @@ const ProductDetail = () => {
     }
 
     const handleDeleteRating = (id) => async () => {
-        await adminDeleteRating(id)
-        fetchData()
+        await adminDeleteRating(id);
+        setRefreshSignal({});
     }
 
     return <>
