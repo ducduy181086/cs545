@@ -47,7 +47,7 @@ api.interceptors.response.use(
           } catch (refreshError) {
             console.log('Refresh token failed:', refreshError);
             localStorage.removeItem('user');
-            window.location.href = '/login';
+            window.location.href = '/';
           }
         }
       }
