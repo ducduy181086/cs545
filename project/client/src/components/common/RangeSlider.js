@@ -1,13 +1,18 @@
 import { Slider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+const delay = 500;
+
 function RangeSlider({ minLimit, maxLimit, onValueChanged }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(1000);
 
   useEffect(() => {
-    onValueChanged(minValue, maxValue);
-  }, [minValue, maxValue]);
+    const handler = setTimeout(() => {
+      onValueChanged(minValue, maxValue);
+    }, delay);
+    return () => clearTimeout(handler);
+  }, [minValue, maxValue, delay]);
 
   return (
     <div className="flex flex-col items-center pt-6 ">
@@ -16,7 +21,7 @@ function RangeSlider({ minLimit, maxLimit, onValueChanged }) {
         <Slider
           valueLabelDisplay="auto"
           value={[minValue, maxValue]}
-          onChangeCommitted={(e, newValue) => [setMinValue(newValue[0]), setMaxValue(newValue[1])]} min={minLimit} max={maxLimit} />
+          onChange={(e, newValue) => [setMinValue(newValue[0]), setMaxValue(newValue[1])]} min={minLimit} max={maxLimit} />
       </div>
 
       {/* Display Min/Max Values */}
